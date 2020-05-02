@@ -49,6 +49,11 @@ body {
     font-size: 20px;
 }
 
+#HydrogenAtomText {
+    font: bold 20px sans-serif;
+    fill: white;
+}
+
 /*All the Navigation Bar related CSS*/
 .NavigationBar {
     border: 1px solid rgb(60, 61, 64);
