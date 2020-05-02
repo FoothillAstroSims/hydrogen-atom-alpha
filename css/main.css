@@ -1,0 +1,110 @@
+body {
+    background-color: rgb(19,20,24);
+    color: whitesmoke;
+    font-family: 'Exo', sans-serif;
+}
+
+#sim-root {
+    width: 1200px;
+    height: 500px;
+    margin: auto;
+}
+
+
+.TopHalf {
+    display: flex;
+}
+
+.MainView {
+    width: 950px;
+    height: 300px;
+    border: 1px solid darkmagenta;
+}
+
+.Diagram {
+    flex-grow: 1;
+    margin-left: 10px;
+    border: 1px solid darkmagenta;
+}
+
+.BottomHalf {
+    display: flex;
+    margin-top: 10px;
+}
+
+.Controls {
+    width: 900px;
+    height: 300px;
+    border: 1px solid darkmagenta;
+}
+
+.EventLog {
+    flex-grow: 1;
+    margin-left: 10px;
+    border: 1px solid darkmagenta;
+}
+
+.TitleText {
+    text-align: center;
+    font-size: 20px;
+}
+
+/*All the Navigation Bar related CSS*/
+.NavigationBar {
+    border: 1px solid rgb(60, 61, 64);
+    padding: 0.5em;
+}
+
+#title {
+    float: left;
+    padding-left: 10px;
+    font-size: 28px;
+}
+
+.navbar::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+nav {
+    float: right;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin: 10px 20px;
+}
+
+nav a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: salmon;
+}
+
+/*button {*/
+/*    background-color: salmon;*/
+/*    color: whitesmoke;*/
+/*    border: none;*/
+/*    padding: 15px 32px;*/
+/*    text-align: center;*/
+/*    text-decoration: none;*/
+/*    font-family: 'Exo', sans-serif;*/
+/*    font-size: 14px;*/
+/*    border-radius: 4px;*/
+/*    min-width: 150px;*/
+/*    transition: all 0.2s ease-in-out;*/
+/*    float: right;*/
+/*    margin: 10px 5px;*/
+/*}*/
+
+/*button:hover {*/
+/*    box-shadow: 0 5px 15px rgba(250, 128, 114, .4);*/
+/*}*/
