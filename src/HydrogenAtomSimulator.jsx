@@ -2,7 +2,7 @@ import React from 'react';
 import NavigationBar from './NavigationBar.jsx';
 import MainView from './MainView.jsx';
 import Spectrum from './Spectrum.jsx';
-import ClusterControls from './ClusterControls.jsx';
+import PhotonBeams from './PhotonBeams.jsx';
 
 const PLANCKSCONSTANT = 6.62607004e-34;
 const COULUMBCHARGE = 1.602176634e-19;
@@ -71,6 +71,9 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                         />
                         <div className={"BackgroundCanvas"}>
+                            <PhotonBeams
+
+                            />
 
                         </div>
                     </div>
