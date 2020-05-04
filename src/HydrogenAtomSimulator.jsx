@@ -21,15 +21,14 @@ const formatWavelength = (wavelength) => {
     // let lambda = Number.parseFloat(wavelength);
     // lambda = Math.round(lambda / 1e-9) * 1e-9;
     let lambda = wavelength.toString();
-    let units = "nm";
+    let units = " nm";
     if (Number.parseFloat(wavelength) > 1e-6) {
-        units = "μm";
+        units = " μm";
         lambda = Number.parseFloat(wavelength).toExponential();
     }
 
     lambda = lambda.substr(0, 4) + units;
     return lambda;
-
 }
 
 const formatEnergy = (energy) => {
