@@ -30,6 +30,9 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <MainView
 
                         />
+                        <div className={"BackgroundCanvas"}>
+
+                        </div>
                     </div>
 
                     <div className={"Diagram"}>
@@ -41,6 +44,14 @@ export default class HydrogenAtomSimulator extends React.Component {
                     <div className={"Controls"}>
                         <p className={"TitleText"}>Photon Selection</p>
 
+                        <div className={"FirePhotonButton"}>
+                            <button type="box"
+                                    className="btn btn-danger btn-sm"
+                                    onClick={this.firePhoton.bind(this)}>
+                                {"Fire Photon"}
+                            </button>
+                        </div>
+
                     </div>
                     <div className={"EventLog"}>
                         <p className={"TitleText"}>Event Log</p>
@@ -51,12 +62,16 @@ export default class HydrogenAtomSimulator extends React.Component {
         );
     }
 
+    firePhoton() {
+        console.log(`fireing`);
+    }
+
     handleNewParameters(newParams) {
-        // distance to source must be greater than/equal to distance to cluster
         this.setState({ parameters: newParams });
     }
 
     handleReset() {
         this.setState(this.initialState);
     }
+
 }
