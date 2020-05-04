@@ -8,6 +8,24 @@ const PLANCKSCONSTANT = 6.62607004e-34;
 const COULUMBCHARGE = 1.602176634e-19;
 const LIGHTSPEED = 299792458;
 
+const formatFrequency = (freq) => {
+    // let frequency = Math.round(Number.parseFloat(freq) / 1e1) * 1e1;
+    let frequency = Number.parseFloat(freq);
+    frequency = frequency.toExponential();
+    let value = frequency.toString();
+    value = Number.parseFloat(value.substr(value.length - 2, 2));
+    frequency = Math.round(frequency / Math.pow(10, value - 1)) * Math.pow(10, value - 1);
+    return frequency.toString().substr(0,1) + "." + frequency.toString().substr(1,1) + " 10^" + value + " Hz";
+}
+
+const formatWavelength = (wavelength) => {
+
+}
+
+const formatEnergy = (energy) => {
+
+}
+
 export default class HydrogenAtomSimulator extends React.Component {
     constructor(props) {
         super(props);
@@ -23,10 +41,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         };
 
         this.state = this.initialState;
-
-        this.frequencyValues = []
-        this.wavelengthValues = [];
-        this.energyValues = []
 
         this.handleNewParameters = this.handleNewParameters.bind(this);
         this.handleReset = this.handleReset.bind(this)
@@ -63,21 +77,21 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <div className={"PhotonSpectrum"}>
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
-                                frequencyValues={this.frequencyValues}
+                                value={formatFrequency(this.state.photon.frequency)}
                             />
                         </div>
 
                         <div className={"PhotonSpectrum"}>
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
-                                wavelengthValues={this.wavelengthValues}
+                                value={this.state.photon.wavelength}
                             />
                         </div>
 
                         <div className={"PhotonSpectrum"}>
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
-                                energyValues={this.energyValues}
+                                value={this.state.photon.energyValue}
                             />
                         </div>
 
@@ -129,7 +143,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         }
 
         this.setState({ photon: newPhoton });
-        console.log(`this is it: ${this.state.photon.energyValue} ${newPhoton.energyValue}`);
+        // console.log(`this is it: ${this.state.photon.energyValue} ${newPhoton.energyValue}`);
     }
 
     handleNewParameters(newParams) {
