@@ -1,7 +1,12 @@
 import React from 'react';
 import NavigationBar from './NavigationBar.jsx';
 import MainView from './MainView.jsx';
+import Spectrum from './Spectrum.jsx';
 import ClusterControls from './ClusterControls.jsx';
+
+const PLANCKSCONSTANT = 6.62607004e-34;
+const COULUMBCHARGE = 1.602176634e-19;
+const LIGHTSPEED = 299792458;
 
 export default class HydrogenAtomSimulator extends React.Component {
     constructor(props) {
@@ -18,6 +23,10 @@ export default class HydrogenAtomSimulator extends React.Component {
         };
 
         this.state = this.initialState;
+
+        this.frequencyValues = []
+        this.wavelengthValues = [];
+        this.energyValues = []
 
         this.handleNewParameters = this.handleNewParameters.bind(this);
         this.handleReset = this.handleReset.bind(this)
@@ -53,16 +62,35 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                         <div className={"PhotonSpectrum"}>
                             <Spectrum
-
+                                energyValue={this.state.photon.energyValue}
+                                frequencyValues={this.frequencyValues}
                             />
                         </div>
 
                         <div className={"PhotonSpectrum"}>
-
+                            <Spectrum
+                                energyValue={this.state.photon.energyValue}
+                                wavelengthValues={this.wavelengthValues}
+                            />
                         </div>
 
                         <div className={"PhotonSpectrum"}>
+                            <Spectrum
+                                energyValue={this.state.photon.energyValue}
+                                energyValues={this.energyValues}
+                            />
+                        </div>
 
+                        <div className={"PhotonSpectrum"}>
+                            <input
+                                type="range"
+                                min={0.03}
+                                max={15.00}
+                                step={0.01}
+                                id={"slider"}
+                                value={this.state.photon.energyValue}
+                                onChange={this.onPhotonValueChange.bind(this)}
+                            />
                         </div>
 
                         {/*<div className={"FirePhotonButton"}>*/}
@@ -84,8 +112,24 @@ export default class HydrogenAtomSimulator extends React.Component {
         );
     }
 
-    firePhoton() {
-        console.log(`fireing`);
+    // Updates the properties of the photon using the new energy value
+    onPhotonValueChange(e) {
+        // If the photon is currently being fired, then don't update anything
+        if (this.state.photon.fired) return;
+
+        let newEnergyValue = e.target.value;
+        let photonFrequency = (newEnergyValue / PLANCKSCONSTANT) * COULUMBCHARGE;
+        let photonWavelength = ((PLANCKSCONSTANT * LIGHTSPEED) / newEnergyValue) / COULUMBCHARGE;
+
+        let newPhoton = {
+            fired: false,
+            energyValue: newEnergyValue,
+            frequency: photonFrequency,
+            wavelength: photonWavelength
+        }
+
+        this.setState({ photon: newPhoton });
+        console.log(`this is it: ${this.state.photon.energyValue} ${newPhoton.energyValue}`);
     }
 
     handleNewParameters(newParams) {

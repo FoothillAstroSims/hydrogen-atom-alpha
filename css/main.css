@@ -45,6 +45,12 @@ body {
     /*height: 400px;*/
 }
 
+#slider {
+    width: 90%;
+    position: relative;
+    left: 20px;
+}
+
 .Controls {
     width: 900px;
     height: 400px;
