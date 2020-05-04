@@ -10,20 +10,31 @@ const LIGHTSPEED = 299792458;
 
 const formatFrequency = (freq) => {
     // let frequency = Math.round(Number.parseFloat(freq) / 1e1) * 1e1;
-    let frequency = Number.parseFloat(freq);
-    frequency = frequency.toExponential();
+    let frequency = Number.parseFloat(freq).toExponential();
     let value = frequency.toString();
     value = Number.parseFloat(value.substr(value.length - 2, 2));
     frequency = Math.round(frequency / Math.pow(10, value - 1)) * Math.pow(10, value - 1);
-    return frequency.toString().substr(0,1) + "." + frequency.toString().substr(1,1) + " 10^" + value + " Hz";
+    return frequency.toString().substr(0,1) + "." + frequency.toString().substr(1,1) + " x 10^" + value + " Hz";
 }
 
 const formatWavelength = (wavelength) => {
+    // let lambda = Number.parseFloat(wavelength);
+    // lambda = Math.round(lambda / 1e-9) * 1e-9;
+    let lambda = wavelength.toString();
+    let units = "nm";
+    if (Number.parseFloat(wavelength) > 1e-6) {
+        units = "μm";
+        lambda = Number.parseFloat(wavelength).toExponential();
+    }
+
+    lambda = lambda.substr(0, 4) + units;
+    return lambda;
 
 }
 
 const formatEnergy = (energy) => {
-
+    let eV = Number.parseFloat(energy).toFixed(1);
+    return eV.toString() + " eV";
 }
 
 export default class HydrogenAtomSimulator extends React.Component {
@@ -84,14 +95,14 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <div className={"PhotonSpectrum"}>
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
-                                value={this.state.photon.wavelength}
+                                value={formatWavelength(this.state.photon.wavelength)}
                             />
                         </div>
 
                         <div className={"PhotonSpectrum"}>
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
-                                value={this.state.photon.energyValue}
+                                value={formatEnergy(this.state.photon.energyValue)}
                             />
                         </div>
 

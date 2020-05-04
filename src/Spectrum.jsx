@@ -7,7 +7,7 @@ const HEIGHT = 60;
 
 const scale = scaleLinear()
         .domain([0, 15])
-        .range([0, WIDTH]);
+        .range([40, WIDTH - 45]);
 
 const formatValue = (value) => {
     // console.log(`value type: ${typeof value} ${value}`);
