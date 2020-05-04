@@ -9,11 +9,6 @@ const scale = scaleLinear()
         .domain([0, 15])
         .range([48, WIDTH - 51]);
 
-const formatValue = (value) => {
-    // console.log(`value type: ${typeof value} ${value}`);
-    return value;
-}
-
 export default class Spectrum extends React.Component {
     constructor(props) {
         super(props);
@@ -35,12 +30,10 @@ export default class Spectrum extends React.Component {
         const linePosition = scale(this.props.energyValue);
         const topY = (HEIGHT / 2) + 5;
         const bottomY = (HEIGHT / 2) - 5;
-        const displayValue = formatValue(this.props.value);
         return (
             <svg width={WIDTH} height={HEIGHT}>
                 <line x1={linePosition} x2={linePosition} y1={topY} y2={bottomY} stroke={"red"} strokeWidth={2}/>
-                <text x={linePosition - 13} y={20} >{displayValue}</text>
-                {/*<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />*/}
+                <text x={linePosition - 13} y={20} >{this.props.value}</text>
             </svg>
         );
     }
