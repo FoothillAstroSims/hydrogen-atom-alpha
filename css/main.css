@@ -42,11 +42,12 @@ body {
 .BottomHalf {
     display: flex;
     margin-top: 10px;
+    /*height: 400px;*/
 }
 
 .Controls {
     width: 900px;
-    height: 300px;
+    height: 400px;
     border: 1px solid darkmagenta;
 }
 
@@ -61,6 +62,14 @@ body {
     height: 100px;
     border: 1px solid darkmagenta;
     position: relative;
+}
+
+.PhotonSpectrum {
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 860px;
+    height: 60px;
+    border: 1px solid darkmagenta;
 }
 
 .TitleText {

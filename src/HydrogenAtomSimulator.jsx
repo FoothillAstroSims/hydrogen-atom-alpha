@@ -7,7 +7,14 @@ export default class HydrogenAtomSimulator extends React.Component {
     constructor(props) {
         super(props);
         this.initialState = {
-
+            currentEnergyLevel: 1,
+            timeUntilDeExcitation: 0,
+            photon: {
+                fired: false,
+                frequency: 3.1E8,
+                wavelength: 271,
+                energyValue: 4.6
+            }
         };
 
         this.state = this.initialState;
@@ -44,15 +51,30 @@ export default class HydrogenAtomSimulator extends React.Component {
                     <div className={"Controls"}>
                         <p className={"TitleText"}>Photon Selection</p>
 
-                        <div className={"FirePhotonButton"}>
-                            <button type="box"
-                                    className="btn btn-danger btn-sm"
-                                    onClick={this.firePhoton.bind(this)}>
-                                {"Fire Photon"}
-                            </button>
+                        <div className={"PhotonSpectrum"}>
+                            <Spectrum
+
+                            />
                         </div>
 
+                        <div className={"PhotonSpectrum"}>
+
+                        </div>
+
+                        <div className={"PhotonSpectrum"}>
+
+                        </div>
+
+                        {/*<div className={"FirePhotonButton"}>*/}
+                        {/*    <button type="box"*/}
+                        {/*            className="btn btn-danger btn-sm"*/}
+                        {/*            onClick={this.firePhoton.bind(this)}>*/}
+                        {/*        {"Fire Photon"}*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
+
                     </div>
+
                     <div className={"EventLog"}>
                         <p className={"TitleText"}>Event Log</p>
                     </div>

@@ -9,8 +9,8 @@ const renderOrbitalRadii = () => {
         const circleProperties = {
             cx: 0,
             cy: HEIGHT / 2,
-            r: data,
-            stroke: "red",
+            r: data.r,
+            stroke: data.stroke,
             fill: "none",
             key: index
         }
@@ -22,8 +22,16 @@ const renderOrbitalRadii = () => {
 export default class MainView extends React.Component {
     constructor(props) {
         super(props);
-        this.orbitalRadii = [20, 40, 110, 250, 420, 620, 880];
+        // Settings the properties of the curved lines
+        this.orbitalRadii = [{r: 20}, {r: 40}, {r: 110}, {r: 250}, {r: 420}, {r: 620}, {r: 880}];
+        // Setting the stroke property of the curved lines to grey
+        this.orbitalRadii.forEach(element => { element.stroke = "grey" });
 
+        this.initialState = {
+            deExciting: false,
+        }
+
+        this.state = this.initialState;
     }
 
     componentDidMount() {
@@ -45,8 +53,11 @@ export default class MainView extends React.Component {
 
                 {/*The following <g> tag will hold all the red orbital lines*/}
                 <g>{ this.orbitalRadii.map(renderOrbitalRadii()) }</g>
+                {/*The following circle and text are for the red proton with the letter p*/}
                 <circle cx={0} cy={center} r={20} stroke={"red"} fill={"red"}/>
                 <text x={2} y={center + 4} id={"HydrogenAtomText"}>p</text>
+
+
             </svg>
         );
     }
