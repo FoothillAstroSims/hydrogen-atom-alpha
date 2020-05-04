@@ -44,7 +44,7 @@ export default class HydrogenAtomSimulator extends React.Component {
             timeUntilDeExcitation: 0,
             photon: {
                 fired: false,
-                frequency: 3.1E8,
+                frequency: 1.1123E15,
                 wavelength: 271,
                 energyValue: 4.6
             }
@@ -105,7 +105,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                             />
                         </div>
 
-                        <div className={"PhotonSpectrum"}>
+                        <div className={"SliderContainer"}>
                             <input
                                 type="range"
                                 min={0.03}
@@ -117,13 +117,13 @@ export default class HydrogenAtomSimulator extends React.Component {
                             />
                         </div>
 
-                        {/*<div className={"FirePhotonButton"}>*/}
-                        {/*    <button type="box"*/}
-                        {/*            className="btn btn-danger btn-sm"*/}
-                        {/*            onClick={this.firePhoton.bind(this)}>*/}
-                        {/*        {"Fire Photon"}*/}
-                        {/*    </button>*/}
-                        {/*</div>*/}
+                        <div className={"FirePhotonButton"}>
+                            <button type="box"
+                                    className="btn btn-danger btn-sm"
+                                    onClick={this.firePhoton.bind(this)}>
+                                {"Fire Photon"}
+                            </button>
+                        </div>
 
                     </div>
 
@@ -134,6 +134,10 @@ export default class HydrogenAtomSimulator extends React.Component {
 
             </React.Fragment>
         );
+    }
+
+    firePhoton() {
+        console.log(`whats poppin`);
     }
 
     // Updates the properties of the photon using the new energy value

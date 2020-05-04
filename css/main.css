@@ -64,15 +64,22 @@ body {
 }
 
 .FirePhotonButton {
-    width: 100px;
-    height: 100px;
+    width: 77px;
+    height: 20px;
     border: 1px solid darkmagenta;
-    position: relative;
+    margin-left: 45%;
 }
 
 .PhotonSpectrum {
     margin-left: 20px;
     margin-bottom: 20px;
+    width: 860px;
+    height: 60px;
+    border: 1px solid darkmagenta;
+}
+
+.SliderContainer {
+    margin-left: 20px;
     width: 860px;
     height: 60px;
     border: 1px solid darkmagenta;
