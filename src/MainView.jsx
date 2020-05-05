@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Electron from './Electron';
 
 const WIDTH = 950;
 const HEIGHT = 300;
@@ -49,16 +50,22 @@ export default class MainView extends React.Component {
     render() {
         const center = HEIGHT / 2;
         return (
-            <svg width={WIDTH} height={HEIGHT}>
+            // <svg width={WIDTH} height={HEIGHT}>
 
+            <g>
                 {/*The following <g> tag will hold all the red orbital lines*/}
                 <g>{ this.orbitalRadii.map(renderOrbitalRadii()) }</g>
                 {/*The following circle and text are for the red proton with the letter p*/}
                 <circle cx={0} cy={center} r={20} stroke={"red"} fill={"red"}/>
                 <text x={2} y={center + 4} id={"HydrogenAtomText"}>p</text>
 
+                {/*<Electron*/}
 
-            </svg>
+                {/*/>*/}
+
+            </g>
+
+            // </svg>
         );
     }
 }

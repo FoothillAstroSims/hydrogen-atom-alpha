@@ -19,15 +19,20 @@ import MainView from './MainView.jsx';
 import Spectrum from './Spectrum.jsx';
 import PhotonBeams from './PhotonBeams.jsx';
 import { formatFrequency, formatEnergy, formatWavelength } from "./utils/FormatValues";
+import Electron from "./Electron";
 
 const PLANCK_CONSTANT = 6.62607004e-34;
 const COULOMB_CHARGE = 1.602176634e-19;
 const LIGHT_SPEED = 299792458;
 
+const WIDTH = 950;
+const HEIGHT = 300;
+
 export default class HydrogenAtomSimulator extends React.Component {
     constructor(props) {
         super(props);
         this.initialState = {
+            eventLog: [],
             currentEnergyLevel: 1,
             timeUntilDeExcitation: 0,
             photon: {
@@ -55,15 +60,19 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                 <div className={"TopHalf"}>
                     <div className={"MainView"}>
-                        <MainView
+                        <div className={"BackgroundSVG"}>
+                            <svg width={WIDTH} height={HEIGHT}>
+                                <MainView
 
-                        />
+                                />
+                            </svg>
+                        </div>
+
                         <div className={"BackgroundCanvas"}>
                             <PhotonBeams
                                 animatePhoton={this.state.photon.fired}
                                 stopPhotonAnimation={this.stopPhotonAnimation.bind(this)}
                             />
-
                         </div>
                     </div>
 
@@ -121,6 +130,10 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                     <div className={"EventLog"}>
                         <p className={"TitleText"}>Event Log</p>
+                        <Electron
+
+                        />
+
                     </div>
                 </div>
 
