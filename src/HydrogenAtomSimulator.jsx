@@ -159,12 +159,10 @@ export default class HydrogenAtomSimulator extends React.Component {
         // If the photon has already been fired, you can't fire it again until it passes.
         if (this.state.photon.fired) return;
 
-        let baseEnergy = -13.4;
-        let photonEnergy = this.state.energyValue;
+        let baseEnergy = -13.6;
+        let photonEnergy = this.state.photon.energyValue;
         let electronEnergy = baseEnergy / Math.pow(this.state.currentEnergyLevel, 2);
-        let totalEnergy = photonEnergy + electronEnergy;
-        // let totalEnergy = -0.5;
-        // this.energyLevelValues = [-13.6, -3.4, -1.5, -0.9, -0.5, -0.4];
+        let totalEnergy = Number.parseFloat((photonEnergy + electronEnergy).toFixed(2));
 
         let newEnergyLevel = this.state.currentEnergyLevel;
         this.energyLevelValues.forEach((element, index) => {
@@ -199,7 +197,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         }
 
         let newEnergyValue = getSnappedOnEnergyValues(Number.parseFloat(e.target.value));
-        // let newEnergyValue = Number.parseFloat(e.target.value);
         let photonFrequency = (newEnergyValue / PLANCK_CONSTANT) * COULOMB_CHARGE;
         let photonWavelength = ((PLANCK_CONSTANT * LIGHT_SPEED) / newEnergyValue) / COULOMB_CHARGE;
 
