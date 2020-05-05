@@ -21,7 +21,7 @@ export default class PhotonBeams extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.animatePhoton) { this.startAnimation(); }
+        if (this.props.photon.fired) { this.startAnimation(); }
         else {this.stopAnimation(); }
     }
 
@@ -68,10 +68,16 @@ export default class PhotonBeams extends React.Component {
 
 
         let speed = 10;
+        let end = -wavelength;
         this.initX -= speed;
         this.raf = requestAnimationFrame(this.draw);
         // TODO Wavelength should change to something provided by props that tells us how far the photon should travel
-        if (this.initX <= -wavelength) {
+        if (!this.props.photon.passThrough) {
+            console.log(`we should be passing thru`);
+            end = 500;
+        }
+
+        if (this.initX <= end) {
             this.initX = WIDTH;
             this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
             this.isPlaying = false;

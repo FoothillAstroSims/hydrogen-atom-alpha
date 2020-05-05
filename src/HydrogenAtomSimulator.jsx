@@ -39,7 +39,8 @@ export default class HydrogenAtomSimulator extends React.Component {
                 fired: false,
                 frequency: 1.1123E15,
                 wavelength: 271,
-                energyValue: 4.6
+                energyValue: 4.6,
+                passThrough: true,
             }
         };
 
@@ -73,7 +74,7 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                         <div className={"BackgroundCanvas"}>
                             <PhotonBeams
-                                animatePhoton={this.state.photon.fired}
+                                photon={this.state.photon}
                                 currentEnergyLevel={this.state.currentEnergyLevel}
                                 stopPhotonAnimation={this.stopPhotonAnimation.bind(this)}
                             />
@@ -159,20 +160,18 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonEnergy = this.state.energyValue;
         let electronEnergy = baseEnergy / Math.pow(this.state.currentEnergyLevel, 2);
         // let totalEnergy = photonEnergy + electronEnergy;
-        let totalEnergy = -0.4;
-
+        let totalEnergy = -3.5;
         // this.energyLevelValues = [-13.6, -3.4, -1.5, -0.9, -0.5, -0.4];
+
         let newEnergyLevel = this.state.currentEnergyLevel;
         this.energyLevelValues.forEach((element, index) => {
-            console.log(`hello fuckers volume 1 ${element} ${totalEnergy}`);
-            if (element === totalEnergy) {
-                newEnergyLevel = index + 1;
-                console.log(`hello fuckers ${element} ${totalEnergy}`);
-            }
+            if (element === totalEnergy) { newEnergyLevel = index + 1; }
         });
 
         let photonState = this.state.photon;
         photonState.fired = true;
+        photonState.passThrough = newEnergyLevel === this.state.currentEnergyLevel;
+        console.log(`new pass thru value: ${photonState.passThrough}`);
         this.setState({
             photon: photonState,
             currentEnergyLevel: newEnergyLevel
