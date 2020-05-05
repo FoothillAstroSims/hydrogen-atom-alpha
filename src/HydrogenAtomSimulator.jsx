@@ -1,40 +1,28 @@
+// TODO: PHOTON SELECTION COMPONENT
+// 3 Spectrums:
+// TODO Add tickmarks to the spectrums
+// TODO Change font size and color for spectrum values
+// TODO Add labels right above the slider indicating the general range for each (infrared, uv, visible)
+// Buttons
+// TODO Add buttons that snap to certain photon configurations
+// TODO Add snapping action for when you get close to a certain special photon configuration
+
+// TODO: MainView component
+// TODO After photon hits, move the electron to outside screen and then bring it back using animation
+// TODO Do calculations behind whether photon hitting results in particular action
+// TODO: EVENT LOG
+// TODO Keep track of all actions in an array to be displayed by the event log
+
 import React from 'react';
 import NavigationBar from './NavigationBar.jsx';
 import MainView from './MainView.jsx';
 import Spectrum from './Spectrum.jsx';
 import PhotonBeams from './PhotonBeams.jsx';
+import { formatFrequency, formatEnergy, formatWavelength } from "./utils/FormatValues";
 
-const PLANCKSCONSTANT = 6.62607004e-34;
-const COULUMBCHARGE = 1.602176634e-19;
-const LIGHTSPEED = 299792458;
-
-const formatFrequency = (freq) => {
-    // let frequency = Math.round(Number.parseFloat(freq) / 1e1) * 1e1;
-    let frequency = Number.parseFloat(freq).toExponential();
-    let value = frequency.toString();
-    value = Number.parseFloat(value.substr(value.length - 2, 2));
-    frequency = Math.round(frequency / Math.pow(10, value - 1)) * Math.pow(10, value - 1);
-    return frequency.toString().substr(0,1) + "." + frequency.toString().substr(1,1) + " x 10^" + value + " Hz";
-}
-
-const formatWavelength = (wavelength) => {
-    // let lambda = Number.parseFloat(wavelength);
-    // lambda = Math.round(lambda / 1e-9) * 1e-9;
-    let lambda = wavelength.toString();
-    let units = " nm";
-    if (Number.parseFloat(wavelength) > 1e-6) {
-        units = " μm";
-        lambda = Number.parseFloat(wavelength).toExponential();
-    }
-
-    lambda = lambda.substr(0, 4) + units;
-    return lambda;
-}
-
-const formatEnergy = (energy) => {
-    let eV = Number.parseFloat(energy).toFixed(1);
-    return eV.toString() + " eV";
-}
+const PLANCK_CONSTANT = 6.62607004e-34;
+const COULOMB_CHARGE = 1.602176634e-19;
+const LIGHT_SPEED = 299792458;
 
 export default class HydrogenAtomSimulator extends React.Component {
     constructor(props) {
@@ -161,8 +149,8 @@ export default class HydrogenAtomSimulator extends React.Component {
         if (this.state.photon.fired) return;
 
         let newEnergyValue = e.target.value;
-        let photonFrequency = (newEnergyValue / PLANCKSCONSTANT) * COULUMBCHARGE;
-        let photonWavelength = ((PLANCKSCONSTANT * LIGHTSPEED) / newEnergyValue) / COULUMBCHARGE;
+        let photonFrequency = (newEnergyValue / PLANCK_CONSTANT) * COULOMB_CHARGE;
+        let photonWavelength = ((PLANCK_CONSTANT * LIGHT_SPEED) / newEnergyValue) / COULOMB_CHARGE;
 
         let newPhoton = {
             fired: false,
@@ -172,7 +160,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         }
 
         this.setState({ photon: newPhoton });
-        // console.log(`this is it: ${this.state.photon.energyValue} ${newPhoton.energyValue}`);
     }
 
     handleNewParameters(newParams) {

@@ -33,12 +33,8 @@ export default class PhotonBeams extends React.Component {
         cancelAnimationFrame(this.raf);
     }
 
-    plotSine() {
-        let amplitude = 20;
-        let frequency = 1;
-        let wavelength = 200;
-
-        let x = this.initX;
+    plotSine(amplitude, frequency, wavelength) {
+       let x = this.initX;
         let x2 = this.initX + wavelength;
         let y = 0;
 
@@ -64,12 +60,18 @@ export default class PhotonBeams extends React.Component {
 
     draw() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
-        this.plotSine();
+
+        let amplitude = 20;
+        let frequency = 1;
+        let wavelength = 200;
+        this.plotSine(amplitude, frequency, wavelength);
+
 
         let speed = 10;
         this.initX -= speed;
         this.raf = requestAnimationFrame(this.draw);
-        if (this.initX <= -200) {
+        // TODO Wavelength should change to something provided by props that tells us how far the photon should travel
+        if (this.initX <= -wavelength) {
             this.initX = WIDTH;
             this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
             this.isPlaying = false;
