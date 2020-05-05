@@ -2,46 +2,13 @@ import React from 'react';
 import { select, drag, event} from 'd3/dist/d3';
 import PropTypes from 'prop-types';
 
-const findClosestOrbital = (endX) => {
-    let orbitalDistances = [40, 110, 250, 420, 620, 880];
-    let distanceFromEndXToOrbital = orbitalDistances.map(element => Math.abs(element - endX));
-    let indexOfClosestOrbital = distanceFromEndXToOrbital.indexOf(Math.min(...distanceFromEndXToOrbital));
-    return orbitalDistances[indexOfClosestOrbital];
-}
-
-// const makeDraggable = (node, fn) => {
-//     let translateX = 0;
-//     const handleDrag = drag()
-//         .subject(function() {
-//             return { x: translateX, y: 0 }
-//         })
-//         .on('start', function() {
-//             console.log(`starting dragging stuff`);
-//         })
-//         .on('end', function() {
-//             const me = select(this);
-//             let finalX = findClosestOrbital(event.x);
-//             const transform = `translate(${finalX}, 0)`;
-//             translateX = finalX;
-//             me.attr('transform', transform);
-//         })
-//         .on('drag', function() {
-//             const me = select(this);
-//             fn(event.x,event.y);
-//             console.log(`eventX ${event.x}`);
-//             const transform = `translate(${event.x}, ${0})`;
-//             translateX = event.x;
-//             me.attr('transform', transform);
-//         });
-//
-//     select(node).call(handleDrag);
-// }
 
 export default class Electron extends React.Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef();
-        this.translateX = 0;
+        this.val = false;
+        this.orbitalDistances = [40, 110, 250, 420, 620, 880];
     }
 
     componentDidMount() {
@@ -54,17 +21,12 @@ export default class Electron extends React.Component {
             .attr("fill", "green");
 
         // makeDraggable(this.ref.current, this.up);
-        this.makeDraggable(this.ref.current, this.up);
+        this.makeDraggable(this.ref.current);
     }
 
-    makeDraggable(node, fn) {
-        let translateX = this.translateX;
-        const setTranslateX = (x) => this.translateX = x;
-
+    makeDraggable(node) {
+        const findClosestOrbital = this.findClosestOrbital.bind(this);
         const handleDrag = drag()
-            // .subject(function() {
-            //     return { x: translateX, y: 0 }
-            // })
             .on('start', function() {
                 console.log(`starting dragging stuff`);
             })
@@ -72,25 +34,32 @@ export default class Electron extends React.Component {
                 const me = select(this);
                 let finalX = findClosestOrbital(event.x);
                 const transform = `translate(${finalX}, 0)`;
-                translateX = finalX;
-                me.attr('transform', transform);
+                me.transition().attr('transform', transform);
             })
             .on('drag', function() {
                 const me = select(this);
-                fn(event.x,event.y);
-                console.log(`eventX ${event.x}`);
                 const transform = `translate(${event.x}, ${0})`;
-                translateX = event.x;
                 me.attr('transform', transform);
             });
 
         select(node).call(handleDrag);
     }
 
-    componentWillUpdate(nextProps, nextState, nextContext) {
-        let node = this.ref.current;
-        select(node).attr('transform', `translate(210, 0)`);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // If the photon wasn't fired, simply return
+        if (!this.props.fired) return;
 
+        let node = this.ref.current;
+        console.log(`currEner: ${this.props.currentEnergyLevel}`);
+        let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
+        select(node).transition().attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
+    }
+
+    findClosestOrbital(endX) {
+        let distanceFromEndXToOrbital = this.orbitalDistances.map(element => Math.abs(element - endX));
+        let indexOfClosestOrbital = distanceFromEndXToOrbital.indexOf(Math.min(...distanceFromEndXToOrbital));
+        this.props.updateEnergyLevel(indexOfClosestOrbital + 1);
+        return this.orbitalDistances[indexOfClosestOrbital];
     }
 
     up(x,y) {

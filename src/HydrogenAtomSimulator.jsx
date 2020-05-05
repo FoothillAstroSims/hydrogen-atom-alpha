@@ -44,6 +44,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         };
 
         this.state = this.initialState;
+        this.energyLevelValues = [-13.6, -3.4, -1.5, -0.9, -0.5, -0.4];
 
         this.handleNewParameters = this.handleNewParameters.bind(this);
         this.handleReset = this.handleReset.bind(this)
@@ -64,6 +65,8 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <svg width={WIDTH} height={HEIGHT}>
                                 <MainView
                                     fired={this.state.photon.fired}
+                                    currentEnergyLevel={this.state.currentEnergyLevel}
+                                    updateEnergyLevel={this.updateEnergyLevel.bind(this)}
                                 />
                             </svg>
                         </div>
@@ -71,6 +74,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <div className={"BackgroundCanvas"}>
                             <PhotonBeams
                                 animatePhoton={this.state.photon.fired}
+                                currentEnergyLevel={this.state.currentEnergyLevel}
                                 stopPhotonAnimation={this.stopPhotonAnimation.bind(this)}
                             />
                         </div>
@@ -137,6 +141,10 @@ export default class HydrogenAtomSimulator extends React.Component {
         );
     }
 
+    updateEnergyLevel(newEnergyLevel) {
+        this.setState({ currentEnergyLevel: newEnergyLevel})
+    }
+
     stopPhotonAnimation() {
         let photonState = this.state.photon;
         photonState.fired = false;
@@ -144,12 +152,31 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     firePhoton() {
-        // If the photon has already ben fired, you can't fire it again until it passes.
+        // If the photon has already been fired, you can't fire it again until it passes.
         if (this.state.photon.fired) return;
+
+        let baseEnergy = -13.4;
+        let photonEnergy = this.state.energyValue;
+        let electronEnergy = baseEnergy / Math.pow(this.state.currentEnergyLevel, 2);
+        // let totalEnergy = photonEnergy + electronEnergy;
+        let totalEnergy = -0.4;
+
+        // this.energyLevelValues = [-13.6, -3.4, -1.5, -0.9, -0.5, -0.4];
+        let newEnergyLevel = this.state.currentEnergyLevel;
+        this.energyLevelValues.forEach((element, index) => {
+            console.log(`hello fuckers volume 1 ${element} ${totalEnergy}`);
+            if (element === totalEnergy) {
+                newEnergyLevel = index + 1;
+                console.log(`hello fuckers ${element} ${totalEnergy}`);
+            }
+        });
 
         let photonState = this.state.photon;
         photonState.fired = true;
-        this.setState({ photon: photonState });
+        this.setState({
+            photon: photonState,
+            currentEnergyLevel: newEnergyLevel
+        });
     }
 
     // Updates the properties of the photon using the new energy value

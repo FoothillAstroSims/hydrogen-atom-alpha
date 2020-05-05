@@ -60,6 +60,8 @@ export default class MainView extends React.Component {
                 {/*The Electron component returns a <g> tag that draws the draggable circle for us*/}
                 <Electron
                     fired={this.props.fired}
+                    currentEnergyLevel={this.props.currentEnergyLevel}
+                    updateEnergyLevel={this.props.updateEnergyLevel}
                 />
 
             </g>
