@@ -73,7 +73,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <div className={"BackgroundCanvas"}>
                             <PhotonBeams
                                 animatePhoton={this.state.photon.fired}
-                                // stopPhotonAnimation={this.stopPhotonAnimation()}
+                                stopPhotonAnimation={this.stopPhotonAnimation.bind(this)}
                             />
 
                         </div>
@@ -140,14 +140,16 @@ export default class HydrogenAtomSimulator extends React.Component {
         );
     }
 
-    // stopPhotonAnimation() {
-    //     let photonState = this.state.photon;
-    //     photonState.fired = false;
-    //     this.setState({ photon: photonState });
-    // }
+    stopPhotonAnimation() {
+        let photonState = this.state.photon;
+        photonState.fired = false;
+        this.setState({ photon: photonState });
+    }
 
     firePhoton() {
-        console.log(`photons tate: ${this.state.photon.fired}`);
+        // If the photon has already ben fired, you can't fire it again until it passes.
+        if (this.state.photon.fired) return;
+
         let photonState = this.state.photon;
         photonState.fired = true;
         this.setState({ photon: photonState });
