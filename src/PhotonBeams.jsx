@@ -9,7 +9,9 @@ export default class PhotonBeams extends React.Component {
         this.canvasRef = React.createRef();
         this.initX = WIDTH;
 
-        this.isPlaying = false;
+        // this.isPlaying = false;
+        this.orbitalDistances = [40, 110, 250, 420, 620, 880];
+        this.energyLevel = 1;
         this.draw = this.draw.bind(this);
         this.startAnimation = this.startAnimation.bind(this);
         this.stopAnimation = this.stopAnimation.bind(this);
@@ -21,6 +23,7 @@ export default class PhotonBeams extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        this.energyLevel = prevProps.currentEnergyLevel;
         if (this.props.photon.fired) { this.startAnimation(); }
         else {this.stopAnimation(); }
     }
@@ -34,7 +37,7 @@ export default class PhotonBeams extends React.Component {
     }
 
     plotSine(amplitude, frequency, wavelength) {
-       let x = this.initX;
+        let x = this.initX;
         let x2 = this.initX + wavelength;
         let y = 0;
 
@@ -74,7 +77,7 @@ export default class PhotonBeams extends React.Component {
         // TODO Wavelength should change to something provided by props that tells us how far the photon should travel
         if (!this.props.photon.passThrough) {
             console.log(`we should be passing thru`);
-            end = 500;
+            end = this.orbitalDistances[this.energyLevel - 1];
         }
 
         if (this.initX <= end) {

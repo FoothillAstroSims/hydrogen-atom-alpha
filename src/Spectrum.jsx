@@ -28,12 +28,16 @@ export default class Spectrum extends React.Component {
 
     render() {
         const linePosition = scale(this.props.energyValue);
+        const shiftLeftValues = [45, 25, 17];
+        // The props id sent to us basically indicates whether we are passing frequency, wavelength, or eV so that
+        // we can center align the numbers on top of the tick
+        const shiftLeft = shiftLeftValues[this.props.id];
         const topY = (HEIGHT / 2) + 5;
         const bottomY = (HEIGHT / 2) - 5;
         return (
             <svg width={WIDTH} height={HEIGHT}>
                 <line x1={linePosition} x2={linePosition} y1={topY} y2={bottomY} stroke={"red"} strokeWidth={2}/>
-                <text x={linePosition - 13} y={20} >{this.props.value}</text>
+                <text className={"spectrumTexts"} x={linePosition - shiftLeft} y={20} >{this.props.value}</text>
             </svg>
         );
     }

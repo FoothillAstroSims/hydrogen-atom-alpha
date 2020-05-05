@@ -94,6 +94,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
                                 value={formatFrequency(this.state.photon.frequency)}
+                                id={0}
                             />
                         </div>
 
@@ -101,6 +102,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
                                 value={formatWavelength(this.state.photon.wavelength)}
+                                id={1}
                             />
                         </div>
 
@@ -108,6 +110,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
                                 value={formatEnergy(this.state.photon.energyValue)}
+                                id={2}
                             />
                         </div>
 
@@ -159,8 +162,8 @@ export default class HydrogenAtomSimulator extends React.Component {
         let baseEnergy = -13.4;
         let photonEnergy = this.state.energyValue;
         let electronEnergy = baseEnergy / Math.pow(this.state.currentEnergyLevel, 2);
-        // let totalEnergy = photonEnergy + electronEnergy;
-        let totalEnergy = -3.5;
+        let totalEnergy = photonEnergy + electronEnergy;
+        // let totalEnergy = -0.5;
         // this.energyLevelValues = [-13.6, -3.4, -1.5, -0.9, -0.5, -0.4];
 
         let newEnergyLevel = this.state.currentEnergyLevel;
@@ -183,7 +186,20 @@ export default class HydrogenAtomSimulator extends React.Component {
         // If the photon is currently being fired, then don't update anything
         if (this.state.photon.fired) return;
 
-        let newEnergyValue = e.target.value;
+        const getSnappedOnEnergyValues = (energy) => {
+            let criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.8, 13.1, 13.2];
+            let epsilon = 0.08;
+            let energyValue = energy;
+            criticalPhotonEVs.forEach((element, index) => {
+                if (energy < (element + epsilon) && energy > (element - epsilon)) energyValue = element;
+                console.log(`energyValue: ${energyValue} and type: ${typeof energyValue}`);
+            })
+
+            return energyValue;
+        }
+
+        let newEnergyValue = getSnappedOnEnergyValues(Number.parseFloat(e.target.value));
+        // let newEnergyValue = Number.parseFloat(e.target.value);
         let photonFrequency = (newEnergyValue / PLANCK_CONSTANT) * COULOMB_CHARGE;
         let photonWavelength = ((PLANCK_CONSTANT * LIGHT_SPEED) / newEnergyValue) / COULOMB_CHARGE;
 

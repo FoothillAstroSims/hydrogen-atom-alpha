@@ -56,6 +56,10 @@ body {
     /*height: 400px;*/
 }
 
+.spectrumTexts {
+    fill: darkcyan;
+}
+
 #slider {
     width: 90%;
     position: relative;
