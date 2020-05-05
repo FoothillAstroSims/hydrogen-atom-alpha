@@ -7,7 +7,11 @@ export default class PhotonBeams extends React.Component {
     constructor(props) {
         super(props);
         this.canvasRef = React.createRef();
+        this.initX = 350;
 
+        this.draw = this.draw.bind(this);
+        this.startAnimation = this.startAnimation.bind(this);
+        this.stopAnimation = this.stopAnimation.bind(this);
     }
 
     componentDidMount() {
@@ -27,7 +31,57 @@ export default class PhotonBeams extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.animatePhoton) this.startAnimation();
+        else this.stopAnimation();
+    }
 
+    startAnimation() {
+        this.raf = requestAnimationFrame(this.draw.bind(this));
+    }
+
+    stopAnimation() {
+        cancelAnimationFrame(this.raf);
+    }
+
+    plotSine() {
+        let wavelength = 200;
+        let x = this.initX;
+        let x2 = this.initX + wavelength;
+        let y = 0;
+        let amplitude = 20;
+        let frequency = 5;
+        let transparency = 1;
+        let incrementValue = 1;
+
+        while (x < x2) {
+            y = HEIGHT/2 + amplitude * Math.sin((x)/frequency);
+            this.ctx.beginPath();
+            this.ctx.lineWidth = 2;
+            this.ctx.strokeStyle = `rgb(128,0,128, ${transparency})`;
+            this.ctx.moveTo(x-1, HEIGHT / 2 + amplitude * Math.sin((x-incrementValue) / frequency));
+            this.ctx.lineTo(x, y);
+
+            this.ctx.stroke();
+            x += incrementValue;
+
+            transparency = 1 - ((x - this.initX) / (wavelength));
+        }
+
+        this.ctx.stroke();
+    }
+
+    draw() {
+        this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        this.plotSine();
+
+        let speed = 3;
+        this.initX -= speed;
+        this.raf = requestAnimationFrame(this.draw);
+        if (this.initX <= 0) {
+            this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            this.stopAnimation();
+            // this.props.stopPhotonAnimation();
+        }
     }
 
     render() {
@@ -76,7 +130,6 @@ export default class PhotonBeams extends React.Component {
 //     initialX -= speed;
 //     if (initialX <= 0) {
 //         initialX = 400;
-//         step = 0;
 //     }
 //     window.requestAnimationFrame(draw);
 // }

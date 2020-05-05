@@ -72,7 +72,8 @@ export default class HydrogenAtomSimulator extends React.Component {
                         />
                         <div className={"BackgroundCanvas"}>
                             <PhotonBeams
-
+                                animatePhoton={this.state.photon.fired}
+                                // stopPhotonAnimation={this.stopPhotonAnimation()}
                             />
 
                         </div>
@@ -139,8 +140,17 @@ export default class HydrogenAtomSimulator extends React.Component {
         );
     }
 
+    // stopPhotonAnimation() {
+    //     let photonState = this.state.photon;
+    //     photonState.fired = false;
+    //     this.setState({ photon: photonState });
+    // }
+
     firePhoton() {
-        console.log(`whats poppin`);
+        console.log(`photons tate: ${this.state.photon.fired}`);
+        let photonState = this.state.photon;
+        photonState.fired = true;
+        this.setState({ photon: photonState });
     }
 
     // Updates the properties of the photon using the new energy value
