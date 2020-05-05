@@ -2,6 +2,13 @@ import React from 'react';
 import { select, drag, event} from 'd3/dist/d3';
 import PropTypes from 'prop-types';
 
+const findClosestOrbital = (endX) => {
+    let orbitalDistances = [0, 70, 210, 380, 580, 840];
+    let distanceFromEndXToOrbital = orbitalDistances.map(element => Math.abs(element - endX));
+    let indexOfClosestOrbital = distanceFromEndXToOrbital.indexOf(Math.min(...distanceFromEndXToOrbital));
+    return orbitalDistances[indexOfClosestOrbital];
+}
+
 const makeDraggable = (node, fn) => {
     let translateX = 0;
     let translateY = 0;
@@ -13,14 +20,18 @@ const makeDraggable = (node, fn) => {
             console.log(`starting dragging stuff`);
         })
         .on('end', function() {
-            console.log(`starting edning stuff`);
+            const me = select(this);
+            let finalX = findClosestOrbital(event.x);
+            const transform = `translate(${finalX}, 0)`;
+            translateX = finalX;
+            me.attr('transform', transform);
         })
         .on('drag', function() {
             const me = select(this);
             fn(event.x,event.y);
+            console.log(`eventX ${event.x}`);
             const transform = `translate(${event.x}, ${0})`;
             translateX = event.x;
-            translateY = 0;
             me.attr('transform', transform);
         });
 
@@ -35,12 +46,11 @@ export default class Electron extends React.Component {
 
     componentDidMount() {
         this.circle = select(this.ref.current).append("circle")
-            .attr("cx", 110)
+            .attr("cx", 40)
             .attr("cy", 150)
-            .attr("r", 10)
+            .attr("r", 7)
             .attr("fill", "green");
         makeDraggable(this.ref.current, this.up);
-        console.log(`circe; ${this.circle}`);
     }
 
     componentWillUpdate(nextProps, nextState, nextContext) {

@@ -8,7 +8,7 @@
 // TODO Add snapping action for when you get close to a certain special photon configuration
 
 // TODO: MainView component
-// TODO After photon hits, move the electron to outside screen and then bring it back using animation
+// TODO After photon hits, move the electron to outside screen and then bring it back using transition
 // TODO Do calculations behind whether photon hitting results in particular action
 // TODO: EVENT LOG
 // TODO Keep track of all actions in an array to be displayed by the event log
