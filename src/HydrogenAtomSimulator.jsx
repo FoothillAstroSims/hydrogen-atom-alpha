@@ -172,7 +172,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonState = this.state.photon;
         photonState.fired = true;
         photonState.passThrough = newEnergyLevel === this.state.currentEnergyLevel;
-        console.log(`new pass thru value: ${photonState.passThrough}`);
+        // console.log(`new pass thru value: ${photonState.passThrough}`);
         this.setState({
             photon: photonState,
             currentEnergyLevel: newEnergyLevel
@@ -190,7 +190,7 @@ export default class HydrogenAtomSimulator extends React.Component {
             let energyValue = energy;
             criticalPhotonEVs.forEach((element, index) => {
                 if (energy < (element + epsilon) && energy > (element - epsilon)) energyValue = element;
-                console.log(`energyValue: ${energyValue} and type: ${typeof energyValue}`);
+                // console.log(`energyValue: ${energyValue} and type: ${typeof energyValue}`);
             })
 
             return energyValue;

@@ -27,6 +27,7 @@ export default class MainView extends React.Component {
         this.orbitalRadii = [{r: 20}, {r: 40}, {r: 110}, {r: 250}, {r: 420}, {r: 620}, {r: 880}];
         // Setting the stroke property of the curved lines to grey
         this.orbitalRadii.forEach(element => { element.stroke = "grey" });
+        this.orbitalRadii[1].stroke = "red";
 
         this.initialState = {
             deExciting: false,
@@ -44,7 +45,15 @@ export default class MainView extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
-        
+        this.updateCurrentCurve();
+    }
+
+    updateCurrentCurve() {
+        for (let i = 0; i < this.orbitalRadii.length; i++) {
+            this.orbitalRadii[i].stroke = "grey";
+        }
+
+        this.orbitalRadii[this.props.currentEnergyLevel - 0].stroke = "red";
     }
 
     render() {

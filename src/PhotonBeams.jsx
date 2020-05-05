@@ -65,7 +65,7 @@ export default class PhotonBeams extends React.Component {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
         let amplitude = 20;
-        let frequency = 1;
+        let frequency = 5;
         let wavelength = 200;
         this.plotSine(amplitude, frequency, wavelength);
 
@@ -76,8 +76,8 @@ export default class PhotonBeams extends React.Component {
         this.raf = requestAnimationFrame(this.draw);
         // TODO Wavelength should change to something provided by props that tells us how far the photon should travel
         if (!this.props.photon.passThrough) {
-            console.log(`we should be passing thru`);
-            end = this.orbitalDistances[this.energyLevel - 1];
+            console.log(`we shouldn't be passing thru`);
+            end = this.orbitalDistances[this.energyLevel - 1] - 50;
         }
 
         if (this.initX <= end) {
