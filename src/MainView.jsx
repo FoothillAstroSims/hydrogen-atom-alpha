@@ -59,9 +59,9 @@ export default class MainView extends React.Component {
                 <circle cx={0} cy={center} r={20} stroke={"red"} fill={"red"}/>
                 <text x={2} y={center + 4} id={"HydrogenAtomText"}>p</text>
 
-                {/*<Electron*/}
+                <Electron
 
-                {/*/>*/}
+                />
 
             </g>
 
