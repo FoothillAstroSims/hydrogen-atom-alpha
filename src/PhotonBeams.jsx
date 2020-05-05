@@ -62,7 +62,7 @@ export default class PhotonBeams extends React.Component {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
         let amplitude = 20;
-        let frequency = 50;
+        let frequency = 1;
         let wavelength = 200;
         this.plotSine(amplitude, frequency, wavelength);
 

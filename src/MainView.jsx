@@ -50,8 +50,6 @@ export default class MainView extends React.Component {
     render() {
         const center = HEIGHT / 2;
         return (
-            // <svg width={WIDTH} height={HEIGHT}>
-
             <g>
                 {/*The following <g> tag will hold all the red orbital lines*/}
                 <g>{ this.orbitalRadii.map(renderOrbitalRadii()) }</g>
@@ -59,13 +57,12 @@ export default class MainView extends React.Component {
                 <circle cx={0} cy={center} r={20} stroke={"red"} fill={"red"}/>
                 <text x={2} y={center + 4} id={"HydrogenAtomText"}>p</text>
 
+                {/*The Electron component returns a <g> tag that draws the draggable circle for us*/}
                 <Electron
-
+                    fired={this.props.fired}
                 />
 
             </g>
-
-            // </svg>
         );
     }
 }

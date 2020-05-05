@@ -63,7 +63,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <div className={"BackgroundSVG"}>
                             <svg width={WIDTH} height={HEIGHT}>
                                 <MainView
-
+                                    fired={this.state.photon.fired}
                                 />
                             </svg>
                         </div>
