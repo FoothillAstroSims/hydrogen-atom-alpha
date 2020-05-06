@@ -19,7 +19,7 @@ import MainView from './MainView.jsx';
 import Spectrum from './Spectrum.jsx';
 import PhotonBeams from './PhotonBeams.jsx';
 import { formatFrequency, formatEnergy, formatWavelength } from "./utils/FormatValues";
-import Electron from "./Electron";
+import Slider from "./Slider";
 
 const PLANCK_CONSTANT = 6.62607004e-34;
 const COULOMB_CHARGE = 1.602176634e-19;
@@ -47,7 +47,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         this.state = this.initialState;
         this.energyLevelValues = [-13.6, -3.4, -1.5, -0.9, -0.5, -0.4];
 
-        this.handleNewParameters = this.handleNewParameters.bind(this);
         this.handleReset = this.handleReset.bind(this)
     }
 
@@ -115,15 +114,18 @@ export default class HydrogenAtomSimulator extends React.Component {
                         </div>
 
                         <div className={"SliderContainer"}>
-                            <input
-                                type="range"
-                                min={0.03}
-                                max={15.00}
-                                step={0.01}
-                                id={"slider"}
-                                value={this.state.photon.energyValue}
-                                onChange={this.onPhotonValueChange.bind(this)}
+                            <Slider
+
                             />
+                            {/*<input*/}
+                            {/*    type="range"*/}
+                            {/*    min={0.03}*/}
+                            {/*    max={15.00}*/}
+                            {/*    step={0.01}*/}
+                            {/*    id={"slider"}*/}
+                            {/*    value={this.state.photon.energyValue}*/}
+                            {/*    onChange={this.onPhotonValueChange.bind(this)}*/}
+                            {/*/>*/}
                         </div>
 
                         <div className={"FirePhotonButton"}>
@@ -208,10 +210,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         }
 
         this.setState({ photon: newPhoton });
-    }
-
-    handleNewParameters(newParams) {
-        this.setState({ parameters: newParams });
     }
 
     handleReset() {

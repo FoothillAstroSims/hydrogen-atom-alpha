@@ -109,6 +109,42 @@ body {
     font: bold 20px sans-serif;
     fill: white;
 }
+/* All the slider related stuff */
+
+.track,
+.track-inset,
+.track-overlay {
+    stroke-linecap: round;
+}
+
+.track {
+    stroke: #000;
+    stroke-opacity: 0.3;
+    stroke-width: 10px;
+}
+
+.filler {
+    stroke-linecap: round;
+    stroke-width: 10px;
+}
+
+.track-inset {
+    stroke: #ddd;
+    stroke-width: 8px;
+}
+
+.track-overlay {
+    pointer-events: stroke;
+    stroke-width: 50px;
+    cursor: ew-resize;
+}
+
+.handle {
+    /*fill: #fff;*/
+    stroke: #000;
+    stroke-opacity: 0.5;
+    stroke-width: 1px;
+}
 
 /*All the Navigation Bar related CSS*/
 .NavigationBar {
