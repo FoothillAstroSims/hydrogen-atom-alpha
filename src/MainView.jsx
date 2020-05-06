@@ -27,6 +27,7 @@ export default class MainView extends React.Component {
         this.orbitalRadii = [{r: 20}, {r: 40}, {r: 110}, {r: 250}, {r: 420}, {r: 620}, {r: 880}];
         // Setting the stroke property of the curved lines to grey
         this.orbitalRadii.forEach(element => { element.stroke = "grey" });
+        // Setting the first energy level stroke to red to indicate that's our current level
         this.orbitalRadii[1].stroke = "red";
 
         this.initialState = {
