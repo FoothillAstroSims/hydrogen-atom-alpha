@@ -9,6 +9,36 @@ const scale = scaleLinear()
         .domain([0, 15])
         .range([48, WIDTH - 51]);
 
+// <line x1={linePosition} x2={linePosition} y1={topY} y2={bottomY} stroke={"red"} strokeWidth={2}/>
+const renderTickMarks = () => {
+    return (data, index) => {
+        const lineProperties = {
+            x1: data.x,
+            x2: data.x,
+            y1: data.top,
+            y2: data.bottom,
+            stroke: "white",
+            key: index
+        }
+
+        return <line {...lineProperties} />;
+    }
+}
+
+const renderTickTexts = () => {
+    return (data, index) => {
+        let shift = index > 1 ? 20 : 12;
+        const textProperties = {
+            className: "spectrumTexts",
+            x: data.x - shift,
+            y: data.top + 15,
+            key: index
+        }
+
+        return <text {...textProperties}>{data.text}</text>;
+    }
+}
+
 export default class Spectrum extends React.Component {
     constructor(props) {
         super(props);
@@ -34,8 +64,12 @@ export default class Spectrum extends React.Component {
         const shiftLeft = shiftLeftValues[this.props.id];
         const topY = (HEIGHT / 2) + 5;
         const bottomY = (HEIGHT / 2) - 5;
+        console.log(`linePosition: ${linePosition}`);
+
         return (
             <svg width={WIDTH} height={HEIGHT}>
+                <g>{ this.props.tickMarksData.map( renderTickMarks()) }</g>
+                <g>{ this.props.tickMarksData.map( renderTickTexts()) }</g>
                 <line x1={linePosition} x2={linePosition} y1={topY} y2={bottomY} stroke={"red"} strokeWidth={2}/>
                 <text className={"spectrumTexts"} x={linePosition - shiftLeft} y={20} >{this.props.value}</text>
             </svg>
