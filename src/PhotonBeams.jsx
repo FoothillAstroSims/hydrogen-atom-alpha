@@ -49,8 +49,8 @@ export default class PhotonBeams extends React.Component {
             this.ctx.beginPath();
             this.ctx.lineWidth = 2;
             // this.ctx.strokeStyle = `rgb(128,0,128, ${transparency})`;
-            console.log(`rgb with adulteration: ${rgb}, and with: ${rgb.substring(0, rgb.length - 2)}`);
-            this.ctx.strokeStyle = rgb.substring(0, rgb.length - 2) + `,${transparency})`;
+            // console.log(`rgb without adulteration: ${rgb}, and with: ${rgb.substring(0, rgb.length - 1)}`);
+            this.ctx.strokeStyle = rgb.substring(0, rgb.length - 1) + `,${transparency})`;
             this.ctx.moveTo(x-1, HEIGHT / 2 + amplitude * Math.sin((x-incrementValue) / frequency));
             this.ctx.lineTo(x, y);
 
@@ -84,6 +84,7 @@ export default class PhotonBeams extends React.Component {
 
         if (this.initX <= end) {
             this.initX = WIDTH;
+            console.log(`im here to be stopped ${this.props.photon.color}`);
             this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
             this.isPlaying = false;
             this.stopAnimation();

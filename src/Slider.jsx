@@ -45,7 +45,7 @@ export default class Slider extends React.Component {
         let photonColorHex = getWavelengthHex(photonWavelength * 1e9);
         let photonColorRGB = getWavelengthRGB(photonWavelength * 1e9);
 
-        console.log(`color HEx: ${photonColorHex}, color RGB: ${photonColorRGB}`);
+        // console.log(`color HEx: ${photonColorHex}, color RGB: ${photonColorRGB}`);
 
         let newPhoton = {
             fired: this.props.photon.fired,
