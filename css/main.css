@@ -19,7 +19,7 @@ body {
     position: relative;
     width: 950px;
     height: 300px;
-    border: 1px solid darkmagenta;
+    border: 1px solid sienna;
 }
 
 .BackgroundCanvas {
@@ -47,7 +47,7 @@ body {
 .Diagram {
     flex-grow: 1;
     margin-left: 10px;
-    border: 1px solid darkmagenta;
+    border: 1px solid sienna;
 }
 
 .BottomHalf {
@@ -69,19 +69,18 @@ body {
 .Controls {
     width: 900px;
     height: 400px;
-    border: 1px solid darkmagenta;
+    border: 1px solid sienna;
 }
 
 .EventLog {
     flex-grow: 1;
     margin-left: 10px;
-    border: 1px solid darkmagenta;
+    border: 1px solid sienna;
 }
 
 .FirePhotonButton {
     width: 77px;
     height: 20px;
-    border: 1px solid darkmagenta;
     margin-left: 45%;
 }
 
@@ -90,14 +89,14 @@ body {
     margin-bottom: 20px;
     width: 860px;
     height: 60px;
-    border: 1px solid darkmagenta;
+    border: 1px solid green;
 }
 
 .SliderContainer {
     margin-left: 20px;
     width: 860px;
     height: 60px;
-    border: 1px solid darkmagenta;
+    border: 1px solid lightseagreen;
 }
 
 .TitleText {

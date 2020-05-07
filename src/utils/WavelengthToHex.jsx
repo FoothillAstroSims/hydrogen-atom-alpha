@@ -1,4 +1,4 @@
-const getHex = (wavelength) => {
+const wavelengthToColor = (wavelength) => {
     let w = parseFloat(wavelength);
     let red = 0;
     let green = 0;
@@ -70,7 +70,7 @@ const getHex = (wavelength) => {
     let G = (green > 0 ? 255*Math.pow(green * factor, gamma) : 0);
     let B = (blue  > 0 ? 255*Math.pow(blue  * factor, gamma) : 0);
 
-    return "#" + decimalToHex(R) + decimalToHex(G) + decimalToHex(B);
+    return [R, G, B];
 }
 
 const decimalToHex = (dec) => {
@@ -83,4 +83,23 @@ const decimalToHex = (dec) => {
     return hex;
 }
 
-export { getHex };
+const getWavelengthRGB = (wv) => {
+    const rgbArr = wavelengthToColor(wv);
+
+    const R = rgbArr[0];
+    const G = rgbArr[1];
+    const B = rgbArr[2];
+
+    return `rgb(${R},${G},${B})`;
+}
+
+const getWavelengthHex = (wv) => {
+    const rgbArr = wavelengthToColor(wv);
+    const R = rgbArr[0];
+    const G = rgbArr[1];
+    const B = rgbArr[2];
+
+    return "#" + decimalToHex(R) + decimalToHex(G) + decimalToHex(B);
+}
+
+export { getWavelengthHex, getWavelengthRGB };

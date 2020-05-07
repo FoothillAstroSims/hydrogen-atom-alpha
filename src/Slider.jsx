@@ -1,5 +1,5 @@
 import React from 'react';
-import { getHex } from "./utils/WavelengthToHex";
+import { getWavelengthHex, getWavelengthRGB } from "./utils/WavelengthToHex";
 
 const PLANCK_CONSTANT = 6.62607004e-34;
 const COULOMB_CHARGE = 1.602176634e-19;
@@ -42,27 +42,31 @@ export default class Slider extends React.Component {
         let newEnergyValue = getSnappedOnEnergyValues(Number.parseFloat(e.target.value));
         let photonFrequency = (newEnergyValue / PLANCK_CONSTANT) * COULOMB_CHARGE;
         let photonWavelength = ((PLANCK_CONSTANT * LIGHT_SPEED) / newEnergyValue) / COULOMB_CHARGE;
+        let photonColorHex = getWavelengthHex(photonWavelength * 1e9);
+        let photonColorRGB = getWavelengthRGB(photonWavelength * 1e9);
+
+        console.log(`color HEx: ${photonColorHex}, color RGB: ${photonColorRGB}`);
 
         let newPhoton = {
-            fired: false,
-            energyValue: newEnergyValue,
+            fired: this.props.photon.fired,
             frequency: photonFrequency,
-            wavelength: photonWavelength
+            wavelength: photonWavelength,
+            energyValue: newEnergyValue,
+            passThrough: this.props.photon.passThrough,
+            color: photonColorRGB
         }
 
-        this.styling(e, getHex(photonWavelength * 1e9));
-
+        this.styling(newEnergyValue, photonColorHex);
         this.props.changePhoton(newPhoton);
     }
 
-    styling(e, color) {
+    styling(energy, color) {
         const settings={
             fill: color,
             background: '#d7dcdf'
         }
 
-        let val = e.target.value;
-        const percentage = 100 * (val - 0.03) / (15 - 0.03);
+        const percentage = 100 * (energy - 0.03) / (15 - 0.03);
         this.bg = `linear-gradient(90deg, ${settings.fill} ${percentage}%, ${settings.background} ${percentage+0.1}%)`;
     }
 

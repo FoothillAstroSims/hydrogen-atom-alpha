@@ -9,7 +9,7 @@ export default class PhotonBeams extends React.Component {
         this.canvasRef = React.createRef();
         this.initX = WIDTH;
 
-        // this.isPlaying = false;
+        this.isPlaying = false;
         this.orbitalDistances = [40, 110, 250, 420, 620, 880];
         this.energyLevel = 1;
         this.draw = this.draw.bind(this);
@@ -36,7 +36,7 @@ export default class PhotonBeams extends React.Component {
         cancelAnimationFrame(this.raf);
     }
 
-    plotSine(amplitude, frequency, wavelength) {
+    plotSine(amplitude, frequency, wavelength, rgb) {
         let x = this.initX;
         let x2 = this.initX + wavelength;
         let y = 0;
@@ -48,7 +48,9 @@ export default class PhotonBeams extends React.Component {
             y = HEIGHT/2 + amplitude * Math.sin((x)/frequency);
             this.ctx.beginPath();
             this.ctx.lineWidth = 2;
-            this.ctx.strokeStyle = `rgb(128,0,128, ${transparency})`;
+            // this.ctx.strokeStyle = `rgb(128,0,128, ${transparency})`;
+            console.log(`rgb with adulteration: ${rgb}, and with: ${rgb.substring(0, rgb.length - 2)}`);
+            this.ctx.strokeStyle = rgb.substring(0, rgb.length - 2) + `,${transparency})`;
             this.ctx.moveTo(x-1, HEIGHT / 2 + amplitude * Math.sin((x-incrementValue) / frequency));
             this.ctx.lineTo(x, y);
 
@@ -67,7 +69,7 @@ export default class PhotonBeams extends React.Component {
         let amplitude = 20;
         let frequency = 5;
         let wavelength = 200;
-        this.plotSine(amplitude, frequency, wavelength);
+        this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
 
 
         let speed = 10;

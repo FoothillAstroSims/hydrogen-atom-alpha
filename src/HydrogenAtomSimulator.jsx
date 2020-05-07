@@ -41,6 +41,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                 wavelength: 271,
                 energyValue: 4.6,
                 passThrough: true,
+                color: "#630063"
             }
         };
 
@@ -155,6 +156,7 @@ export default class HydrogenAtomSimulator extends React.Component {
 
     firePhoton() {
         // If the photon has already been fired, you can't fire it again until it passes.
+        console.log(`phtton: ${this.state.photon.fired}`);
         if (this.state.photon.fired) return;
 
         let baseEnergy = -13.6;
