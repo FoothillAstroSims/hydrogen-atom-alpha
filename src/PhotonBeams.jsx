@@ -8,10 +8,13 @@ export default class PhotonBeams extends React.Component {
         super(props);
         this.canvasRef = React.createRef();
         this.initX = WIDTH;
+        this.speed = 10;
+        this.fadeIndex = 1;
 
         this.isPlaying = false;
         this.orbitalDistances = [40, 110, 250, 420, 620, 880];
         this.energyLevel = 1;
+
         this.draw = this.draw.bind(this);
         this.startAnimation = this.startAnimation.bind(this);
         this.stopAnimation = this.stopAnimation.bind(this);
@@ -48,8 +51,6 @@ export default class PhotonBeams extends React.Component {
             y = HEIGHT/2 + amplitude * Math.sin((x)/frequency);
             this.ctx.beginPath();
             this.ctx.lineWidth = 2;
-            // this.ctx.strokeStyle = `rgb(128,0,128, ${transparency})`;
-            // console.log(`rgb without adulteration: ${rgb}, and with: ${rgb.substring(0, rgb.length - 1)}`);
             this.ctx.strokeStyle = rgb.substring(0, rgb.length - 1) + `,${transparency})`;
             this.ctx.moveTo(x-1, HEIGHT / 2 + amplitude * Math.sin((x-incrementValue) / frequency));
             this.ctx.lineTo(x, y);
@@ -58,6 +59,7 @@ export default class PhotonBeams extends React.Component {
             x += incrementValue;
 
             transparency = 1 - ((x - this.initX) / (wavelength));
+            transparency *= this.fadeIndex;
         }
 
         this.ctx.stroke();
@@ -71,22 +73,30 @@ export default class PhotonBeams extends React.Component {
         let wavelength = 200;
         this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
 
-
-        let speed = 10;
         let end = -wavelength;
-        this.initX -= speed;
+        this.initX -= this.speed;
         this.raf = requestAnimationFrame(this.draw);
         // TODO Wavelength should change to something provided by props that tells us how far the photon should travel
         if (!this.props.photon.passThrough) {
-            console.log(`we shouldn't be passing thru`);
-            end = this.orbitalDistances[this.energyLevel - 1] - 50;
+            end = this.orbitalDistances[this.energyLevel - 1];
+        }
+        // end = this.orbitalDistances[this.energyLevel - 1];
+
+        console.log(`fade index: ${this.fadeIndex}`);
+        if (this.initX <= end) {
+            // console.log(`im here to be stopped ${this.props.photon.color}`);
+            this.speed = 0;
+            // this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            this.fadeIndex -= 0.01;
+            // this.stopAnimation();
+            // this.props.stopPhotonAnimation();
         }
 
-        if (this.initX <= end) {
+        if (this.fadeIndex <= 0.01) {
+            this.fadeIndex = 1;
+            this.speed = 10;
             this.initX = WIDTH;
-            console.log(`im here to be stopped ${this.props.photon.color}`);
             this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
-            this.isPlaying = false;
             this.stopAnimation();
             this.props.stopPhotonAnimation();
         }
