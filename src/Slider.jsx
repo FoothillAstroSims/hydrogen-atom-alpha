@@ -32,9 +32,9 @@ export default class Slider extends React.Component {
             let criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.8, 13.1, 13.2];
             let epsilon = 0.08;
             let energyValue = energy;
-            // criticalPhotonEVs.forEach((element, index) => {
-            //     if (energy < (element + epsilon) && energy > (element - epsilon)) energyValue = element;
-            // })
+            criticalPhotonEVs.forEach((element, index) => {
+                if (energy < (element + epsilon) && energy > (element - epsilon)) energyValue = element;
+            })
 
             return energyValue;
         }

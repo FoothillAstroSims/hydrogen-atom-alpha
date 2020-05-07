@@ -57,7 +57,11 @@ body {
 }
 
 .spectrumTexts {
-    fill: darkcyan;
+    fill: peachpuff;
+}
+
+.tickMarkTexts {
+    fill: royalblue;
 }
 
 #slider {
