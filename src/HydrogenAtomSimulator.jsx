@@ -118,15 +118,6 @@ export default class HydrogenAtomSimulator extends React.Component {
                                 photon={this.state.photon}
                                 changePhoton={this.changePhoton.bind(this)}
                             />
-                            {/*<input*/}
-                            {/*    type="range"*/}
-                            {/*    min={0.03}*/}
-                            {/*    max={15.00}*/}
-                            {/*    step={0.01}*/}
-                            {/*    id={"slider"}*/}
-                            {/*    value={this.state.photon.energyValue}*/}
-                            {/*    onChange={this.onPhotonValueChange.bind(this)}*/}
-                            {/*/>*/}
                         </div>
 
                         <div className={"FirePhotonButton"}>
@@ -184,37 +175,6 @@ export default class HydrogenAtomSimulator extends React.Component {
             photon: photonState,
             currentEnergyLevel: newEnergyLevel
         });
-    }
-
-    // Updates the properties of the photon using the new energy value
-    onPhotonValueChange(e) {
-        // If the photon is currently being fired, then don't update anything
-        if (this.state.photon.fired) return;
-
-        const getSnappedOnEnergyValues = (energy) => {
-            let criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.8, 13.1, 13.2];
-            let epsilon = 0.08;
-            let energyValue = energy;
-            criticalPhotonEVs.forEach((element, index) => {
-                if (energy < (element + epsilon) && energy > (element - epsilon)) energyValue = element;
-                // console.log(`energyValue: ${energyValue} and type: ${typeof energyValue}`);
-            })
-
-            return energyValue;
-        }
-
-        let newEnergyValue = getSnappedOnEnergyValues(Number.parseFloat(e.target.value));
-        let photonFrequency = (newEnergyValue / PLANCK_CONSTANT) * COULOMB_CHARGE;
-        let photonWavelength = ((PLANCK_CONSTANT * LIGHT_SPEED) / newEnergyValue) / COULOMB_CHARGE;
-
-        let newPhoton = {
-            fired: false,
-            energyValue: newEnergyValue,
-            frequency: photonFrequency,
-            wavelength: photonWavelength
-        }
-
-        this.setState({ photon: newPhoton });
     }
 
     handleReset() {
