@@ -19,7 +19,7 @@ import MainView from './MainView.jsx';
 import Spectrum from './Spectrum.jsx';
 import PhotonBeams from './PhotonBeams.jsx';
 import { formatFrequency, formatEnergy, formatWavelength } from "./utils/FormatValues";
-import { tickMarkEnergyValues } from "./utils/TickMarksData";
+import {tickMarkEnergyValues, tickMarkFrequencyValues, tickMarkWavelengthValues} from "./utils/TickMarksData";
 import Slider from "./Slider";
 
 const WIDTH = 950;
@@ -91,7 +91,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
                                 value={formatFrequency(this.state.photon.frequency)}
-                                tickMarksData={tickMarkEnergyValues}
+                                tickMarksData={tickMarkFrequencyValues}
                                 id={0}
                             />
                         </div>
@@ -100,7 +100,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
                                 value={formatWavelength(this.state.photon.wavelength)}
-                                tickMarksData={tickMarkEnergyValues}
+                                tickMarksData={tickMarkWavelengthValues}
                                 id={1}
                             />
                         </div>
