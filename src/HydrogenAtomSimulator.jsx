@@ -115,7 +115,8 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                         <div className={"SliderContainer"}>
                             <Slider
-
+                                photon={this.state.photon}
+                                changePhoton={this.changePhoton.bind(this)}
                             />
                             {/*<input*/}
                             {/*    type="range"*/}
@@ -155,6 +156,10 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonState = this.state.photon;
         photonState.fired = false;
         this.setState({ photon: photonState });
+    }
+
+    changePhoton(newPhoton) {
+        this.setState({ photon: newPhoton });
     }
 
     firePhoton() {
