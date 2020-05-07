@@ -54,7 +54,7 @@ const getHex = (wavelength) => {
 
     // Let the intensity fall off near the vision limits
 
-    let factor = 0;
+    let factor;
     if (w >= 380 && w < 420)
         factor = 0.3 + 0.7*(w - 380) / (420 - 380);
     else if (w >= 420 && w < 701)
@@ -65,7 +65,6 @@ const getHex = (wavelength) => {
         factor = 0.3055933636847426;
 
     let gamma = 0.80;
-    console.log(`red: ${red} gree: ${green} and blue ${blue} and factor ${factor}`);
 
     let R = (red   > 0 ? 255*Math.pow(red   * factor, gamma) : 0);
     let G = (green > 0 ? 255*Math.pow(green * factor, gamma) : 0);
@@ -83,6 +82,5 @@ const decimalToHex = (dec) => {
 
     return hex;
 }
-
 
 export { getHex };
