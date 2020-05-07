@@ -21,10 +21,6 @@ import PhotonBeams from './PhotonBeams.jsx';
 import { formatFrequency, formatEnergy, formatWavelength } from "./utils/FormatValues";
 import Slider from "./Slider";
 
-const PLANCK_CONSTANT = 6.62607004e-34;
-const COULOMB_CHARGE = 1.602176634e-19;
-const LIGHT_SPEED = 299792458;
-
 const WIDTH = 950;
 const HEIGHT = 300;
 
