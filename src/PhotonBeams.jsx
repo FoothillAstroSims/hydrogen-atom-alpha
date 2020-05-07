@@ -68,33 +68,19 @@ export default class PhotonBeams extends React.Component {
     draw() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
-        let amplitude = 20;
-        let frequency = 5;
+        let amplitude = 10;
+        let frequency = 1;
         let wavelength = 200;
         this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
 
         let end = -wavelength;
         this.initX -= this.speed;
         this.raf = requestAnimationFrame(this.draw);
-        // TODO Wavelength should change to something provided by props that tells us how far the photon should travel
         if (!this.props.photon.passThrough) {
-            end = this.orbitalDistances[this.energyLevel - 1];
+            end = this.orbitalDistances[this.energyLevel - 1] - 10;
         }
-        // end = this.orbitalDistances[this.energyLevel - 1];
 
-        console.log(`fade index: ${this.fadeIndex}`);
         if (this.initX <= end) {
-            // console.log(`im here to be stopped ${this.props.photon.color}`);
-            this.speed = 0;
-            // this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
-            this.fadeIndex -= 0.01;
-            // this.stopAnimation();
-            // this.props.stopPhotonAnimation();
-        }
-
-        if (this.fadeIndex <= 0.01) {
-            this.fadeIndex = 1;
-            this.speed = 10;
             this.initX = WIDTH;
             this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
             this.stopAnimation();

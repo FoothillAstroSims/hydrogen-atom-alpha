@@ -48,10 +48,8 @@ export default class Electron extends React.Component {
         if (!this.props.fired) return;
 
         let node = this.ref.current;
-        // console.log(`currEner: ${this.props.currentEnergyLevel}`);
         let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
         select(node).transition().delay(1500).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
-        // select(node).transition().delay(0).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
     }
 
     findClosestOrbital(endX) {
