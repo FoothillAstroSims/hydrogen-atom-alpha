@@ -40,11 +40,16 @@ const getHex = (wavelength) => {
         green = 0.0;
         blue  = 0.0;
     }
-    else
-    {
-        red   = 0.0;
+    else if (w > 781) {
+        red   = 1.0;
         green = 0.0;
         blue  = 0.0;
+    }
+    else
+    {
+        red   = 1.0;
+        green = 0.0;
+        blue  = 1.0;
     }
 
     // Let the intensity fall off near the vision limits
@@ -57,9 +62,11 @@ const getHex = (wavelength) => {
     else if (w >= 701 && w < 781)
         factor = 0.3 + 0.7*(780 - w) / (780 - 700);
     else
-        factor = 0.0;
+        factor = 0.3055933636847426;
 
     let gamma = 0.80;
+    console.log(`red: ${red} gree: ${green} and blue ${blue} and factor ${factor}`);
+
     let R = (red   > 0 ? 255*Math.pow(red   * factor, gamma) : 0);
     let G = (green > 0 ? 255*Math.pow(green * factor, gamma) : 0);
     let B = (blue  > 0 ? 255*Math.pow(blue  * factor, gamma) : 0);

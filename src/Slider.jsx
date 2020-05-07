@@ -1,8 +1,5 @@
 import React from 'react';
-import { select, scaleLinear, drag, event} from 'd3/dist/d3';
-
-const WIDTH = 800;
-const HEIGHT = 50;
+import { getHex } from "./utils/WavelengthToHex";
 
 const PLANCK_CONSTANT = 6.62607004e-34;
 const COULOMB_CHARGE = 1.602176634e-19;
@@ -12,7 +9,7 @@ export default class Slider extends React.Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef();
-        this.bg = `linear-gradient(90deg, rgb(0,255,0) 25%, rgb(255,0,0) 25.1%)`;
+        this.bg = `linear-gradient(90deg, rgb(0,255,0) 25%, #d7dcdf 25.1%)`;
     }
 
     componentDidMount() {
@@ -53,14 +50,14 @@ export default class Slider extends React.Component {
             wavelength: photonWavelength
         }
 
-        this.styling(e);
+        this.styling(e, getHex(photonWavelength * 1e9));
 
         this.props.changePhoton(newPhoton);
     }
 
-    styling(e) {
+    styling(e, color) {
         const settings={
-            fill: 'rgb(255,0,0)',
+            fill: color,
             background: '#d7dcdf'
         }
 
