@@ -105,6 +105,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                             />
                         </div>
 
+                        {/*<p className={"spectrumLabels"}>Energy</p>*/}
                         <div className={"PhotonSpectrum"}>
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
@@ -114,12 +115,12 @@ export default class HydrogenAtomSimulator extends React.Component {
                             />
                         </div>
 
-                        <div className={"SliderContainer"}>
+                        {/*<div className={"SliderContainer"}>*/}
                             <Slider
                                 photon={this.state.photon}
                                 changePhoton={this.changePhoton.bind(this)}
                             />
-                        </div>
+                        {/*</div>*/}
 
                         <div className={"FirePhotonButton"}>
                             <button type="box"
@@ -128,6 +129,9 @@ export default class HydrogenAtomSimulator extends React.Component {
                                 {"Fire Photon"}
                             </button>
                         </div>
+                        {/*<p className={"spectrumLabels"}>Frequency</p>*/}
+                        {/*<p className={"spectrumLabels"}>Wavelength</p>*/}
+                        {/*<p className={"spectrumLabels"}>Energy</p>*/}
 
                     </div>
 
