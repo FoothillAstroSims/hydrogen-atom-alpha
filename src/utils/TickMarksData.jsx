@@ -11,11 +11,9 @@ const tickMarkFrequencyValues = [
     {x: 265.7, text: `1e15 Hz`, bottom: 25, top: 35, shift: 15},
     {x: 460, text: `2e15 Hz`, bottom: 25, top: 35, shift: 15},
     {x: 670.5, text: `3e15 Hz`, bottom: 25, top: 35, shift: 15},
-    // {x: 676.1, text: `100 nm`, bottom: 25, top: 35}
 ];
 const numEnergyTickMarks = 16;
 
-// (48, 809)
 for (let i = 0; i < numEnergyTickMarks; i++) {
     let text = "";
     let bottom = 25;

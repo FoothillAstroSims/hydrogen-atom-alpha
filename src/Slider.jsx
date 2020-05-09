@@ -10,6 +10,7 @@ export default class Slider extends React.Component {
         super(props);
         this.ref = React.createRef();
         this.bg = `linear-gradient(90deg, #630063 30.8%, #d7dcdf 30.9%)`;
+        this.criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.8, 13.1, 13.2];
     }
 
     componentDidMount() {
@@ -29,10 +30,9 @@ export default class Slider extends React.Component {
         if (this.props.photon.fired) return;
 
         const getSnappedOnEnergyValues = (energy) => {
-            let criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.8, 13.1, 13.2];
             let epsilon = 0.08;
             let energyValue = energy;
-            criticalPhotonEVs.forEach((element, index) => {
+            this.criticalPhotonEVs.forEach((element, index) => {
                 if (energy < (element + epsilon) && energy > (element - epsilon)) energyValue = element;
             })
 
@@ -44,8 +44,6 @@ export default class Slider extends React.Component {
         let photonWavelength = ((PLANCK_CONSTANT * LIGHT_SPEED) / newEnergyValue) / COULOMB_CHARGE;
         let photonColorHex = getWavelengthHex(photonWavelength * 1e9);
         let photonColorRGB = getWavelengthRGB(photonWavelength * 1e9);
-
-        // console.log(`color HEx: ${photonColorHex}, color RGB: ${photonColorRGB}`);
 
         let newPhoton = {
             fired: this.props.photon.fired,

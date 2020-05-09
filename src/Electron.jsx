@@ -59,10 +59,6 @@ export default class Electron extends React.Component {
         return this.orbitalDistances[indexOfClosestOrbital];
     }
 
-    up(x,y) {
-        // console.log(`hapenning ${x} ${y}`);
-    }
-
     render() {
         return (
             <g ref={this.ref} />

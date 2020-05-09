@@ -63,7 +63,6 @@ export default class Spectrum extends React.Component {
         const shiftLeft = shiftLeftValues[this.props.id];
         const topY = (HEIGHT / 2) + 5;
         const bottomY = (HEIGHT / 2) - 5;
-        // console.log(`linePosition: ${linePosition}`);
 
         return (
             <svg width={WIDTH} height={HEIGHT}>
