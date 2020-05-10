@@ -26,7 +26,7 @@ export default class Slider extends React.Component {
 
     }
 
-    onPhotonValueChange(e) {
+    onPhotonValueChange(e, fire) {
         // If the photon is currently being fired, then don't update anything
         if (this.props.photon.fired) return;
 
@@ -56,7 +56,8 @@ export default class Slider extends React.Component {
         }
 
         this.styling(newEnergyValue, photonColorHex);
-        this.props.changePhoton(newPhoton);
+        if (fire) this.props.changePhotonAndFire(newPhoton);
+        else this.props.changePhoton(newPhoton);
     }
 
     styling(energy, color) {
@@ -70,7 +71,14 @@ export default class Slider extends React.Component {
     }
 
     changeSlider(e) {
-        console.log(`hello ${e}`);
+        let value = {
+            target: {
+                value: 0
+            }
+        }
+
+        value.target.value = e;
+        this.onPhotonValueChange(value, true);
     }
 
     render() {
@@ -92,74 +100,74 @@ export default class Slider extends React.Component {
 
                 <Button
                     symbol={"Pα"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Pa"}
+                    changeSliderValue={() => { this.changeSlider(0.66)}}
                 />
 
                 <Button
                     symbol={"Pᵧ"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Py"}
+                    changeSliderValue={() => { this.changeSlider(1.1)}}
                 />
 
                 <Button
                     symbol={"Hᵦ"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Hb"}
+                    changeSliderValue={() => { this.changeSlider(2.5)}}
                 />
 
                 <Button
                     symbol={"Hδ"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Hd"}
+                    changeSliderValue={() => { this.changeSlider(3.0)}}
                 />
 
                 <Button
                     symbol={"Pᵦ"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Pb"}
+                    changeSliderValue={() => { this.changeSlider(0.97)}}
                 />
 
                 <Button
                     symbol={"Hα"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Ha"}
+                    changeSliderValue={() => { this.changeSlider(1.9)}}
                 />
 
                 <Button
                     symbol={"Hᵧ"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Hy"}
+                    changeSliderValue={() => { this.changeSlider(2.9)}}
                 />
 
                 <Button
                     symbol={"Lα"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"La"}
+                    changeSliderValue={() => { this.changeSlider(10.2)}}
                 />
 
                 <Button
                     symbol={"Lᵦ"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Lb"}
+                    changeSliderValue={() => { this.changeSlider(12.1)}}
                 />
 
                 <Button
                     symbol={"Lᵧ"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Ly"}
+                    changeSliderValue={() => { this.changeSlider(12.8)}}
                 />
 
                 <Button
                     symbol={"Lε"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Le"}
+                    changeSliderValue={() => { this.changeSlider(13.2)}}
                 />
 
                 <Button
                     symbol={"Lδ"}
-                    changeSliderValue={this.changeSlider.bind(this)}
                     id={"Ld"}
+                    changeSliderValue={() => { this.changeSlider(13.1)}}
                 />
 
 

@@ -120,12 +120,14 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <Slider
                                 photon={this.state.photon}
                                 changePhoton={this.changePhoton.bind(this)}
+                                changePhotonAndFire={this.changePhotonAndFire.bind(this)}
+                                firePhoton={this.firePhoton.bind(this)}
                             />
                         {/*</div>*/}
 
                         <div className={"FirePhotonButton"}>
                             <button type="box"
-                                    className="btn btn-danger btn-sm"
+                                    className="fireButton"
                                     onClick={this.firePhoton.bind(this)}>
                                 {"Fire Photon "}
                             </button>
@@ -158,6 +160,14 @@ export default class HydrogenAtomSimulator extends React.Component {
 
     changePhoton(newPhoton) {
         this.setState({ photon: newPhoton });
+    }
+
+    changePhotonAndFire(newPhoton) {
+        this.setState({
+            photon: newPhoton
+        }, () => {
+            this.firePhoton();
+        });
     }
 
     firePhoton() {

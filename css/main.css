@@ -65,9 +65,9 @@ body {
 }
 
 #slider {
-    width: 90%;
+    width: 87%;
     position: relative;
-    left: 40px;
+    left: 60px;
 }
 
 .Controls {
@@ -290,4 +290,76 @@ nav a:hover {
 input::-moz-focus-inner,
 input::-moz-focus-outer {
     border: 0;
+}
+
+
+
+/*button stuff*/
+
+.fireButton {
+    width: 100px;
+    background-color: #1abc9c;
+}
+
+.sliderButtons {
+    background-color: royalblue;
+    position: relative;
+    margin-left: 5px;
+}
+
+#Pa {
+    position: relative;
+    margin-left: 5px;
+
+}
+#Py {
+    position: relative;
+    margin-left: 5px;
+
+}
+#Hb {
+    position: relative;
+
+}
+#Hd {
+    position: relative;
+
+}
+
+#Pb {
+    position: relative;
+
+}
+#Ha {
+    position: relative;
+
+}
+#Hy {
+    position: relative;
+
+}
+
+#La {
+    position: relative;
+
+}
+
+#Lb {
+    position: relative;
+
+}
+
+#Ly {
+    position: relative;
+
+}
+#Le {
+    position: relative;
+
+}
+
+#Ld {
+    position: relative;
+    left: 50px;
+
 }
