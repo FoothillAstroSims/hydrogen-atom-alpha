@@ -98,6 +98,12 @@ body {
     border: 1px solid green;
 }
 
+.spectrumLabels {
+    position: relative;
+    bottom: 100px;
+
+}
+
 .SliderContainer {
     margin-left: 20px;
     width: 860px;

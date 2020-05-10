@@ -21,6 +21,7 @@ import PhotonBeams from './PhotonBeams.jsx';
 import { formatFrequency, formatEnergy, formatWavelength } from "./utils/FormatValues";
 import {tickMarkEnergyValues, tickMarkFrequencyValues, tickMarkWavelengthValues} from "./utils/TickMarksData";
 import Slider from "./Slider";
+import Button from "./utils/Button";
 
 const WIDTH = 950;
 const HEIGHT = 300;
@@ -126,12 +127,13 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <button type="box"
                                     className="btn btn-danger btn-sm"
                                     onClick={this.firePhoton.bind(this)}>
-                                {"Fire Photon"}
+                                {"Fire Photon "}
                             </button>
                         </div>
-                        <p className={"spectrumLabels"}>Frequency</p>
-                        <p className={"spectrumLabels"}>Wavelength</p>
-                        <p className={"spectrumLabels"}>Energy</p>
+
+                        {/*<p className={"spectrumLabels"}>Frequency</p>*/}
+                        {/*<p className={"spectrumLabels"}>Wavelength</p>*/}
+                        {/*<p className={"spectrumLabels"}>Energy</p>*/}
 
                     </div>
 

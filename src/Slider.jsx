@@ -1,5 +1,6 @@
 import React from 'react';
 import { getWavelengthHex, getWavelengthRGB } from "./utils/WavelengthToHex";
+import Button from "./utils/Button";
 
 const PLANCK_CONSTANT = 6.62607004e-34;
 const COULOMB_CHARGE = 1.602176634e-19;
@@ -30,7 +31,7 @@ export default class Slider extends React.Component {
         if (this.props.photon.fired) return;
 
         const getSnappedOnEnergyValues = (energy) => {
-            let epsilon = 0.08;
+            let epsilon = 0.04;
             let energyValue = energy;
             this.criticalPhotonEVs.forEach((element, index) => {
                 if (energy < (element + epsilon) && energy > (element - epsilon)) energyValue = element;
@@ -68,21 +69,102 @@ export default class Slider extends React.Component {
         this.bg = `linear-gradient(90deg, ${settings.fill} ${percentage}%, ${settings.background} ${percentage+0.1}%)`;
     }
 
+    changeSlider(e) {
+        console.log(`hello ${e}`);
+    }
+
     render() {
         return (
-            <div className={"range-slider"}>
-                <input
-                    type="range"
-                    min={0.03}
-                    max={15.00}
-                    step={0.01}
-                    style={{background: this.bg}}
-                    className={"range-slider__range"}
-                    id={"slider"}
-                    value={this.props.photon.energyValue}
-                    onChange={this.onPhotonValueChange.bind(this)}
+            <React.Fragment>
+                <div className={"range-slider"}>
+                    <input
+                        type="range"
+                        min={0.03}
+                        max={15.00}
+                        step={0.01}
+                        style={{background: this.bg}}
+                        className={"range-slider__range"}
+                        id={"slider"}
+                        value={this.props.photon.energyValue}
+                        onChange={this.onPhotonValueChange.bind(this)}
+                    />
+                </div>
+
+                <Button
+                    symbol={"Pα"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Pa"}
                 />
-            </div>
+
+                <Button
+                    symbol={"Pᵧ"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Py"}
+                />
+
+                <Button
+                    symbol={"Hᵦ"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Hb"}
+                />
+
+                <Button
+                    symbol={"Hδ"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Hd"}
+                />
+
+                <Button
+                    symbol={"Pᵦ"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Pb"}
+                />
+
+                <Button
+                    symbol={"Hα"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Ha"}
+                />
+
+                <Button
+                    symbol={"Hᵧ"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Hy"}
+                />
+
+                <Button
+                    symbol={"Lα"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"La"}
+                />
+
+                <Button
+                    symbol={"Lᵦ"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Lb"}
+                />
+
+                <Button
+                    symbol={"Lᵧ"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Ly"}
+                />
+
+                <Button
+                    symbol={"Lε"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Le"}
+                />
+
+                <Button
+                    symbol={"Lδ"}
+                    changeSliderValue={this.changeSlider.bind(this)}
+                    id={"Ld"}
+                />
+
+
+            </React.Fragment>
+
         )
     }
 }
