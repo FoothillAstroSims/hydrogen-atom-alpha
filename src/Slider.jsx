@@ -56,8 +56,7 @@ export default class Slider extends React.Component {
         }
 
         this.styling(newEnergyValue, photonColorHex);
-        if (fire) this.props.changePhotonAndFire(newPhoton);
-        else this.props.changePhoton(newPhoton);
+        this.props.changePhoton(newPhoton, fire);
     }
 
     styling(energy, color) {

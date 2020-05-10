@@ -177,6 +177,8 @@ body {
 
 nav {
     float: right;
+    position: relative;
+    left: 275px;
 }
 
 nav ul {
@@ -308,58 +310,46 @@ input::-moz-focus-outer {
 }
 
 #Pa {
-    position: relative;
     margin-left: 5px;
 
 }
 #Py {
-    position: relative;
     margin-left: 5px;
 
 }
 #Hb {
-    position: relative;
 
 }
 #Hd {
-    position: relative;
 
 }
 
 #Pb {
-    position: relative;
 
 }
 #Ha {
-    position: relative;
 
 }
 #Hy {
-    position: relative;
 
 }
 
 #La {
-    position: relative;
 
 }
 
 #Lb {
-    position: relative;
 
 }
 
 #Ly {
-    position: relative;
 
 }
 #Le {
-    position: relative;
 
 }
 
 #Ld {
-    position: relative;
     left: 50px;
 
 }

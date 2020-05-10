@@ -120,7 +120,6 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <Slider
                                 photon={this.state.photon}
                                 changePhoton={this.changePhoton.bind(this)}
-                                changePhotonAndFire={this.changePhotonAndFire.bind(this)}
                                 firePhoton={this.firePhoton.bind(this)}
                             />
                         {/*</div>*/}
@@ -158,15 +157,12 @@ export default class HydrogenAtomSimulator extends React.Component {
         this.setState({ photon: photonState });
     }
 
-    changePhoton(newPhoton) {
-        this.setState({ photon: newPhoton });
-    }
-
-    changePhotonAndFire(newPhoton) {
+    changePhoton(newPhoton, firePhotonNow) {
+        // this.setState({ photon: newPhoton });
         this.setState({
             photon: newPhoton
         }, () => {
-            this.firePhoton();
+            if (firePhotonNow) this.firePhoton();
         });
     }
 
@@ -187,7 +183,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonState = this.state.photon;
         photonState.fired = true;
         photonState.passThrough = newEnergyLevel === this.state.currentEnergyLevel;
-        // console.log(`new pass thru value: ${photonState.passThrough}`);
         this.setState({
             photon: photonState,
             currentEnergyLevel: newEnergyLevel
