@@ -116,6 +116,12 @@ export default class HydrogenAtomSimulator extends React.Component {
                             />
                         </div>
 
+                        <div className={"sliderNames"}>
+                            <p id={"infraredLabel"}>Infrared</p>
+                            <p id={"visibleLabel"}>Visible</p>
+                            <p id={"ultravioletLabel"}>Ultraviolet</p>
+                        </div>
+
                         {/*<div className={"SliderContainer"}>*/}
                             <Slider
                                 photon={this.state.photon}

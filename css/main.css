@@ -70,6 +70,25 @@ body {
     left: 60px;
 }
 
+.sliderNames p {
+    display:inline;
+    word-wrap: break-word;
+    position: relative;
+    bottom: 15px;
+}
+
+#infraredLabel {
+    left: 85px;
+}
+
+#visibleLabel {
+    left: 115px;
+}
+
+#ultravioletLabel {
+    left: 315px;
+}
+
 .Controls {
     width: 900px;
     height: 400px;
@@ -215,33 +234,40 @@ nav a:hover {
     padding: 0;
     margin: 0;
 }
+
 .range-slider__range::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
+    height: 25px;
+    /*width: 5px;*/
+    width: 7px;
+    border-radius: 3px;
     background: #2c3e50;
     cursor: pointer;
     -webkit-transition: background .15s ease-in-out;
     transition: background .15s ease-in-out;
 }
+
+.range-slider__range::-moz-range-thumb {
+    /*width: 20px;*/
+    /*height: 20px;*/
+    height: 25px;
+    width: 7px;
+    border: 0;
+    border-radius: 3px;
+    background: #2c3e50;
+    cursor: pointer;
+    -moz-transition: background .15s ease-in-out;
+    transition: background .15s ease-in-out;
+}
+
 .range-slider__range::-webkit-slider-thumb:hover {
     background: #1abc9c;
 }
 .range-slider__range:active::-webkit-slider-thumb {
     background: #1abc9c;
 }
-.range-slider__range::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border: 0;
-    border-radius: 50%;
-    background: #2c3e50;
-    cursor: pointer;
-    -moz-transition: background .15s ease-in-out;
-    transition: background .15s ease-in-out;
-}
+
 .range-slider__range::-moz-range-thumb:hover {
     background: #1abc9c;
 }
@@ -267,20 +293,21 @@ input::-moz-focus-outer {
 .fireButton {
     width: 100px;
     background-color: #1abc9c;
+    position: relative;
+    top: 12px;
 }
 
 .sliderButtons {
     background-color: royalblue;
     position: relative;
+    /*top: 5px;*/
     margin-left: 5px;
 }
 
 #Pa {
-    margin-left: 5px;
 
 }
 #Py {
-    margin-left: 5px;
 
 }
 #Hb {
@@ -312,10 +339,12 @@ input::-moz-focus-outer {
 
 }
 #Le {
-
+    /*top: 20px;*/
+    left: 390px;
 }
 
 #Ld {
-    left: 50px;
+    top: 25px;
+    left: 350px;
 
 }
