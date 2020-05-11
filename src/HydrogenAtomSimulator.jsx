@@ -24,7 +24,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                 wavelength: 495E-9,
                 energyValue: 2.5,
                 passThrough: true,
-                color: "#00ffc0"
+                color: "rgb(0,255,192)"
             }
         };
 

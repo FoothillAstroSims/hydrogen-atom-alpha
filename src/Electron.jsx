@@ -47,6 +47,8 @@ export default class Electron extends React.Component {
         // If the photon wasn't fired, simply return
         if (!(this.props.fired || this.props.emitted)) return;
 
+        // If the photon was emitted, then make no delay. Otherwise, the photon
+        // was fired, so there needs to be a 1500 millisecond delay
         let delay = this.props.emitted ? 0 : 1500;
         let node = this.ref.current;
         let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
