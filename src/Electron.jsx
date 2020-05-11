@@ -9,6 +9,14 @@ export default class Electron extends React.Component {
         this.ref = React.createRef();
         this.val = false;
         this.orbitalDistances = [40, 110, 250, 420, 620, 880];
+
+        this.timer = {
+            id: null,
+            started: false,
+        };
+
+        this.returnEnergy = this.returnEnergy.bind(this);
+
     }
 
     componentDidMount() {
@@ -53,6 +61,34 @@ export default class Electron extends React.Component {
         let node = this.ref.current;
         let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
         select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
+    }
+
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     // If the photon wasn't fired, simply return
+    //     if (!(this.props.fired || this.props.emitted)) return;
+    //
+    //     let node = this.ref.current;
+    //     let delay = 1500;
+    //     let x = 350;
+    //     let y = 50;
+    //
+    //     if (this.timer.started) { clearInterval(this.timer.id); }
+    //     this.timer.started = true;
+    //     this.timer.id = setTimeout(() => this.returnEnergy(), 1000);
+    //
+    //     select(node).transition().delay(delay).attr('transform', `translate(${x}, ${y})`).duration(500);
+    // }
+
+    returnEnergy() {
+        let node = this.ref.current;
+        let delay = 1000;
+        let x = 420;
+        let y = 0;
+
+        select(node).transition().delay(delay).attr('transform', `translate(${x}, ${y})`).duration(500);
+
+        this.timer.started = false;
+        clearInterval(this.timer.id);
     }
 
     findClosestOrbital(endX, beingDragged) {

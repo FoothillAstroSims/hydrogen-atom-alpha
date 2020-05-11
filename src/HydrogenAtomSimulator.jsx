@@ -170,12 +170,10 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonS = this.state.photon;
         photonS.emitted = true;
         let newEnergyLevel = Math.floor(Math.random() * (this.state.currentEnergyLevel - 1)) + 1;
-        // console.log(`new leve: ${newEnergyLevel}`);
         this.setState({
             photon: photonS,
             currentEnergyLevel: newEnergyLevel,
-            // currentEnergyLevel: 1,
-        })
+        });
 
         this.timer.started = false;
         clearInterval(this.timer.id);
