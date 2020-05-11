@@ -29,14 +29,14 @@ export default class Electron extends React.Component {
         const handleDrag = drag()
             .on('end', function() {
                 const me = select(this);
-                let finalX = findClosestOrbital(event.x);
+                let finalX = findClosestOrbital(event.x, false);
                 const transform = `translate(${finalX}, 0)`;
                 me.transition().attr('transform', transform);
             })
             .on('drag', function() {
                 const me = select(this);
                 const transform = `translate(${event.x}, ${0})`;
-                findClosestOrbital(event.x);
+                findClosestOrbital(event.x, true);
                 me.attr('transform', transform);
             });
 
@@ -55,10 +55,10 @@ export default class Electron extends React.Component {
         select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
     }
 
-    findClosestOrbital(endX) {
+    findClosestOrbital(endX, beingDragged) {
         let distanceFromEndXToOrbital = this.orbitalDistances.map(element => Math.abs(element - endX));
         let indexOfClosestOrbital = distanceFromEndXToOrbital.indexOf(Math.min(...distanceFromEndXToOrbital));
-        this.props.updateEnergyLevel(indexOfClosestOrbital + 1);
+        this.props.updateEnergyLevel(indexOfClosestOrbital + 1, beingDragged);
         return this.orbitalDistances[indexOfClosestOrbital];
     }
 

@@ -17,6 +17,7 @@ export default class HydrogenAtomSimulator extends React.Component {
             eventLog: [],
             currentEnergyLevel: 1,
             timeUntilDeExcitation: 0,
+            electronIsBeingDragged: false,
             photon: {
                 fired: false,
                 emitted: false,
@@ -146,32 +147,46 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.photon !== this.state.photon || prevState.currentEnergyLevel !== this.state.currentEnergyLevel) {
-            if (this.state.currentEnergyLevel === 1) {
-                this.stopPhotonEmission();
-                return;
-            }
+        if (this.state.electronIsBeingDragged) {
+            clearInterval(this.timer.id);
+            this.timer.started = false;
+            return;
+        }
+
+        let canUpdateConditions = prevState.photon !== this.state.photon
+            || prevState.currentEnergyLevel !== this.state.currentEnergyLevel
+            || prevState.electronIsBeingDragged !== this.state.electronIsBeingDragged;
+
+        if (canUpdateConditions) {
+            this.stopPhotonEmission();
 
             if (this.timer.started) { clearInterval(this.timer.id); }
             this.timer.started = true;
-            this.timer.id = setTimeout(() => this.deExcitation(), 3000);
+            this.timer.id = setTimeout(() => this.deExcitation(), 1000);
         }
     }
 
     deExcitation() {
         let photonS = this.state.photon;
         photonS.emitted = true;
+        let newEnergyLevel = Math.floor(Math.random() * (this.state.currentEnergyLevel - 1)) + 1;
+        // console.log(`new leve: ${newEnergyLevel}`);
         this.setState({
             photon: photonS,
-            currentEnergyLevel: 1,
+            currentEnergyLevel: newEnergyLevel,
+            // currentEnergyLevel: 1,
         })
 
         this.timer.started = false;
         clearInterval(this.timer.id);
+        if (newEnergyLevel !== 1) this.timer.id = setTimeout(() => this.deExcitation(), 1000);
     }
 
-    updateEnergyLevel(newEnergyLevel) {
-        this.setState({ currentEnergyLevel: newEnergyLevel})
+    updateEnergyLevel(newEnergyLevel, beingDragged) {
+        this.setState({
+            currentEnergyLevel: newEnergyLevel,
+            electronIsBeingDragged: beingDragged
+        });
     }
 
     stopPhotonEmission() {
