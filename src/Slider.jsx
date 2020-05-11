@@ -10,7 +10,8 @@ export default class Slider extends React.Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef();
-        this.bg = `linear-gradient(90deg, #630063 30.8%, #d7dcdf 30.9%)`;
+        // this.bg = `linear-gradient(90deg, #630063 30.8%, #d7dcdf 30.9%)`;
+        this.bg = `linear-gradient(90deg, #00ffc0 16.499665998663996%, #d7dcdf 16.599665998663998%)`;
         this.criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.8, 13.1, 13.2];
     }
 
@@ -65,9 +66,9 @@ export default class Slider extends React.Component {
             background: '#d7dcdf'
         }
 
-
         const percentage = 100 * (energy - 0.03) / (15 - 0.03);
         this.bg = `linear-gradient(90deg, ${settings.fill} ${percentage}%, ${settings.background} ${percentage+0.1}%)`;
+        console.log(`this is the bg values: ${this.bg}`);
     }
 
     changeSlider(e) {

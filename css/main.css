@@ -306,69 +306,81 @@ input::-moz-focus-outer {
     top: 5px;
     left: 70px;
     background-color: #630000;
+    color: white;
 }
 #Py {
     top: 5px;
     left: 43px;
     background-color: #630000;
+    color: white;
 }
 
 #Pb {
     top: 30px;
     left: 50px;
     background-color: #630000;
+    color: white;
 }
 
 #Ha {
     top: 30px;
     left: 45px;
     background-color: #ff0000;
+    color: white;
 }
 
 #Hy {
     top: 30px;
     left: 60px;
     background-color: #4900ff;
+    color: white;
 }
 
 #Hb {
     top: 5px;
     left: 7px;
     background-color: #00ffc0;
+    color: black;
 }
 
 #Hd {
     top: 5px;
     left: 10px;
     background-color: #7900e7;
+    color: white;
 }
 
 #La {
     top: 5px;
     left: 335px;
     background-color: #630063;
+    color: white;
 }
 
 #Lb {
     top: 5px;
     left: 400px;
     background-color: #630063;
+    color: white;
 }
 
 #Ly {
     top: 5px;
     left: 400px;
     background-color: #630063;
+    color: white;
 }
 
 #Le {
     top: 5px;
     left: 406px;
     background-color: #630063;
+    color: white;
 }
 
 #Ld {
     top: 30px;
     left: 353px;
     background-color: #630063;
+    color: white;
 }
