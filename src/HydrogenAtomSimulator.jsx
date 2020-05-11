@@ -171,7 +171,6 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     startDeExcitation() {
-        // console.log(`${this.state.electronIsBeingDragged} hello`);
         if (this.state.electronIsBeingDragged) {
             clearInterval(this.timer.id);
             this.timer.started = false;
