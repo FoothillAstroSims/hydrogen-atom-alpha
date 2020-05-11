@@ -46,10 +46,12 @@ export default class MainView extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
+        // setTimeout(this.updateCurrentCurve, 2000);
         this.updateCurrentCurve();
     }
 
     updateCurrentCurve() {
+        console.log(`im being exectued`)
         for (let i = 0; i < this.orbitalRadii.length; i++) {
             this.orbitalRadii[i].stroke = "grey";
         }
@@ -59,7 +61,7 @@ export default class MainView extends React.Component {
 
     render() {
         const center = HEIGHT / 2;
-        this.updateCurrentCurve();
+        // this.updateCurrentCurve();
         return (
             <g>
                 {/*The following <g> tag will hold all the red orbital lines*/}

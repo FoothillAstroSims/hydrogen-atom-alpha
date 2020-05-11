@@ -1,18 +1,3 @@
-// TODO: PHOTON SELECTION COMPONENT
-// 3 Spectrums:
-// TODO Add tickmarks to the spectrums
-// TODO Change font size and color for spectrum values
-// TODO Add labels right above the slider indicating the general range for each (infrared, uv, visible)
-// Buttons
-// TODO Add buttons that snap to certain photon configurations
-// TODO Add snapping action for when you get close to a certain special photon configuration
-
-// TODO: MainView component
-// TODO After photon hits, move the electron to outside screen and then bring it back using transition
-// TODO Do calculations behind whether photon hitting results in particular action
-// TODO: EVENT LOG
-// TODO Keep track of all actions in an array to be displayed by the event log
-
 import React from 'react';
 import NavigationBar from './NavigationBar.jsx';
 import MainView from './MainView.jsx';
@@ -21,7 +6,6 @@ import PhotonBeams from './PhotonBeams.jsx';
 import { formatFrequency, formatEnergy, formatWavelength } from "./utils/FormatValues";
 import {tickMarkEnergyValues, tickMarkFrequencyValues, tickMarkWavelengthValues} from "./utils/TickMarksData";
 import Slider from "./Slider";
-import Button from "./utils/Button";
 
 const WIDTH = 950;
 const HEIGHT = 300;
@@ -106,7 +90,6 @@ export default class HydrogenAtomSimulator extends React.Component {
                             />
                         </div>
 
-                        {/*<p className={"spectrumLabels"}>Energy</p>*/}
                         <div className={"PhotonSpectrum"}>
                             <Spectrum
                                 energyValue={this.state.photon.energyValue}
@@ -133,6 +116,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <div className={"FirePhotonButton"}>
                             <button type="box"
                                     className="fireButton"
+                                    style={{backgroundColor: this.state.photon.color}}
                                     onClick={this.firePhoton.bind(this)}>
                                 {"Fire Photon "}
                             </button>
