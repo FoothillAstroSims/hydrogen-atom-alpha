@@ -20,7 +20,6 @@ for (let i = 0; i < numEnergyTickMarks; i++) {
     let top = 35;
 
     if (i % 5 === 0) {
-        console.log(`hello ${i}`);
         bottom = 22.5;
         top = 37.5;
         text = `${i} eV`;

@@ -19,6 +19,7 @@ export default class HydrogenAtomSimulator extends React.Component {
             timeUntilDeExcitation: 0,
             photon: {
                 fired: false,
+                emitted: false,
                 frequency: 6.0E15,
                 wavelength: 495E-9,
                 energyValue: 2.5,
@@ -30,6 +31,8 @@ export default class HydrogenAtomSimulator extends React.Component {
         this.state = this.initialState;
         this.energyLevelValues = [-13.6, -3.4, -1.5, -0.9, -0.5, -0.4];
 
+        this.timer = null;
+        this.deExcitation = this.deExcitation.bind(this);
         this.handleReset = this.handleReset.bind(this)
     }
 
@@ -48,6 +51,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <svg width={WIDTH} height={HEIGHT}>
                                 <MainView
                                     fired={this.state.photon.fired}
+                                    emitted={this.state.photon.emitted}
                                     currentEnergyLevel={this.state.currentEnergyLevel}
                                     updateEnergyLevel={this.updateEnergyLevel.bind(this)}
                                 />
@@ -137,8 +141,37 @@ export default class HydrogenAtomSimulator extends React.Component {
         );
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.photon !== this.state.photon || prevState.currentEnergyLevel !== this.state.currentEnergyLevel) {
+            if (this.state.currentEnergyLevel === 1) {
+                this.stopPhotonEmission();
+                return;
+            }
+
+            this.timer = setTimeout(() => this.deExcitation(), 3000);
+        }
+    }
+
+    deExcitation() {
+        console.log(`im supposed to be running; current energy level : ${this.state.currentEnergyLevel}`);
+        let photonS = this.state.photon;
+        photonS.emitted = true;
+        this.setState({
+            photon: photonS,
+            currentEnergyLevel: 1,
+        })
+
+        clearInterval(this.timer);
+    }
+
     updateEnergyLevel(newEnergyLevel) {
         this.setState({ currentEnergyLevel: newEnergyLevel})
+    }
+
+    stopPhotonEmission() {
+        let photonState = this.state.photon;
+        photonState.emitted = false;
+        this.setState({ photon: photonState });
     }
 
     stopPhotonAnimation() {
@@ -148,7 +181,7 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     changePhoton(newPhoton, firePhotonNow) {
-        // this.setState({ photon: newPhoton });
+        // console.log(`hello new photon: ${newPhoton} and ${this.state.currentEnergyLevel}`);
         this.setState({
             photon: newPhoton
         }, () => {

@@ -45,11 +45,12 @@ export default class Electron extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         // If the photon wasn't fired, simply return
-        if (!this.props.fired) return;
+        if (!(this.props.fired || this.props.emitted)) return;
 
+        let delay = this.props.emitted ? 0 : 1500;
         let node = this.ref.current;
         let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
-        select(node).transition().delay(1500).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
+        select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
     }
 
     findClosestOrbital(endX) {
