@@ -65,6 +65,7 @@ export default class Slider extends React.Component {
             background: '#d7dcdf'
         }
 
+
         const percentage = 100 * (energy - 0.03) / (15 - 0.03);
         this.bg = `linear-gradient(90deg, ${settings.fill} ${percentage}%, ${settings.background} ${percentage+0.1}%)`;
     }
@@ -103,28 +104,18 @@ export default class Slider extends React.Component {
                     changeSliderValue={() => { this.changeSlider(0.66)}}
                 />
 
-                <Button
-                    symbol={"Pᵧ"}
-                    id={"Py"}
-                    changeSliderValue={() => { this.changeSlider(1.1)}}
-                />
 
-                <Button
-                    symbol={"Hᵦ"}
-                    id={"Hb"}
-                    changeSliderValue={() => { this.changeSlider(2.5)}}
-                />
-
-                <Button
-                    symbol={"Hδ"}
-                    id={"Hd"}
-                    changeSliderValue={() => { this.changeSlider(3.0)}}
-                />
 
                 <Button
                     symbol={"Pᵦ"}
                     id={"Pb"}
                     changeSliderValue={() => { this.changeSlider(0.97)}}
+                />
+
+                <Button
+                    symbol={"Pᵧ"}
+                    id={"Py"}
+                    changeSliderValue={() => { this.changeSlider(1.1)}}
                 />
 
                 <Button
@@ -137,6 +128,18 @@ export default class Slider extends React.Component {
                     symbol={"Hᵧ"}
                     id={"Hy"}
                     changeSliderValue={() => { this.changeSlider(2.9)}}
+                />
+
+                <Button
+                    symbol={"Hᵦ"}
+                    id={"Hb"}
+                    changeSliderValue={() => { this.changeSlider(2.5)}}
+                />
+
+                <Button
+                    symbol={"Hδ"}
+                    id={"Hd"}
+                    changeSliderValue={() => { this.changeSlider(3.0)}}
                 />
 
                 <Button

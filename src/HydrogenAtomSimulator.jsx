@@ -35,11 +35,11 @@ export default class HydrogenAtomSimulator extends React.Component {
             timeUntilDeExcitation: 0,
             photon: {
                 fired: false,
-                frequency: 1.1123E15,
-                wavelength: 2.69E-7,
-                energyValue: 4.6,
+                frequency: 6.0E15,
+                wavelength: 495E-9,
+                energyValue: 2.5,
                 passThrough: true,
-                color: "rgb(98.7,0,98.7)"
+                color: "#00ffc0"
             }
         };
 

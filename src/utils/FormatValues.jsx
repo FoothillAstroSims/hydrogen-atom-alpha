@@ -17,7 +17,6 @@ const formatWavelength = (wavelength) => {
         lambda = (Number.parseFloat(wavelength).toExponential() / 1e-9).toString();
         endSubtr = Number.parseFloat(lambda) > 100 ? 3 : 4;
     }
-    console.log(`wavelength: ${wavelength}`);
 
     lambda = lambda.substr(0, endSubtr) + units;
     return lambda;

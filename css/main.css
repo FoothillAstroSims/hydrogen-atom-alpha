@@ -249,8 +249,6 @@ nav a:hover {
 }
 
 .range-slider__range::-moz-range-thumb {
-    /*width: 20px;*/
-    /*height: 20px;*/
     height: 25px;
     width: 7px;
     border: 0;
@@ -305,46 +303,72 @@ input::-moz-focus-outer {
 }
 
 #Pa {
-
+    top: 5px;
+    left: 70px;
+    background-color: #630000;
 }
 #Py {
-
-}
-#Hb {
-
-}
-#Hd {
-
+    top: 5px;
+    left: 43px;
+    background-color: #630000;
 }
 
 #Pb {
-
+    top: 30px;
+    left: 50px;
+    background-color: #630000;
 }
+
 #Ha {
-
+    top: 30px;
+    left: 45px;
+    background-color: #ff0000;
 }
-#Hy {
 
+#Hy {
+    top: 30px;
+    left: 60px;
+    background-color: #4900ff;
+}
+
+#Hb {
+    top: 5px;
+    left: 7px;
+    background-color: #00ffc0;
+}
+
+#Hd {
+    top: 5px;
+    left: 10px;
+    background-color: #7900e7;
 }
 
 #La {
-
+    top: 5px;
+    left: 335px;
+    background-color: #630063;
 }
 
 #Lb {
-
+    top: 5px;
+    left: 400px;
+    background-color: #630063;
 }
 
 #Ly {
-
+    top: 5px;
+    left: 400px;
+    background-color: #630063;
 }
+
 #Le {
-    /*top: 20px;*/
-    left: 390px;
+    top: 5px;
+    left: 406px;
+    background-color: #630063;
 }
 
 #Ld {
-    top: 25px;
-    left: 350px;
-
+    top: 30px;
+    left: 353px;
+    background-color: #630063;
 }
