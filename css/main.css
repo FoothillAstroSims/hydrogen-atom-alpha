@@ -10,7 +10,6 @@ body {
     margin: auto;
 }
 
-
 .TopHalf {
     display: flex;
 }
@@ -65,9 +64,9 @@ body {
 }
 
 #slider {
-    width: 87%;
+    width: 85.25%;
     position: relative;
-    left: 60px;
+    left: 67px;
 }
 
 .sliderNames p {
@@ -119,8 +118,28 @@ body {
 
 .spectrumLabels {
     position: relative;
-    bottom: 100px;
+    /*bottom: 100px;*/
+}
 
+#frequencyLabel {
+    position: relative;
+    float: right;
+    bottom: 192px;
+    right: 20px;
+}
+
+#wavelengthLabel {
+    position: relative;
+    bottom: 274px;
+    float: right;
+    left: 55px;
+}
+
+#energyLabel {
+    position: relative;
+    float: right;
+    bottom: 356px;
+    left: 140px;
 }
 
 .SliderContainer {

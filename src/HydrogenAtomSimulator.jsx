@@ -138,9 +138,9 @@ export default class HydrogenAtomSimulator extends React.Component {
                             </button>
                         </div>
 
-                        {/*<p className={"spectrumLabels"}>Frequency</p>*/}
-                        {/*<p className={"spectrumLabels"}>Wavelength</p>*/}
-                        {/*<p className={"spectrumLabels"}>Energy</p>*/}
+                        <p id={"frequencyLabel"}><i>Frequency</i></p>
+                        <p id={"wavelengthLabel"}><i>Wavelength</i></p>
+                        <p id={"energyLabel"}><i>Energy</i></p>
 
                     </div>
 
