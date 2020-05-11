@@ -75,6 +75,7 @@ export default class PhotonBeams extends React.Component {
 
         let end = -wavelength;
         this.initX -= this.speed;
+
         this.raf = requestAnimationFrame(this.draw);
         if (!this.props.photon.passThrough) {
             end = this.orbitalDistances[this.energyLevel - 1] - 10;
@@ -85,6 +86,7 @@ export default class PhotonBeams extends React.Component {
             this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
             this.stopAnimation();
             this.props.stopPhotonAnimation();
+            this.props.startDeExcitation();
         }
     }
 

@@ -59,6 +59,7 @@ export default class MainView extends React.Component {
 
     render() {
         const center = HEIGHT / 2;
+        // this.updateCurrentCurve();
         return (
             <g>
                 {/*The following <g> tag will hold all the red orbital lines*/}
@@ -73,6 +74,7 @@ export default class MainView extends React.Component {
                     emitted={this.props.emitted}
                     currentEnergyLevel={this.props.currentEnergyLevel}
                     updateEnergyLevel={this.props.updateEnergyLevel}
+                    startDeExcitation={this.props.startDeExcitation}
                 />
             </g>
         );

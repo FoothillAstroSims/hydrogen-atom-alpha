@@ -2,7 +2,6 @@ import React from 'react';
 import { select, drag, event} from 'd3/dist/d3';
 import PropTypes from 'prop-types';
 
-
 export default class Electron extends React.Component {
     constructor(props) {
         super(props);
@@ -34,18 +33,21 @@ export default class Electron extends React.Component {
 
     makeDraggable(node) {
         const findClosestOrbital = this.findClosestOrbital.bind(this);
+        const startDeExcitation = this.props.startDeExcitation.bind(this);
         const handleDrag = drag()
             .on('end', function() {
                 const me = select(this);
                 let finalX = findClosestOrbital(event.x, false);
                 const transform = `translate(${finalX}, 0)`;
                 me.transition().attr('transform', transform);
+                startDeExcitation();
             })
             .on('drag', function() {
                 const me = select(this);
                 const transform = `translate(${event.x}, ${0})`;
                 findClosestOrbital(event.x, true);
                 me.attr('transform', transform);
+                startDeExcitation();
             });
 
         select(node).call(handleDrag);
@@ -61,6 +63,7 @@ export default class Electron extends React.Component {
         let node = this.ref.current;
         let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
         select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
+        // this.props.startDeExcitation();
     }
 
     // componentDidUpdate(prevProps, prevState, snapshot) {
