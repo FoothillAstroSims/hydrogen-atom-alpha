@@ -86,6 +86,7 @@ export default class PhotonBeams extends React.Component {
             this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
             this.stopAnimation();
             this.props.stopPhotonAnimation();
+            this.props.changeElectronState(true);
             this.props.startDeExcitation();
         }
     }

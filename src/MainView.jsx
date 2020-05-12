@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Electron from './Electron';
+import PhotonBeams from "./PhotonBeams";
 
 const WIDTH = 950;
 const HEIGHT = 300;
@@ -54,7 +55,7 @@ export default class MainView extends React.Component {
             this.orbitalRadii[i].stroke = "grey";
         }
 
-        this.orbitalRadii[this.props.currentEnergyLevel].stroke = "red";
+        if (this.props.currentEnergyLevel < 7) this.orbitalRadii[this.props.currentEnergyLevel].stroke = "red";
     }
 
     render() {
@@ -69,11 +70,13 @@ export default class MainView extends React.Component {
 
                 {/*The Electron component returns a <g> tag that draws the draggable circle for us*/}
                 <Electron
-                    fired={this.props.fired}
+                    moveElectron={this.props.moveElectron}
                     emitted={this.props.emitted}
                     currentEnergyLevel={this.props.currentEnergyLevel}
                     updateEnergyLevel={this.props.updateEnergyLevel}
                     startDeExcitation={this.props.startDeExcitation}
+                    changeElectronState={this.props.changeElectronState}
+                    electronIsBeingDragged={this.props.electronIsBeingDragged}
                 />
             </g>
         );

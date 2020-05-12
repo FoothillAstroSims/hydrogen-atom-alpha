@@ -7,7 +7,7 @@ export default class Electron extends React.Component {
         super(props);
         this.ref = React.createRef();
         this.val = false;
-        this.orbitalDistances = [40, 110, 250, 420, 620, 880];
+        this.orbitalDistances = [40, 110, 250, 420, 620, 880, 880];
 
         this.timer = {
             id: null,
@@ -53,42 +53,65 @@ export default class Electron extends React.Component {
         select(node).call(handleDrag);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // If the photon wasn't fired, simply return
-        if (!(this.props.fired || this.props.emitted)) return;
-
-        // If the photon was emitted, then make no delay. Otherwise, the photon
-        // was fired, so there needs to be a 1500 millisecond delay
-        let delay = this.props.emitted ? 0 : 1500;
-        let node = this.ref.current;
-        let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
-        select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
-        // this.props.startDeExcitation();
-    }
-
     // componentDidUpdate(prevProps, prevState, snapshot) {
     //     // If the photon wasn't fired, simply return
     //     if (!(this.props.fired || this.props.emitted)) return;
     //
+    //     // If the photon was emitted, then make no delay. Otherwise, the photon
+    //     // was fired, so there needs to be a 1500 millisecond delay
+    //     let delay = this.props.emitted ? 0 : 1500;
     //     let node = this.ref.current;
-    //     let delay = 1500;
-    //     let x = 350;
-    //     let y = 50;
-    //
-    //     if (this.timer.started) { clearInterval(this.timer.id); }
-    //     this.timer.started = true;
-    //     this.timer.id = setTimeout(() => this.returnEnergy(), 1000);
-    //
-    //     select(node).transition().delay(delay).attr('transform', `translate(${x}, ${y})`).duration(500);
+    //     let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
+    //     select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
+    //     // this.props.startDeExcitation();
     // }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // If the photon wasn't fired, simply return
+        if (!(this.props.moveElectron || this.props.emitted) || this.props.electronIsBeingDragged) return;
+
+        // console.log(`i swear to fucking god moveElectron: ${this.props.moveElectron} and ${this.props.emitted}`);
+        if (this.props.moveElectron) this.moveElectron();
+        if (this.props.emitted) this.photonEmission();
+    }
+
+    photonEmission() {
+            // If the photon was emitted, then make no delay. Otherwise, the photon
+            // was fired, so there needs to be a 1500 millisecond delay
+            // let delay = this.props.emitted ? 0 : 1500;
+            let node = this.ref.current;
+            let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
+            select(node).transition().attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
+    }
+
+    moveElectron() {
+        if (this.props.currentEnergyLevel !== 7) {
+            this.photonEmission();
+            return;
+        }
+
+        let node = this.ref.current;
+        let x = 500;
+        let y = 300;
+        console.log(`i should only be rnning once: emitted: ${this.props.emitted} and moveEl ${this.props.moveElectron}`);
+
+        select(node).transition().attr('transform', `translate(${x}, ${y})`).duration(500);
+
+        if (!this.timer.started) {
+            this.timer.started = true;
+            this.timer.id = setTimeout(() => this.returnEnergy(), 500);
+            // clearInterval(this.timer.id);
+        }
+
+        this.props.changeElectronState(false);
+    }
 
     returnEnergy() {
         let node = this.ref.current;
         let delay = 1000;
-        let x = 420;
-        let y = 0;
+        let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
 
-        select(node).transition().delay(delay).attr('transform', `translate(${x}, ${y})`).duration(500);
+        select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
 
         this.timer.started = false;
         clearInterval(this.timer.id);

@@ -18,6 +18,7 @@ export default class HydrogenAtomSimulator extends React.Component {
             currentEnergyLevel: 1,
             timeUntilDeExcitation: 0,
             electronIsBeingDragged: false,
+            moveElectron: false,
             photon: {
                 fired: false,
                 emitted: false,
@@ -58,8 +59,11 @@ export default class HydrogenAtomSimulator extends React.Component {
                                     fired={this.state.photon.fired}
                                     emitted={this.state.photon.emitted}
                                     currentEnergyLevel={this.state.currentEnergyLevel}
+                                    moveElectron={this.state.moveElectron}
                                     updateEnergyLevel={this.updateEnergyLevel.bind(this)}
                                     startDeExcitation={this.startDeExcitation.bind(this)}
+                                    changeElectronState={this.changeElectronState.bind(this)}
+                                    electronIsBeingDragged={this.state.electronIsBeingDragged}
                                 />
                             </svg>
                         </div>
@@ -70,6 +74,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                                 currentEnergyLevel={this.state.currentEnergyLevel}
                                 stopPhotonAnimation={this.stopPhotonAnimation.bind(this)}
                                 startDeExcitation={this.startDeExcitation.bind(this)}
+                                changeElectronState={this.changeElectronState.bind(this)}
                             />
                         </div>
                     </div>
@@ -179,7 +184,7 @@ export default class HydrogenAtomSimulator extends React.Component {
 
         if (this.timer.started) { clearInterval(this.timer.id); }
         this.timer.started = true;
-        this.timer.id = setTimeout(() => this.deExcitation(), 1000);
+        this.timer.id = setTimeout(() => this.deExcitation(), 2000);
     }
 
     deExcitation() {
@@ -194,7 +199,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         this.timer.started = false;
         clearInterval(this.timer.id);
         this.stopPhotonEmission();
-        if (newEnergyLevel !== 1) this.timer.id = setTimeout(() => this.deExcitation(), 1000);
+        if (newEnergyLevel !== 1) this.timer.id = setTimeout(() => this.deExcitation(), 2000);
     }
 
     updateEnergyLevel(newEnergyLevel, beingDragged) {
@@ -216,6 +221,10 @@ export default class HydrogenAtomSimulator extends React.Component {
         this.setState({ photon: photonState });
     }
 
+    changeElectronState(moveElectron) {
+        if (this.state.moveElectron !== moveElectron) this.setState( {moveElectron: moveElectron });
+    }
+
     changePhoton(newPhoton, firePhotonNow) {
         // console.log(`hello new photon: ${newPhoton} and ${this.state.currentEnergyLevel}`);
         this.setState({
@@ -234,7 +243,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         let electronEnergy = baseEnergy / Math.pow(this.state.currentEnergyLevel, 2);
         let totalEnergy = Number.parseFloat((photonEnergy + electronEnergy).toFixed(2));
 
-        let newEnergyLevel = this.state.currentEnergyLevel;
+        let newEnergyLevel = totalEnergy >= 0 ? 7 : this.state.currentEnergyLevel;
         this.energyLevelValues.forEach((element, index) => {
             if (element === totalEnergy) { newEnergyLevel = index + 1; }
         });
@@ -242,17 +251,13 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonState = this.state.photon;
         photonState.fired = true;
         photonState.passThrough = newEnergyLevel === this.state.currentEnergyLevel;
-        // if (newEnergyLevel !== 1) this.startDeExcitation();
         this.setState({
             photon: photonState,
             currentEnergyLevel: newEnergyLevel
-        }, () => {
-            // if (newEnergyLevel !== 1) this.startDeExcitation();
         });
     }
 
     handleReset() {
         this.setState(this.initialState);
     }
-
 }
