@@ -19,6 +19,7 @@ export default class HydrogenAtomSimulator extends React.Component {
             timeUntilDeExcitation: 0,
             electronIsBeingDragged: false,
             moveElectron: false,
+            pauseDeExcitation: false,
             photon: {
                 fired: false,
                 emitted: false,
@@ -138,6 +139,14 @@ export default class HydrogenAtomSimulator extends React.Component {
                             </button>
                         </div>
 
+                        <div className={""}>
+                            <button type="box"
+                                    className=""
+                                    onClick={this.changePauseDeExcitation.bind(this)}>
+                                {"Pause DeExcitations "}
+                            </button>
+                        </div>
+
                         <p id={"frequencyLabel"}><i>Frequency</i></p>
                         <p id={"wavelengthLabel"}><i>Wavelength</i></p>
                         <p id={"energyLabel"}><i>Energy</i></p>
@@ -175,8 +184,21 @@ export default class HydrogenAtomSimulator extends React.Component {
         // }
     }
 
+    changePauseDeExcitation() {
+        this.setState({ pauseDeExcitation: !this.state.pauseDeExcitation});
+        if (!this.state.pauseDeExcitation) {
+            clearInterval(this.timer.id);
+            this.timer.started = false;
+        } else {
+            if (this.timer.started) { clearInterval(this.timer.id); }
+            this.timer.started = true;
+            this.timer.id = setTimeout(() => this.deExcitation(), 2000);
+        }
+    }
+
     startDeExcitation() {
-        if (this.state.electronIsBeingDragged) {
+        console.log(`pause? ${this.state.pauseDeExcitation}`);
+        if (this.state.electronIsBeingDragged || this.state.pauseDeExcitation) {
             clearInterval(this.timer.id);
             this.timer.started = false;
             return;

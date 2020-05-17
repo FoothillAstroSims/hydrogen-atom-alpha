@@ -111,11 +111,11 @@ export default class Electron extends React.Component {
 
         select(node).transition().attr('transform', `translate(${x}, ${y})`).duration(500);
 
-        if (!this.timer.started) {
-            this.timer.started = true;
-            this.timer.id = setTimeout(() => this.returnEnergy(), 1000);
-            // clearInterval(this.timer.id);
-        }
+        // if (!this.timer.started) {
+        //     this.timer.started = true;
+        //     this.timer.id = setTimeout(() => this.returnEnergy(), 1000);
+        //     // clearInterval(this.timer.id);
+        // }
 
         this.props.changeElectronState(false);
     }
