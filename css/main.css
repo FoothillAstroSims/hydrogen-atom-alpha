@@ -112,22 +112,30 @@ body {
 #frequencyLabel {
     position: relative;
     float: right;
-    bottom: 192px;
-    right: 20px;
+    bottom: 357px;
+    left: 10px;
 }
 
 #wavelengthLabel {
     position: relative;
-    bottom: 274px;
     float: right;
-    left: 55px;
+    bottom: 274px;
+    left: 85px;
 }
 
 #energyLabel {
     position: relative;
     float: right;
-    bottom: 356px;
-    left: 140px;
+    bottom: 192px;
+    left: 170px;
+}
+
+#pauseSwitchText {
+    position: relative;
+    float: right;
+    bottom: 50px;
+    left: 230px;
+    font-size: 12px;
 }
 
 .SliderContainer {
@@ -140,8 +148,8 @@ body {
 .pauseSwitch {
     position: relative;
     float: right;
-    bottom: 25px;
-    right: 5px;
+    bottom: 5px;
+    right: 30px;
 }
 
 .TitleText {

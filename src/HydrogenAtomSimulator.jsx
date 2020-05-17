@@ -166,6 +166,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <p id={"frequencyLabel"}><i>Frequency</i></p>
                         <p id={"wavelengthLabel"}><i>Wavelength</i></p>
                         <p id={"energyLabel"}><i>Energy</i></p>
+                        <p id={"pauseSwitchText"}>Automatic<br />DeExcitation</p>
 
                     </div>
 
@@ -276,6 +277,10 @@ export default class HydrogenAtomSimulator extends React.Component {
     firePhoton() {
         // If the photon has already been fired, you can't fire it again until it passes.
         if (this.state.photon.fired) return;
+
+        // possibly temporary
+        clearInterval(this.timer.id);
+        this.timer.started = false;
 
         let baseEnergy = -13.6;
         let photonEnergy = this.state.photon.energyValue;
