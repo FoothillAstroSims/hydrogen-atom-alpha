@@ -35,7 +35,7 @@ export default class Slider extends React.Component {
             let energyValue = energy;
             this.criticalPhotonEVs.forEach((element, index) => {
                 if (energy < (element + epsilon) && energy > (element - epsilon)) energyValue = element;
-            })
+            });
 
             return energyValue;
         }
@@ -46,14 +46,12 @@ export default class Slider extends React.Component {
         let photonColorHex = getWavelengthHex(photonWavelength * 1e9);
         let photonColorRGB = getWavelengthRGB(photonWavelength * 1e9);
 
-        let newPhoton = {
-            fired: this.props.photon.fired,
-            frequency: photonFrequency,
-            wavelength: photonWavelength,
-            energyValue: newEnergyValue,
-            passThrough: this.props.photon.passThrough,
-            color: photonColorRGB
-        }
+        let newPhoton = this.props.photon;
+
+        newPhoton.frequency = photonFrequency;
+        newPhoton.wavelength = photonWavelength;
+        newPhoton.energyValue = newEnergyValue;
+        newPhoton.color = photonColorRGB;
 
         this.styling(newEnergyValue, photonColorHex);
         this.props.changePhoton(newPhoton, fire);

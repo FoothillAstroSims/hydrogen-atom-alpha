@@ -12,7 +12,7 @@ export default class PhotonBeams extends React.Component {
         this.fadeIndex = 1;
 
         this.isPlaying = false;
-        this.orbitalDistances = [40, 110, 250, 420, 620, 880];
+        this.orbitalDistances = [40, 110, 250, 420, 620, 880, 880];
         this.energyLevel = 1;
 
         this.draw = this.draw.bind(this);
@@ -27,8 +27,16 @@ export default class PhotonBeams extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         this.energyLevel = prevProps.currentEnergyLevel;
-        if (this.props.photon.fired) { this.startAnimation(); }
-        else {this.stopAnimation(); }
+
+        if (this.props.photon.fired && !this.isPlaying) {
+            this.startAnimation();
+            this.isPlaying = true;
+        } else {
+            // this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            this.isPlaying = false;
+            this.stopAnimation();
+        }
+
     }
 
     startAnimation() {

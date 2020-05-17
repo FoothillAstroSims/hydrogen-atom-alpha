@@ -222,6 +222,7 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     changeElectronState(moveElectron) {
+        // console.log(`move electron: ${moveElectron}`);
         if (this.state.moveElectron !== moveElectron) this.setState( {moveElectron: moveElectron });
     }
 

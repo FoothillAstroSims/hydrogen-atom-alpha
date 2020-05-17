@@ -70,12 +70,14 @@ export default class Electron extends React.Component {
         // If the photon wasn't fired, simply return
         if (!(this.props.moveElectron || this.props.emitted) || this.props.electronIsBeingDragged) return;
 
-        // console.log(`i swear to fucking god moveElectron: ${this.props.moveElectron} and ${this.props.emitted}`);
         if (this.props.moveElectron) this.moveElectron();
         if (this.props.emitted) this.photonEmission();
     }
 
     photonEmission() {
+            // Fill in photon emission stuff
+
+
             // If the photon was emitted, then make no delay. Otherwise, the photon
             // was fired, so there needs to be a 1500 millisecond delay
             // let delay = this.props.emitted ? 0 : 1500;
@@ -85,25 +87,63 @@ export default class Electron extends React.Component {
     }
 
     moveElectron() {
-        if (this.props.currentEnergyLevel !== 7) {
-            this.photonEmission();
-            return;
-        }
+        // if (this.props.currentEnergyLevel === 7) {
+        //     this.photonEmission();
+        //     return;
+        // }
 
         let node = this.ref.current;
-        let x = 500;
-        let y = 300;
-        console.log(`i should only be rnning once: emitted: ${this.props.emitted} and moveEl ${this.props.moveElectron}`);
+        let x;
+        let y;
+
+        console.log(`curr energy leve: ${this.props.currentEnergyLevel}`);
+        // If the energy level is 7, that means that the electron is ionized and needs to
+        // be moved to a random location off screen. Or else, simply move it to its correct energy level
+        if (this.props.currentEnergyLevel === 7) {
+            let randomPosition = this.ionizeElectron();
+            x = randomPosition.xPos;
+            y = randomPosition.yPos;
+        } else {
+            x = this.orbitalDistances[this.props.currentEnergyLevel - 1];
+            y = 0;
+        }
 
         select(node).transition().attr('transform', `translate(${x}, ${y})`).duration(500);
 
         if (!this.timer.started) {
             this.timer.started = true;
-            this.timer.id = setTimeout(() => this.returnEnergy(), 500);
+            this.timer.id = setTimeout(() => this.returnEnergy(), 1000);
             // clearInterval(this.timer.id);
         }
 
         this.props.changeElectronState(false);
+    }
+
+    ionizeElectron() {
+        const width = 950;
+        const height = 300;
+
+        let xOffset = 500;
+        let yOffset = 500;
+
+        let x = Math.random() * width;
+        let y = Math.random() * height;
+
+        if (Math.random() > 0.5) {
+            x = Math.random() * xOffset + width;
+            if (Math.random() > 0.5) x = -1 * Math.random() * xOffset;
+        } else {
+            y = Math.random() * yOffset + height;
+            if (Math.random() > 0.5) y = -1 * Math.random() * yOffset;
+        }
+
+        console.log(`x and y: ${x}, ${y}`);
+        let randomPosition = {
+            xPos: x,
+            yPos: y,
+        }
+
+        return randomPosition;
     }
 
     returnEnergy() {
@@ -111,8 +151,10 @@ export default class Electron extends React.Component {
         let delay = 1000;
         let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
 
+        console.log(`i am runnning ${this.props.currentEnergyLevel}`);
         select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
 
+        this.props.changeElectronState(false);
         this.timer.started = false;
         clearInterval(this.timer.id);
     }
