@@ -11,7 +11,7 @@ export default class Slider extends React.Component {
         super(props);
         this.ref = React.createRef();
         this.bg = `linear-gradient(90deg, #00ffc0 16.499665998663996%, #d7dcdf 16.599665998663998%)`;
-        this.criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.8, 13.1, 13.2];
+        this.criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.7, 13.1, 13.2];
     }
 
     componentDidMount() {
@@ -154,7 +154,7 @@ export default class Slider extends React.Component {
                 <Button
                     symbol={"Lᵧ"}
                     id={"Ly"}
-                    changeSliderValue={() => { this.changeSlider(12.8)}}
+                    changeSliderValue={() => { this.changeSlider(12.7)}}
                 />
 
                 <Button

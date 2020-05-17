@@ -75,15 +75,16 @@ export default class Electron extends React.Component {
     }
 
     photonEmission() {
-            // Fill in photon emission stuff
+        // Fill in photon emission stuff
 
 
-            // If the photon was emitted, then make no delay. Otherwise, the photon
-            // was fired, so there needs to be a 1500 millisecond delay
-            // let delay = this.props.emitted ? 0 : 1500;
-            let node = this.ref.current;
-            let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
-            select(node).transition().attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
+        // If the photon was emitted, then make no delay. Otherwise, the photon
+        // was fired, so there needs to be a 1500 millisecond delay
+        // let delay = this.props.emitted ? 0 : 1500;
+        // console.log(`photon was emitted`);
+        let node = this.ref.current;
+        let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
+        select(node).transition().attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
     }
 
     moveElectron() {
@@ -96,7 +97,7 @@ export default class Electron extends React.Component {
         let x;
         let y;
 
-        console.log(`curr energy leve: ${this.props.currentEnergyLevel}`);
+        // console.log(`curr energy leve: ${this.props.currentEnergyLevel}`);
         // If the energy level is 7, that means that the electron is ionized and needs to
         // be moved to a random location off screen. Or else, simply move it to its correct energy level
         if (this.props.currentEnergyLevel === 7) {
@@ -130,14 +131,13 @@ export default class Electron extends React.Component {
         let y = Math.random() * height;
 
         if (Math.random() > 0.5) {
-            x = Math.random() * xOffset + width;
-            if (Math.random() > 0.5) x = -1 * Math.random() * xOffset;
+            x = Math.random() * xOffset + width + 100;
+            if (Math.random() > 0.5) x = -1 * Math.random() * xOffset - 100;
         } else {
-            y = Math.random() * yOffset + height;
-            if (Math.random() > 0.5) y = -1 * Math.random() * yOffset;
+            y = Math.random() * yOffset + height + 100;
+            if (Math.random() > 0.5) y = -1 * Math.random() * yOffset - 100;
         }
 
-        console.log(`x and y: ${x}, ${y}`);
         let randomPosition = {
             xPos: x,
             yPos: y,
@@ -151,7 +151,6 @@ export default class Electron extends React.Component {
         let delay = 1000;
         let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
 
-        console.log(`i am runnning ${this.props.currentEnergyLevel}`);
         select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
 
         this.props.changeElectronState(false);

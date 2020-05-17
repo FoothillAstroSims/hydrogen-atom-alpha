@@ -237,6 +237,7 @@ export default class HydrogenAtomSimulator extends React.Component {
 
     firePhoton() {
         // If the photon has already been fired, you can't fire it again until it passes.
+        console.log(`fired? : ${this.state.photon.fired}`);
         if (this.state.photon.fired) return;
 
         let baseEnergy = -13.6;
@@ -245,6 +246,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         let totalEnergy = Number.parseFloat((photonEnergy + electronEnergy).toFixed(2));
 
         let newEnergyLevel = totalEnergy >= 0 ? 7 : this.state.currentEnergyLevel;
+        console.log(`totalEnergy: ${totalEnergy}`);
         this.energyLevelValues.forEach((element, index) => {
             if (element === totalEnergy) { newEnergyLevel = index + 1; }
         });
