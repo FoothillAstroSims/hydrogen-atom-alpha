@@ -6,16 +6,12 @@ export default class Electron extends React.Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef();
-        this.val = false;
         this.orbitalDistances = [40, 110, 250, 420, 620, 880, 880];
 
         this.timer = {
             id: null,
             started: false,
         };
-
-        this.returnEnergy = this.returnEnergy.bind(this);
-
     }
 
     componentDidMount() {
@@ -53,19 +49,6 @@ export default class Electron extends React.Component {
         select(node).call(handleDrag);
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     // If the photon wasn't fired, simply return
-    //     if (!(this.props.fired || this.props.emitted)) return;
-    //
-    //     // If the photon was emitted, then make no delay. Otherwise, the photon
-    //     // was fired, so there needs to be a 1500 millisecond delay
-    //     let delay = this.props.emitted ? 0 : 1500;
-    //     let node = this.ref.current;
-    //     let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
-    //     select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
-    //     // this.props.startDeExcitation();
-    // }
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         // If the photon wasn't fired, simply return
         if (!(this.props.moveElectron || this.props.emitted) || this.props.electronIsBeingDragged) return;
@@ -75,29 +58,16 @@ export default class Electron extends React.Component {
     }
 
     photonEmission() {
-        // Fill in photon emission stuff
-
-
-        // If the photon was emitted, then make no delay. Otherwise, the photon
-        // was fired, so there needs to be a 1500 millisecond delay
-        // let delay = this.props.emitted ? 0 : 1500;
-        // console.log(`photon was emitted`);
         let node = this.ref.current;
         let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
         select(node).transition().attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
     }
 
     moveElectron() {
-        // if (this.props.currentEnergyLevel === 7) {
-        //     this.photonEmission();
-        //     return;
-        // }
-
         let node = this.ref.current;
         let x;
         let y;
 
-        // console.log(`curr energy leve: ${this.props.currentEnergyLevel}`);
         // If the energy level is 7, that means that the electron is ionized and needs to
         // be moved to a random location off screen. Or else, simply move it to its correct energy level
         if (this.props.currentEnergyLevel === 7) {
@@ -110,13 +80,6 @@ export default class Electron extends React.Component {
         }
 
         select(node).transition().attr('transform', `translate(${x}, ${y})`).duration(500);
-
-        // if (!this.timer.started) {
-        //     this.timer.started = true;
-        //     this.timer.id = setTimeout(() => this.returnEnergy(), 1000);
-        //     // clearInterval(this.timer.id);
-        // }
-
         this.props.changeElectronState(false);
     }
 
@@ -138,24 +101,10 @@ export default class Electron extends React.Component {
             if (Math.random() > 0.5) y = -1 * Math.random() * yOffset - 100;
         }
 
-        let randomPosition = {
+        return {
             xPos: x,
-            yPos: y,
-        }
-
-        return randomPosition;
-    }
-
-    returnEnergy() {
-        let node = this.ref.current;
-        let delay = 1000;
-        let newEnergyLevel = this.orbitalDistances[this.props.currentEnergyLevel - 1];
-
-        select(node).transition().delay(delay).attr('transform', `translate(${newEnergyLevel}, 0)`).duration(500);
-
-        this.props.changeElectronState(false);
-        this.timer.started = false;
-        clearInterval(this.timer.id);
+            yPos: y
+        };
     }
 
     findClosestOrbital(endX, beingDragged) {

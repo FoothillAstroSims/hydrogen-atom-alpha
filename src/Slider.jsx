@@ -14,18 +14,6 @@ export default class Slider extends React.Component {
         this.criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.7, 13.1, 13.2];
     }
 
-    componentDidMount() {
-
-    }
-
-    componentWillUnmount() {
-
-    }
-
-    componentDidUpdate(prevProps, prevState, snapShot) {
-
-    }
-
     onPhotonValueChange(e, fire) {
         // If the photon is currently being fired, then don't update anything
         if (this.props.photon.fired) return;

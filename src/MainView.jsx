@@ -38,14 +38,6 @@ export default class MainView extends React.Component {
         this.state = this.initialState;
     }
 
-    componentDidMount() {
-
-    }
-
-    componentWillUnmount() {
-
-    }
-
     componentDidUpdate(prevProps, prevState, snapShot) {
         this.updateCurrentCurve();
     }

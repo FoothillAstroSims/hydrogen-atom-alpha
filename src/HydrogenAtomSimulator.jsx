@@ -139,19 +139,6 @@ export default class HydrogenAtomSimulator extends React.Component {
                             </button>
                         </div>
 
-                        {/*<div className={""}>*/}
-                        {/*    <button type="box"*/}
-                        {/*            className=""*/}
-                        {/*            onClick={this.changePauseDeExcitation.bind(this)}>*/}
-                        {/*        {"Pause DeExcitations "}*/}
-                        {/*    </button>*/}
-                        {/*</div>*/}
-
-                        {/*<label className="switch">*/}
-                        {/*    <input type="checkbox">*/}
-                        {/*        <span className="slider round" />*/}
-                        {/*</label>*/}
-
                         <div className={"pauseSwitch"}>
                             <label className="switch">
                                 <input
@@ -179,30 +166,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         );
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        // if (this.state.electronIsBeingDragged) {
-        //     clearInterval(this.timer.id);
-        //     this.timer.started = false;
-        //     return;
-        // }
-        //
-        // console.log(`${this.state.electronIsBeingDragged}`);
-        //
-        // let canUpdateConditions = prevState.photon !== this.state.photon
-        //     || prevState.currentEnergyLevel !== this.state.currentEnergyLevel
-        //     || prevState.electronIsBeingDragged !== this.state.electronIsBeingDragged;
-        //
-        // if (canUpdateConditions) {
-        //     this.stopPhotonEmission();
-        //
-        //     if (this.timer.started) { clearInterval(this.timer.id); }
-        //     this.timer.started = true;
-        //     this.timer.id = setTimeout(() => this.deExcitation(), 1000);
-        // }
-    }
-
     changePauseDeExcitation() {
-        // console.log(`paused? ${this.state.pauseDeExcitation}`);
         this.setState({ pauseDeExcitation: !this.state.pauseDeExcitation});
         if (!this.state.pauseDeExcitation) {
             clearInterval(this.timer.id);
@@ -210,7 +174,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         } else {
             if (this.timer.started) { clearInterval(this.timer.id); }
             this.timer.started = true;
-            this.timer.id = setTimeout(() => this.deExcitation(), 2000);
+            this.timer.id = setTimeout(() => this.deExcitation(), 3000);
         }
     }
 
@@ -223,7 +187,7 @@ export default class HydrogenAtomSimulator extends React.Component {
 
         if (this.timer.started) { clearInterval(this.timer.id); }
         this.timer.started = true;
-        this.timer.id = setTimeout(() => this.deExcitation(), 2000);
+        this.timer.id = setTimeout(() => this.deExcitation(), 3000);
     }
 
     deExcitation() {
@@ -238,7 +202,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         this.timer.started = false;
         clearInterval(this.timer.id);
         this.stopPhotonEmission();
-        if (newEnergyLevel !== 1) this.timer.id = setTimeout(() => this.deExcitation(), 2000);
+        if (newEnergyLevel !== 1) this.timer.id = setTimeout(() => this.deExcitation(), 3000);
     }
 
     updateEnergyLevel(newEnergyLevel, beingDragged) {
@@ -261,12 +225,10 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     changeElectronState(moveElectron) {
-        // console.log(`move electron: ${moveElectron}`);
         if (this.state.moveElectron !== moveElectron) this.setState( {moveElectron: moveElectron });
     }
 
     changePhoton(newPhoton, firePhotonNow) {
-        // console.log(`hello new photon: ${newPhoton} and ${this.state.currentEnergyLevel}`);
         this.setState({
             photon: newPhoton
         }, () => {

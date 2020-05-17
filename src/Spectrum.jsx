@@ -43,18 +43,6 @@ export default class Spectrum extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
-
-    }
-
-    componentWillUnmount() {
-
-    }
-
-    componentDidUpdate(prevProps, prevState, snapShot) {
-
-    }
-
     render() {
         const linePosition = scale(this.props.energyValue);
         const shiftLeftValues = [45, 25, 17];
