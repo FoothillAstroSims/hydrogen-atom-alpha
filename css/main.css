@@ -137,6 +137,13 @@ body {
     border: 1px solid lightseagreen;
 }
 
+.pauseSwitch {
+    position: relative;
+    float: right;
+    bottom: 25px;
+    right: 5px;
+}
+
 .TitleText {
     text-align: center;
     font-size: 20px;

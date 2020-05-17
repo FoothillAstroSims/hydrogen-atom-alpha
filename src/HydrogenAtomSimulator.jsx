@@ -139,12 +139,28 @@ export default class HydrogenAtomSimulator extends React.Component {
                             </button>
                         </div>
 
-                        <div className={""}>
-                            <button type="box"
-                                    className=""
-                                    onClick={this.changePauseDeExcitation.bind(this)}>
-                                {"Pause DeExcitations "}
-                            </button>
+                        {/*<div className={""}>*/}
+                        {/*    <button type="box"*/}
+                        {/*            className=""*/}
+                        {/*            onClick={this.changePauseDeExcitation.bind(this)}>*/}
+                        {/*        {"Pause DeExcitations "}*/}
+                        {/*    </button>*/}
+                        {/*</div>*/}
+
+                        {/*<label className="switch">*/}
+                        {/*    <input type="checkbox">*/}
+                        {/*        <span className="slider round" />*/}
+                        {/*</label>*/}
+
+                        <div className={"pauseSwitch"}>
+                            <label className="switch">
+                                <input
+                                    type="checkbox"
+                                    onChange={this.changePauseDeExcitation.bind(this)}
+                                    checked={this.state.pauseDeExcitation}
+                                />
+                                <span className="slider round"/>
+                            </label>
                         </div>
 
                         <p id={"frequencyLabel"}><i>Frequency</i></p>
@@ -185,6 +201,7 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     changePauseDeExcitation() {
+        // console.log(`paused? ${this.state.pauseDeExcitation}`);
         this.setState({ pauseDeExcitation: !this.state.pauseDeExcitation});
         if (!this.state.pauseDeExcitation) {
             clearInterval(this.timer.id);
@@ -197,7 +214,6 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     startDeExcitation() {
-        console.log(`pause? ${this.state.pauseDeExcitation}`);
         if (this.state.electronIsBeingDragged || this.state.pauseDeExcitation) {
             clearInterval(this.timer.id);
             this.timer.started = false;
