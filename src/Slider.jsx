@@ -11,7 +11,7 @@ export default class Slider extends React.Component {
         super(props);
         this.ref = React.createRef();
         this.bg = `linear-gradient(90deg, #00ffc0 16.499665998663996%, #d7dcdf 16.599665998663998%)`;
-        this.criticalPhotonEVs = [0.66, 0.97, 1.1, 1.9, 2.5, 2.9, 3.0, 10.2, 12.1, 12.7, 13.1, 13.2];
+        this.criticalPhotonEVs = [0.66, 0.97, 1.13, 1.89, 2.55, 2.86, 3.02, 10.2, 12.09, 12.75, 13.06, 13.22];
     }
 
     onPhotonValueChange(e, fire) {
@@ -100,31 +100,31 @@ export default class Slider extends React.Component {
                 <Button
                     symbol={"Pᵧ"}
                     id={"Py"}
-                    changeSliderValue={() => { this.changeSlider(1.1)}}
+                    changeSliderValue={() => { this.changeSlider(1.13)}}
                 />
 
                 <Button
                     symbol={"Hα"}
                     id={"Ha"}
-                    changeSliderValue={() => { this.changeSlider(1.9)}}
+                    changeSliderValue={() => { this.changeSlider(1.89)}}
                 />
 
                 <Button
                     symbol={"Hᵧ"}
                     id={"Hy"}
-                    changeSliderValue={() => { this.changeSlider(2.9)}}
+                    changeSliderValue={() => { this.changeSlider(2.86)}}
                 />
 
                 <Button
                     symbol={"Hᵦ"}
                     id={"Hb"}
-                    changeSliderValue={() => { this.changeSlider(2.5)}}
+                    changeSliderValue={() => { this.changeSlider(2.55)}}
                 />
 
                 <Button
                     symbol={"Hδ"}
                     id={"Hd"}
-                    changeSliderValue={() => { this.changeSlider(3.0)}}
+                    changeSliderValue={() => { this.changeSlider(3.02)}}
                 />
 
                 <Button
@@ -136,25 +136,25 @@ export default class Slider extends React.Component {
                 <Button
                     symbol={"Lᵦ"}
                     id={"Lb"}
-                    changeSliderValue={() => { this.changeSlider(12.1)}}
+                    changeSliderValue={() => { this.changeSlider(12.09)}}
                 />
 
                 <Button
                     symbol={"Lᵧ"}
                     id={"Ly"}
-                    changeSliderValue={() => { this.changeSlider(12.7)}}
+                    changeSliderValue={() => { this.changeSlider(12.75)}}
                 />
 
                 <Button
                     symbol={"Lε"}
                     id={"Le"}
-                    changeSliderValue={() => { this.changeSlider(13.2)}}
+                    changeSliderValue={() => { this.changeSlider(13.22)}}
                 />
 
                 <Button
                     symbol={"Lδ"}
                     id={"Ld"}
-                    changeSliderValue={() => { this.changeSlider(13.1)}}
+                    changeSliderValue={() => { this.changeSlider(13.06)}}
                 />
             </React.Fragment>
 
