@@ -17,21 +17,42 @@ const renderEventEntries = () => {
 
         const pixelMargin = 50;
         let leftTextMargin = 20;
-        let rightTextMargin = 150;
+        let rightTextMargin = 180;
         let pixelHeight = (index + 1) * pixelMargin;
 
         let photonReaction = "not absorbed";
         let leftHandText = "";
+
+
         if (data.emitted) {
             leftHandText = "deexcitation";
             photonReaction = "emitted";
         }
+
         if (data.absorbed) {
             leftHandText = "excitation";
             photonReaction = "absorbed";
         }
 
+        let previousEnergyText = {};
+        let newEnergyText = {};
+
+        if (data.absorbed || data.emitted) {
+            previousEnergyText = {
+                x: ((leftTextMargin + rightTextMargin) / 2) + 10,
+                y: pixelHeight + 12.5,
+                id: "eLevelText",
+            }
+
+            newEnergyText = {
+                x: ((leftTextMargin + rightTextMargin) / 2) + 50,
+                y: pixelHeight + 12.5,
+                id: "eLevelText",
+            }
+        }
+
         let rightHandText = `${data.photonEnergy.toFixed(2)} eV photon`;
+
         const leftTextProps = {
             x: leftTextMargin,
             y: pixelHeight,
@@ -40,12 +61,12 @@ const renderEventEntries = () => {
 
         const rightTextProps = {
             x: rightTextMargin,
-            y: pixelHeight,
+            y: pixelHeight - 5,
             id: "eLevelText",
         }
 
         const rightBottomTextProps = {
-            x: rightTextMargin,
+            x: rightTextMargin + 20,
             y: pixelHeight + 12.5,
             id: "eLevelText",
         }
@@ -55,6 +76,9 @@ const renderEventEntries = () => {
             <text {...leftTextProps} >{leftHandText}</text>
             <text {...rightTextProps} >{rightHandText}</text>
             <text {...rightBottomTextProps} >{photonReaction}</text>
+
+            <text {...previousEnergyText} >{data.previousEnergyLevel}</text>
+            <text {...newEnergyText} >{data.newEnergyLevel}</text>
         </g>);
     }
 }

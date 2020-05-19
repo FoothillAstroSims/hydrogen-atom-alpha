@@ -225,7 +225,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         };
 
         if (!(newEnergyLevel === this.state.currentEnergyLevel)) {
-            console.log(`deexcitaion function is being run`);
             this.state.eventLog.push(newEvent);
         }
 
