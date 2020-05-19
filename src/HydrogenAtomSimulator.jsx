@@ -6,6 +6,7 @@ import PhotonBeams from './PhotonBeams.jsx';
 import { formatFrequency, formatEnergy, formatWavelength } from "./utils/FormatValues";
 import {tickMarkEnergyValues, tickMarkFrequencyValues, tickMarkWavelengthValues} from "./utils/TickMarksData";
 import Slider from "./Slider";
+import EnergyLevelDiagram from "./EnergyLevelDiagram";
 
 const WIDTH = 950;
 const HEIGHT = 300;
@@ -83,6 +84,9 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                     <div className={"Diagram"}>
                         <p className={"TitleText"}>Energy Level Diagram</p>
+                        <div style={{border: "1px solid blue"}}>
+                            <EnergyLevelDiagram />
+                        </div>
                     </div>
                 </div>
 
@@ -169,6 +173,9 @@ export default class HydrogenAtomSimulator extends React.Component {
 
     changePauseDeExcitation() {
         this.setState({ automaticDeExcitation: !this.state.automaticDeExcitation});
+        // The reason why it looks reversed is because when this function is called,
+        // the setState is changing to !this.state.automaticDeExcitation, so we need to incorporate the new
+        // excitation into the conditional.
         if (this.state.automaticDeExcitation) {
             clearInterval(this.timer.id);
             this.timer.started = false;
@@ -254,7 +261,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         let newEnergyLevel = totalEnergy >= 0 ? 7 : this.state.currentEnergyLevel;
         let delta = 0.01;
         this.energyLevelValues.forEach((element, index) => {
-            console.log(`total ${totalEnergy} element ${element} the difference: ${totalEnergy - element}`);
             if (totalEnergy >= (element - delta) && totalEnergy <= (element + delta)) {
                 newEnergyLevel = index + 1;
             }

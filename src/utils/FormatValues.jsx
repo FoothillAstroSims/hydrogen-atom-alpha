@@ -23,7 +23,7 @@ const formatWavelength = (wavelength) => {
 }
 
 const formatEnergy = (energy) => {
-    let eV = Number.parseFloat(energy).toFixed(1);
+    let eV = Number.parseFloat(energy).toFixed(2);
     if (energy < 1) {
         eV = Number.parseFloat(energy).toFixed(2);
     }

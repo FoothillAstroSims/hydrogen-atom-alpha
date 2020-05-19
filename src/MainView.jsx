@@ -30,12 +30,6 @@ export default class MainView extends React.Component {
         this.orbitalRadii.forEach(element => { element.stroke = "grey" });
         // Setting the first energy level stroke to red to indicate that's our current level
         this.orbitalRadii[1].stroke = "red";
-
-        this.initialState = {
-            deExciting: false,
-        }
-
-        this.state = this.initialState;
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
