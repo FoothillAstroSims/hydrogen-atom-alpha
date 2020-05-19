@@ -85,7 +85,9 @@ export default class HydrogenAtomSimulator extends React.Component {
                     <div className={"Diagram"}>
                         <p className={"TitleText"}>Energy Level Diagram</p>
                         <div style={{border: "1px solid blue"}}>
-                            <EnergyLevelDiagram />
+                            <EnergyLevelDiagram
+                                currentEnergyLevel={this.state.currentEnergyLevel}
+                            />
                         </div>
                     </div>
                 </div>
