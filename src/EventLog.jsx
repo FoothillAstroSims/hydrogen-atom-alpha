@@ -24,7 +24,7 @@ const renderEventEntries = () => {
         if (data.emitted) leftHandText = "deexcitation";
         if (data.absorbed) leftHandText = "excitation";
 
-        let rightHandText = `${data.photonEnergy} eV photon`;
+        let rightHandText = `${data.photonEnergy.toFixed(2)} eV photon`;
         const leftTextProps = {
             x: leftTextMargin,
             y: pixelHeight,
