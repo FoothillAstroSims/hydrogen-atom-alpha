@@ -12,6 +12,39 @@ const convertToPixel = (energyLevel) => {
     return ((maxHeight - minHeight) * ((-energyLevel - minEnergyLevel) / (maxEnergyLevel - minEnergyLevel))) + minHeight;
 }
 
+const renderEventEntries = () => {
+    return (data, index) => {
+
+        const pixelMargin = 50;
+        let leftTextMargin = 20;
+        let rightTextMargin = 150;
+        let pixelHeight = (index + 1) * pixelMargin;
+
+        let leftHandText = "";
+        if (data.emitted) leftHandText = "deexcitation";
+        if (data.absorbed) leftHandText = "excitation";
+
+        let rightHandText = `${data.photonEnergy} eV photon`;
+        const leftTextProps = {
+            x: leftTextMargin,
+            y: pixelHeight,
+            id: "eLevelText",
+        }
+
+        const rightTextProps = {
+            x: rightTextMargin,
+            y: pixelHeight,
+            id: "eLevelText",
+        }
+
+        return (<g key={index}>
+            {/*<text x={0} y={pixelHeight} id={"eLevelText"} key={index} >{leftHandText}</text>*/}
+            <text {...leftTextProps} >{leftHandText}</text>
+            <text {...rightTextProps} >{rightHandText}</text>
+        </g>);
+    }
+}
+
 export default class EnergyLevelDiagram extends React.Component {
     constructor(props) {
         super(props);
@@ -24,13 +57,14 @@ export default class EnergyLevelDiagram extends React.Component {
     render() {
 
         return (
-            // <div style={{border: "1px solid green"}}>
-                <svg width={WIDTH} height={HEIGHT + 100}>
-                    <circle cx={0} cy={HEIGHT} r={50} fill={"green"}/>
-                    <circle cx={0} cy={HEIGHT + 100} r={50} fill={"red"}/>
+            <svg width={WIDTH} height={HEIGHT}>
+                <circle cx={0} cy={HEIGHT} r={50} fill={"green"}/>
+                <circle cx={0} cy={HEIGHT + 100} r={50} fill={"red"}/>
 
-                </svg>
-            // </div>
+                <g>{ this.props.eventLog.map(renderEventEntries()) }</g>
+
+                {/*<text x={0} y={50} id={"eLevelText"} key={50} >{"hello bithces"}</text>*/}
+            </svg>
         );
     }
 }

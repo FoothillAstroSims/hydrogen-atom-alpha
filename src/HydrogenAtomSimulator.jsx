@@ -168,6 +168,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                     <div className={"EventLog"}>
                         <p className={"TitleText"}>Event Log</p>
                         <EventLog
+                            eventLog={this.state.eventLog}
                         />
 
                     </div>
@@ -175,6 +176,10 @@ export default class HydrogenAtomSimulator extends React.Component {
 
             </React.Fragment>
         );
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log(`Event log: ${JSON.stringify(this.state.eventLog)}`);
     }
 
     changePauseDeExcitation() {
@@ -208,9 +213,26 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonS = this.state.photon;
         photonS.emitted = true;
         let newEnergyLevel = Math.floor(Math.random() * (this.state.currentEnergyLevel - 1)) + 1;
+        let photonEnergy = this.energyLevelValues[this.state.currentEnergyLevel - 1]
+            - this.energyLevelValues[newEnergyLevel - 1];
+
+        let newEvent = {
+            previousEnergyLevel: this.state.currentEnergyLevel,
+            newEnergyLevel: newEnergyLevel,
+            photonEnergy: photonEnergy,
+            emitted: true,
+            absorbed: false,
+        };
+
+        if (!(newEnergyLevel === this.state.currentEnergyLevel)) {
+            console.log(`deexcitaion function is being run`);
+            this.state.eventLog.push(newEvent);
+        }
+
         this.setState({
             photon: photonS,
             currentEnergyLevel: newEnergyLevel,
+            eventLog: this.state.eventLog,
         });
 
         this.timer.started = false;
@@ -275,9 +297,22 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonState = this.state.photon;
         photonState.fired = true;
         photonState.passThrough = newEnergyLevel === this.state.currentEnergyLevel;
+
+        let newEvent = {
+            previousEnergyLevel: this.state.currentEnergyLevel,
+            newEnergyLevel: newEnergyLevel,
+            photonEnergy: photonEnergy,
+            emitted: false,
+            absorbed: !photonState.passThrough,
+        };
+
+        console.log(`firephoton function is running`);
+        this.state.eventLog.push(newEvent);
+
         this.setState({
             photon: photonState,
-            currentEnergyLevel: newEnergyLevel
+            currentEnergyLevel: newEnergyLevel,
+            eventLog: this.state.eventLog
         });
     }
 
