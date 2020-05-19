@@ -84,8 +84,10 @@ body {
 
 .EventLog {
     flex-grow: 1;
+    height: 400px;
     margin-left: 10px;
     border: 1px solid sienna;
+    overflow: scroll;
 }
 
 .FirePhotonButton {
@@ -160,4 +162,9 @@ body {
 #HydrogenAtomText {
     font: bold 20px sans-serif;
     fill: white;
+}
+
+#eLevelText {
+    font: 14px serif;
+    fill: darkturquoise;
 }

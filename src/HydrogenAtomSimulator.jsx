@@ -3,10 +3,11 @@ import NavigationBar from './NavigationBar.jsx';
 import MainView from './MainView.jsx';
 import Spectrum from './Spectrum.jsx';
 import PhotonBeams from './PhotonBeams.jsx';
-import { formatFrequency, formatEnergy, formatWavelength } from "./utils/FormatValues";
+import {formatEnergy, formatFrequency, formatWavelength} from "./utils/FormatValues";
 import {tickMarkEnergyValues, tickMarkFrequencyValues, tickMarkWavelengthValues} from "./utils/TickMarksData";
 import Slider from "./Slider";
 import EnergyLevelDiagram from "./EnergyLevelDiagram";
+import EventLog from "./EventLog";
 
 const WIDTH = 950;
 const HEIGHT = 300;
@@ -84,7 +85,7 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                     <div className={"Diagram"}>
                         <p className={"TitleText"}>Energy Level Diagram</p>
-                        <div style={{border: "1px solid blue"}}>
+                        <div>
                             <EnergyLevelDiagram
                                 currentEnergyLevel={this.state.currentEnergyLevel}
                             />
@@ -166,6 +167,9 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                     <div className={"EventLog"}>
                         <p className={"TitleText"}>Event Log</p>
+                        <EventLog
+                        />
+
                     </div>
                 </div>
 

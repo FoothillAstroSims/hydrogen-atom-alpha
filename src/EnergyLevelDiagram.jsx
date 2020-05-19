@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import MainView from "./MainView";
 
 const WIDTH = 230;
 const HEIGHT = 230;
@@ -17,12 +15,6 @@ const convertToPixel = (energyLevel) => {
 export default class EnergyLevelDiagram extends React.Component {
     constructor(props) {
         super(props);
-
-        // this.initialState = {
-        //     deExciting: false,
-        // }
-        //
-        // this.state = this.initialState;
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
@@ -41,12 +33,12 @@ export default class EnergyLevelDiagram extends React.Component {
         const e5 = convertToPixel(energyLevelValues[4]);
         const e6 = convertToPixel(energyLevelValues[5]);
 
-        const e1Color = this.props.currentEnergyLevel === 1 ? "purple" : "grey";
-        const e2Color = this.props.currentEnergyLevel === 2 ? "purple" : "grey";
-        const e3Color = this.props.currentEnergyLevel === 3 ? "purple" : "grey";
-        const e4Color = this.props.currentEnergyLevel === 4 ? "purple" : "grey";
-        const e5Color = this.props.currentEnergyLevel === 5 ? "purple" : "grey";
-        const e6Color = this.props.currentEnergyLevel === 6 ? "purple" : "grey";
+        const e1Color = this.props.currentEnergyLevel === 1 ? "deeppink" : "grey";
+        const e2Color = this.props.currentEnergyLevel === 2 ? "deeppink" : "grey";
+        const e3Color = this.props.currentEnergyLevel === 3 ? "deeppink" : "grey";
+        const e4Color = this.props.currentEnergyLevel === 4 ? "deeppink" : "grey";
+        const e5Color = this.props.currentEnergyLevel === 5 ? "deeppink" : "grey";
+        const e6Color = this.props.currentEnergyLevel === 6 ? "deeppink" : "grey";
 
         const leftX = 85;
         const rightX = 145;
@@ -57,7 +49,7 @@ export default class EnergyLevelDiagram extends React.Component {
         const xEnergyLevelValue = leftX + 75;
 
         const energyLevel = `level ${this.props.currentEnergyLevel}`;
-        const energyValue = energyLevelValues[this.props.currentEnergyLevel - 1];
+        const energyValue = `${energyLevelValues[this.props.currentEnergyLevel - 1]} eV`;
 
         return (
             <svg width={WIDTH} height={HEIGHT}>
@@ -81,8 +73,8 @@ export default class EnergyLevelDiagram extends React.Component {
                 {/*Energy Level 6*/}
                 <line x1={leftX} y1={e6} x2={rightX} y2={e6} strokeWidth={1} stroke={e6Color}/>
 
-                <text x={xEnergyLevelText} y={heightOfText} stroke={"red"}>{energyLevel}</text>
-                <text x={xEnergyLevelValue} y={heightOfText} stroke={"red"}>{energyValue}</text>
+                <text x={xEnergyLevelText} y={heightOfText} id={"eLevelText"}>{energyLevel}</text>
+                <text x={xEnergyLevelValue} y={heightOfText} id={"eLevelText"}>{energyValue}</text>
 
             </svg>
         );
