@@ -20,9 +20,16 @@ const renderEventEntries = () => {
         let rightTextMargin = 150;
         let pixelHeight = (index + 1) * pixelMargin;
 
+        let photonReaction = "not absorbed";
         let leftHandText = "";
-        if (data.emitted) leftHandText = "deexcitation";
-        if (data.absorbed) leftHandText = "excitation";
+        if (data.emitted) {
+            leftHandText = "deexcitation";
+            photonReaction = "emitted";
+        }
+        if (data.absorbed) {
+            leftHandText = "excitation";
+            photonReaction = "absorbed";
+        }
 
         let rightHandText = `${data.photonEnergy.toFixed(2)} eV photon`;
         const leftTextProps = {
@@ -37,10 +44,17 @@ const renderEventEntries = () => {
             id: "eLevelText",
         }
 
+        const rightBottomTextProps = {
+            x: rightTextMargin,
+            y: pixelHeight + 12.5,
+            id: "eLevelText",
+        }
+
         return (<g key={index}>
             {/*<text x={0} y={pixelHeight} id={"eLevelText"} key={index} >{leftHandText}</text>*/}
             <text {...leftTextProps} >{leftHandText}</text>
             <text {...rightTextProps} >{rightHandText}</text>
+            <text {...rightBottomTextProps} >{photonReaction}</text>
         </g>);
     }
 }
