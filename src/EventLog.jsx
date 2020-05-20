@@ -67,7 +67,8 @@ const renderEventEntries = () => {
             };
         }
 
-        let rightHandText = `${data.photonEnergy.toFixed(2)} eV photon`;
+        let rightHandText = "";
+        if (!Number.isNaN(data.photonEnergy)) rightHandText = `${data.photonEnergy.toFixed(2)} eV photon`;
 
         const leftTextProps = {
             x: leftTextMargin,
@@ -87,6 +88,10 @@ const renderEventEntries = () => {
             id: "eLevelText",
         }
 
+        let leftEnergyLevel = Math.min(data.previousEnergyLevel, data.newEnergyLevel);
+        let rightEnergyLevel = Math.max(data.previousEnergyLevel, data.newEnergyLevel);
+
+        if (rightEnergyLevel === 7) rightEnergyLevel = "";
 
         return (<g key={index}>
             <g stroke={"grey"} strokeWidth={1} transform={`translate(0, ${pixelHeight - 25})`}>
@@ -96,12 +101,12 @@ const renderEventEntries = () => {
             {/*<g stroke="green" strokeWidth="2">*/}
             {/*</g>*/}
 
-            <text {...leftTextProps} >{leftHandText}</text>
+            <text {...leftTextProps} >{data.electronEvent}</text>
             <text {...rightTextProps} >{rightHandText}</text>
-            <text {...rightBottomTextProps} >{photonReaction}</text>
+            <text {...rightBottomTextProps} >{data.photonEvent}</text>
 
-            <text {...previousEnergyText} >{data.previousEnergyLevel}</text>
-            <text {...newEnergyText} >{data.newEnergyLevel}</text>
+            <text {...previousEnergyText} >{leftEnergyLevel}</text>
+            <text {...newEnergyText} >{rightEnergyLevel}</text>
 
             <g {...arrowG} >
                 <path {...arrowPath} />

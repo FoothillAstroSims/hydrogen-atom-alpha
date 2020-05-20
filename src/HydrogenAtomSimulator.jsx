@@ -184,7 +184,12 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log(`Event log: ${JSON.stringify(this.state.eventLog)}`);
+        // Uncomment if Geoff wants to clear event log on drag
+
+        // if (prevState !== this.state && this.state.electronIsBeingDragged) {
+        //     let emptyArray = [];
+        //     this.setState({ eventLog: emptyArray });
+        // }
     }
 
     changePauseDeExcitation() {
@@ -224,10 +229,15 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonWavelength = ((PLANCK_CONSTANT * LIGHT_SPEED) / photonEnergy) / COULOMB_CHARGE;
         let photonColorRGB = getWavelengthRGB(photonWavelength * 1e9);
 
+        let photonEvent = this.state.currentEnergyLevel === 7 ? "" : "emitted";
+        let electronEvent = this.state.currentEnergyLevel === 7 ? "recombination" : "deexcitation";
+
         let newEvent = {
             previousEnergyLevel: this.state.currentEnergyLevel,
             newEnergyLevel: newEnergyLevel,
             photonEnergy: photonEnergy,
+            photonEvent: photonEvent,
+            electronEvent: electronEvent,
             emitted: true,
             color: photonColorRGB,
             absorbed: false,
@@ -288,9 +298,7 @@ export default class HydrogenAtomSimulator extends React.Component {
         clearInterval(this.timer.id);
         this.timer.started = false;
 
-        // let baseEnergy = -13.598;
         let photonEnergy = this.state.photon.energyValue;
-        // let electronEnergy = baseEnergy / Math.pow(this.state.currentEnergyLevel, 2);
         let electronEnergy = this.energyLevelValues[this.state.currentEnergyLevel - 1];
         let totalEnergy = Number.parseFloat((photonEnergy + electronEnergy).toFixed(3));
 
@@ -306,16 +314,21 @@ export default class HydrogenAtomSimulator extends React.Component {
         photonState.fired = true;
         photonState.passThrough = newEnergyLevel === this.state.currentEnergyLevel;
 
+        let photonEvent = photonState.passThrough ? "not absorbed" : "absorbed";
+        let electronEvent = photonState.passThrough ? "" : "excitation";
+        if (newEnergyLevel === 7) electronEvent = "ionization";
+
         let newEvent = {
             previousEnergyLevel: this.state.currentEnergyLevel,
             newEnergyLevel: newEnergyLevel,
             photonEnergy: photonEnergy,
+            photonEvent: photonEvent,
+            electronEvent: electronEvent,
             color: photonState.color,
             emitted: false,
             absorbed: !photonState.passThrough,
         };
 
-        console.log(`firephoton function is running`);
         this.state.eventLog.push(newEvent);
 
         this.setState({
