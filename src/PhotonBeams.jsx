@@ -23,6 +23,9 @@ export default class PhotonBeams extends React.Component {
     componentDidMount() {
         this.canvas = this.canvasRef.current;
         this.ctx = this.canvas.getContext("2d");
+        this.ctx.save();
+        // this.ctx.rotate(3 * Math.PI / 4);
+        // this.ctx.translate(0, -300);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -56,11 +59,14 @@ export default class PhotonBeams extends React.Component {
         let incrementValue = 1;
 
         while (x < x2) {
+            let prevX = x - incrementValue;
+            let prevY = HEIGHT / 2 + amplitude * Math.sin((x - incrementValue) / frequency);
+
             y = HEIGHT/2 + amplitude * Math.sin((x)/frequency);
             this.ctx.beginPath();
             this.ctx.lineWidth = 2;
             this.ctx.strokeStyle = rgb.substring(0, rgb.length - 1) + `,${transparency})`;
-            this.ctx.moveTo(x-1, HEIGHT / 2 + amplitude * Math.sin((x-incrementValue) / frequency));
+            this.ctx.moveTo(prevX, prevY);
             this.ctx.lineTo(x, y);
 
             this.ctx.stroke();
@@ -77,7 +83,7 @@ export default class PhotonBeams extends React.Component {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
         let amplitude = 10;
-        let frequency = 1;
+        let frequency = 10;
         let wavelength = 200;
         this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
 
