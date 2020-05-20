@@ -8,9 +8,14 @@ import {tickMarkEnergyValues, tickMarkFrequencyValues, tickMarkWavelengthValues}
 import Slider from "./Slider";
 import EnergyLevelDiagram from "./EnergyLevelDiagram";
 import EventLog from "./EventLog";
+import {getWavelengthHex, getWavelengthRGB} from "./utils/WavelengthToHex";
 
 const WIDTH = 950;
 const HEIGHT = 300;
+
+const PLANCK_CONSTANT = 6.62607004e-34;
+const COULOMB_CHARGE = 1.602176634e-19;
+const LIGHT_SPEED = 299792458;
 
 export default class HydrogenAtomSimulator extends React.Component {
     constructor(props) {
@@ -216,11 +221,15 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonEnergy = this.energyLevelValues[this.state.currentEnergyLevel - 1]
             - this.energyLevelValues[newEnergyLevel - 1];
 
+        let photonWavelength = ((PLANCK_CONSTANT * LIGHT_SPEED) / photonEnergy) / COULOMB_CHARGE;
+        let photonColorRGB = getWavelengthRGB(photonWavelength * 1e9);
+
         let newEvent = {
             previousEnergyLevel: this.state.currentEnergyLevel,
             newEnergyLevel: newEnergyLevel,
             photonEnergy: photonEnergy,
             emitted: true,
+            color: photonColorRGB,
             absorbed: false,
         };
 
@@ -301,6 +310,7 @@ export default class HydrogenAtomSimulator extends React.Component {
             previousEnergyLevel: this.state.currentEnergyLevel,
             newEnergyLevel: newEnergyLevel,
             photonEnergy: photonEnergy,
+            color: photonState.color,
             emitted: false,
             absorbed: !photonState.passThrough,
         };
