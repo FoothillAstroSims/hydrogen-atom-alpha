@@ -27,6 +27,7 @@ export default class HydrogenAtomSimulator extends React.Component {
             electronIsBeingDragged: false,
             moveElectron: false,
             automaticDeExcitation: true,
+            deexcitationEvent: false,
             photon: {
                 fired: false,
                 emitted: false,
@@ -80,10 +81,12 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <div className={"BackgroundCanvas"}>
                             <PhotonBeams
                                 photon={this.state.photon}
+                                deexcitation={this.state.deexcitationEvent}
                                 currentEnergyLevel={this.state.currentEnergyLevel}
                                 stopPhotonAnimation={this.stopPhotonAnimation.bind(this)}
                                 startDeExcitation={this.startDeExcitation.bind(this)}
                                 changeElectronState={this.changeElectronState.bind(this)}
+                                changeDeExcitationState={this.changeDeExcitationState.bind(this)}
                             />
                         </div>
                     </div>
@@ -251,12 +254,17 @@ export default class HydrogenAtomSimulator extends React.Component {
             photon: photonS,
             currentEnergyLevel: newEnergyLevel,
             eventLog: this.state.eventLog,
+            deexcitationEvent: true,
         });
 
         this.timer.started = false;
         clearInterval(this.timer.id);
         this.stopPhotonEmission();
         if (newEnergyLevel !== 1) this.timer.id = setTimeout(() => this.deExcitation(), 3000);
+    }
+
+    changeDeExcitationState() {
+        this.setState({ deexcitationEvent: false });
     }
 
     updateEnergyLevel(newEnergyLevel, beingDragged) {

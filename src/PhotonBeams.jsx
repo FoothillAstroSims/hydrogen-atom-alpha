@@ -15,7 +15,8 @@ export default class PhotonBeams extends React.Component {
         this.orbitalDistances = [40, 110, 250, 420, 620, 880, 880];
         this.energyLevel = 1;
 
-        this.draw = this.draw.bind(this);
+        this.animatePhotonFire = this.animatePhotonFire.bind(this);
+        this.animatePhotonEmission = this.animatePhotonEmission.bind(this);
         this.startAnimation = this.startAnimation.bind(this);
         this.stopAnimation = this.stopAnimation.bind(this);
     }
@@ -23,9 +24,14 @@ export default class PhotonBeams extends React.Component {
     componentDidMount() {
         this.canvas = this.canvasRef.current;
         this.ctx = this.canvas.getContext("2d");
-        this.ctx.save();
+
         // this.ctx.rotate(3 * Math.PI / 4);
-        // this.ctx.translate(0, -300);
+        // this.ctx.translate(0, -200);
+        //
+        // this.makeCircle();
+
+        // this.ctx.restore();
+        // this.ctx.save();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -34,16 +40,39 @@ export default class PhotonBeams extends React.Component {
         if (this.props.photon.fired && !this.isPlaying) {
             this.startAnimation();
             this.isPlaying = true;
+        } else if (prevProps.deExcitation !== this.props.deexcitation && this.props.deexcitation) {
+            // console.log(`i should only be running ONCE`);
+            this.startAnimation(prevProps);
         } else {
             // this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
             this.isPlaying = false;
             this.stopAnimation();
         }
-
     }
 
-    startAnimation() {
-        this.raf = requestAnimationFrame(this.draw.bind(this));
+    startAnimation(prevProps) {
+        // this.makeCircle();
+
+        if (this.props.photon.fired) {
+            this.initX = WIDTH;
+            this.raf = requestAnimationFrame(this.animatePhotonFire.bind(this));
+        } else if (this.props.deexcitation) {
+            this.initX = 0; // change
+            if (prevProps.currentEnergyLevel !== this.props.currentEnergyLevel) {
+                // console.log(`i should be running synchronously `);
+                this.ctx.rotate(3 * Math.PI / 4);
+                this.ctx.translate(0, -500);
+                this.raf = requestAnimationFrame(this.animatePhotonEmission.bind(this));
+            }
+        }
+    }
+
+    makeCircle() {
+        this.ctx.beginPath();
+        this.ctx.arc(20, 0, 30, 0, 2 * Math.PI, false);
+        this.ctx.fillStyle = 'green';
+        this.ctx.fill();
+        this.ctx.stroke();
     }
 
     stopAnimation() {
@@ -79,7 +108,7 @@ export default class PhotonBeams extends React.Component {
         this.ctx.stroke();
     }
 
-    draw() {
+    animatePhotonFire() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
         let amplitude = 10;
@@ -90,7 +119,7 @@ export default class PhotonBeams extends React.Component {
         let end = -wavelength;
         this.initX -= this.speed;
 
-        this.raf = requestAnimationFrame(this.draw);
+        this.raf = requestAnimationFrame(this.animatePhotonFire);
         if (!this.props.photon.passThrough) {
             end = this.orbitalDistances[this.energyLevel - 1] - 20;
         }
@@ -102,6 +131,32 @@ export default class PhotonBeams extends React.Component {
             this.props.stopPhotonAnimation();
             this.props.changeElectronState(true);
             this.props.startDeExcitation();
+        }
+    }
+
+    animatePhotonEmission() {
+        // console.log(`whats pop `);
+        this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+        let amplitude = 10;
+        let frequency = 10;
+        let wavelength = 200;
+
+        this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
+
+        let end = -wavelength;
+        this.initX -= this.speed;
+
+        this.raf = requestAnimationFrame(this.animatePhotonEmission);
+
+        if (this.initX <= end) {
+            this.ctx.translate(0, 500);
+            this.ctx.rotate(-3 * Math.PI / 4);
+
+            this.initX = WIDTH;
+            this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            this.stopAnimation();
+            this.props.changeDeExcitationState();
         }
     }
 
