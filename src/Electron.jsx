@@ -81,7 +81,6 @@ export default class Electron extends React.Component {
 
         // select(node).transition().attr('transform', `translate(${x}, ${y})`).duration(500).on("end", this.sendToRandomLoc.bind(this));
         select(node).transition().attr('transform', `translate(${x}, ${y})`).duration(500);
-        console.log(`x: ${x} and y ${y}`);
 
         this.props.changeElectronState(false);
     }

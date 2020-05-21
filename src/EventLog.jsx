@@ -44,13 +44,13 @@ const renderEventEntries = () => {
             previousEnergyText = {
                 x: ((leftTextMargin + rightTextMargin) / 2) + 5,
                 y: pixelHeight + 12.5,
-                id: "eLevelText",
+                id: "previousEnergyText",
             }
 
             newEnergyText = {
                 x: ((leftTextMargin + rightTextMargin) / 2) + 60,
                 y: pixelHeight + 12.5,
-                id: "eLevelText",
+                id: "newEnergyText",
             }
 
             arrowG = {
@@ -62,7 +62,7 @@ const renderEventEntries = () => {
                 : "M0 0 L 40 0 M 0 0 L 7.5 3.5 M 0 0 L 7.5 -3.5";
 
             arrowPath = {
-                stroke: "aqua",
+                stroke: "white",
                 d: d
             };
         }
@@ -73,19 +73,19 @@ const renderEventEntries = () => {
         const leftTextProps = {
             x: leftTextMargin,
             y: pixelHeight,
-            id: "eLevelText",
+            id: "leftTextEventLog",
         }
 
         const rightTextProps = {
             x: rightTextMargin,
             y: pixelHeight - 5,
-            id: "eLevelText",
+            id: "rightTextEventLog",
         }
 
         const rightBottomTextProps = {
             x: rightTextMargin + 20,
             y: pixelHeight + 12.5,
-            id: "eLevelText",
+            id: "rightTextEventLog",
         }
 
         let leftEnergyLevel = Math.min(data.previousEnergyLevel, data.newEnergyLevel);

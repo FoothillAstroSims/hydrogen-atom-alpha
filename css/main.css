@@ -18,7 +18,7 @@ body {
     position: relative;
     width: 950px;
     height: 300px;
-    border: 1px solid sienna;
+    /*border: 1px solid sienna;*/
 }
 
 .BackgroundCanvas {
@@ -27,7 +27,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    border: 1px solid white;
+    /*border: 1px solid white;*/
     background-color: transparent;
     /*z-index: 10;*/
 }
@@ -38,7 +38,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    border: 1px solid blue;
+    border: 1px solid indianred;
     background-color: transparent;
     z-index: 10;
 }
@@ -46,7 +46,8 @@ body {
 .Diagram {
     flex-grow: 1;
     margin-left: 10px;
-    border: 1px solid sienna;
+    border: 1px solid lightseagreen;
+    /*fill: lightseagreen;*/
 }
 
 .BottomHalf {
@@ -79,15 +80,16 @@ body {
 .Controls {
     width: 900px;
     height: 400px;
-    border: 1px solid sienna;
+    border: 1px solid darkgoldenrod;
+    /*fill: darkslategray;*/
 }
 
 .EventLog {
     flex-grow: 1;
     height: 400px;
     margin-left: 10px;
-    border: 1px solid sienna;
-    /*overflow: scroll;*/
+    border: 1px solid lightpink;
+    /*fill: ;*/
 }
 
 .LogContainer {
@@ -95,7 +97,7 @@ body {
     margin-left: 16px;
     width: 250px;
     height: 300px;
-    border: 1px solid green;
+    border: 1px solid lightblue;
     overflow: scroll;
 }
 
@@ -194,3 +196,24 @@ body {
     margin-left: 110px;
     margin-top: 5px;
 }
+
+#previousEnergyText {
+    font: 14px serif;
+    fill: khaki;
+}
+
+#newEnergyText {
+    font: 14px serif;
+    fill: khaki;
+}
+
+#leftTextEventLog {
+    font: 14px serif;
+    fill: lightgreen;
+}
+
+#rightTextEventLog {
+    font: 14px serif;
+    fill: lightcoral;
+}
+
