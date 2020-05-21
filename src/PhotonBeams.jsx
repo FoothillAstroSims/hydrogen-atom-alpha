@@ -3,13 +3,51 @@ import React from 'react';
 const WIDTH = 950;
 const HEIGHT = 300;
 
+const MIN_X_TRANSLATION = -200;
+const MIN_Y_TRANSLATION = -310;
+
+const getTranslationMatrix = (prev, curr) => {
+    const energyToPixelMappings = [40, -10, -100, -220, -360, -550];
+    let prevEnergyPixel = energyToPixelMappings[prev - 1];
+    let currEnergyPixel = energyToPixelMappings[curr - 1];
+    return (prevEnergyPixel + currEnergyPixel) / 2;
+};
+
 export default class PhotonBeams extends React.Component {
     constructor(props) {
         super(props);
         this.canvasRef = React.createRef();
         this.initX = WIDTH;
-        this.speed = 10;
+        this.speed = 5;
         this.fadeIndex = 1;
+
+        // let prev = 5;
+        // let curr = 4;
+        // let avg = (prev + curr) / 2;
+        // let translate = getTranslationMatrix(avg);
+        //
+        // this.translateX = MIN_X_TRANSLATION - translate;
+        // this.translateY = MIN_Y_TRANSLATION - translate;
+        // console.log(`trans x ${this.translateX} and trans y ${this.translateY}`);
+
+        // this.translateX = -200;
+        // this.translateY = -310;
+
+        // 200, 310
+        // Minimum (-130, -310)
+        // Maximum (-630, -810)
+
+        // this.orbitalRadii = [{r: 20}, {r: 40}, {r: 110}, {r: 250}, {r: 420}, {r: 620}, {r: 880}];
+
+        // 6 -> -550
+        // 5 -> -360
+        // 4 -> -220
+        // 3 -> -100
+        // 2 -> -10
+        // 1 -> 40
+
+        this.translateX = -200;
+        this.translateY = -310;
 
         this.isPlaying = false;
         this.orbitalDistances = [40, 110, 250, 420, 620, 880, 880];
@@ -24,14 +62,6 @@ export default class PhotonBeams extends React.Component {
     componentDidMount() {
         this.canvas = this.canvasRef.current;
         this.ctx = this.canvas.getContext("2d");
-
-        // this.ctx.rotate(3 * Math.PI / 4);
-        // this.ctx.translate(0, -200);
-        //
-        // this.makeCircle();
-
-        // this.ctx.restore();
-        // this.ctx.save();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -57,11 +87,15 @@ export default class PhotonBeams extends React.Component {
             this.initX = WIDTH;
             this.raf = requestAnimationFrame(this.animatePhotonFire.bind(this));
         } else if (this.props.deexcitation) {
-            this.initX = 0; // change
-            if (prevProps.currentEnergyLevel !== this.props.currentEnergyLevel) {
-                // console.log(`i should be running synchronously `);
+            if (prevProps.currentEnergyLevel !== this.props.currentEnergyLevel && prevProps.currentEnergyLevel !== 7) {
+                this.initX = 150;
+                let translation = getTranslationMatrix(prevProps.currentEnergyLevel, this.props.currentEnergyLevel);
+
+                this.translateX = MIN_X_TRANSLATION + translation;
+                this.translateY = MIN_Y_TRANSLATION + translation;
+
                 this.ctx.rotate(3 * Math.PI / 4);
-                this.ctx.translate(0, -500);
+                this.ctx.translate(this.translateX, this.translateY);
                 this.raf = requestAnimationFrame(this.animatePhotonEmission.bind(this));
             }
         }
@@ -69,7 +103,7 @@ export default class PhotonBeams extends React.Component {
 
     makeCircle() {
         this.ctx.beginPath();
-        this.ctx.arc(20, 0, 30, 0, 2 * Math.PI, false);
+        this.ctx.arc(0, 0, 30, 0, 2 * Math.PI, false);
         this.ctx.fillStyle = 'green';
         this.ctx.fill();
         this.ctx.stroke();
@@ -108,6 +142,31 @@ export default class PhotonBeams extends React.Component {
         this.ctx.stroke();
     }
 
+    animatePhotonEmission() {
+        this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+        let amplitude = 10;
+        let frequency = 10;
+        let wavelength = 100;
+
+        this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
+
+        let end = -wavelength;
+        this.initX -= this.speed;
+
+        this.raf = requestAnimationFrame(this.animatePhotonEmission);
+
+        if (this.initX <= -100) {
+            this.ctx.translate(-this.translateX, -this.translateY);
+            this.ctx.rotate(-3 * Math.PI / 4);
+
+            this.initX = WIDTH;
+            this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            this.stopAnimation();
+            this.props.changeDeExcitationState();
+        }
+    }
+
     animatePhotonFire() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
@@ -131,32 +190,6 @@ export default class PhotonBeams extends React.Component {
             this.props.stopPhotonAnimation();
             this.props.changeElectronState(true);
             this.props.startDeExcitation();
-        }
-    }
-
-    animatePhotonEmission() {
-        // console.log(`whats pop `);
-        this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
-
-        let amplitude = 10;
-        let frequency = 10;
-        let wavelength = 200;
-
-        this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
-
-        let end = -wavelength;
-        this.initX -= this.speed;
-
-        this.raf = requestAnimationFrame(this.animatePhotonEmission);
-
-        if (this.initX <= end) {
-            this.ctx.translate(0, 500);
-            this.ctx.rotate(-3 * Math.PI / 4);
-
-            this.initX = WIDTH;
-            this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
-            this.stopAnimation();
-            this.props.changeDeExcitationState();
         }
     }
 
