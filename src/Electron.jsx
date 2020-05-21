@@ -93,13 +93,27 @@ export default class Electron extends React.Component {
         let x = Math.random() * width;
         let y = Math.random() * height;
 
-        if (Math.random() > 0.5) {
-            x = Math.random() * xOffset + width + 100;
-            if (Math.random() > 0.5) x = -1 * Math.random() * xOffset - 100;
-        } else {
-            y = Math.random() * yOffset + height + 100;
-            if (Math.random() > 0.5) y = -1 * Math.random() * yOffset - 100;
+        if (Math.random() >= 0.75) {
+            x = width + 50;
+            y = Math.random() * height;
+        } else if (Math.random() >= 0.50) {
+            x = -50;
+            y = Math.random() * height;
+        } else if (Math.random() >= 0.25) {
+            x = Math.random() * width;
+            y = height + 50;
+        } else if (Math.random() >= 0.00) {
+            x = Math.random() * width;
+            y = -50;
         }
+
+        // if (Math.random() > 0.5) {
+        //     x = Math.random() * xOffset + width + 100;
+        //     if (Math.random() > 0.5) x = -1 * Math.random() * xOffset - 100;
+        // } else {
+        //     y = Math.random() * yOffset + height + 100;
+        //     if (Math.random() > 0.5) y = -1 * Math.random() * yOffset - 100;
+        // }
 
         return {
             xPos: x,
