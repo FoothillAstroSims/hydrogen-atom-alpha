@@ -267,7 +267,7 @@ export default class HydrogenAtomSimulator extends React.Component {
             photon: photonS,
             currentEnergyLevel: newEnergyLevel,
             eventLog: this.state.eventLog,
-            deexcitationEvent: true,
+            deexcitationEvent: this.state.currentEnergyLevel !== 7,
         });
 
         this.timer.started = false;
