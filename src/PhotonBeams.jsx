@@ -1,10 +1,18 @@
 import React from 'react';
+import {getWavelengthHex, getWavelengthRGB} from "./utils/WavelengthToHex";
+import { scaleLog, scalePow } from 'd3/dist/d3';
 
 const WIDTH = 950;
 const HEIGHT = 300;
 
 const MIN_X_TRANSLATION = -200;
 const MIN_Y_TRANSLATION = -310;
+
+const energyLevelValues = [-13.598, -3.400, -1.511, -0.850, -0.544, -0.378];
+
+const PLANCK_CONSTANT = 6.62607004e-34;
+const COULOMB_CHARGE = 1.602176634e-19;
+const LIGHT_SPEED = 299792458;
 
 const getTranslationMatrix = (prev, curr) => {
     const energyToPixelMappings = [40, -10, -100, -220, -360, -550];
@@ -13,41 +21,41 @@ const getTranslationMatrix = (prev, curr) => {
     return (prevEnergyPixel + currEnergyPixel) / 2;
 };
 
+const convertToPixelFrequency = (freq) => {
+    const scaledFreq = freq / 1e15;
+    // let pixelFreq = 100 - 99 * ((scaledFreq - 0.00725) / (3.6197));
+    // console.log(`pixel : ${pixelFreq} and normal ${scaledFreq}`);
+    // return pixelFreq;
+
+    // let logScale = scaleLog()
+    //     .domain([0.00725, 3.7])
+    //     .range([100, 1]);
+
+    // let powerScale = scalePow()
+    //     .exponent(0.00001)
+    //     .domain([0.00725, 3.7])
+    //     .range([100, 1]);
+
+    let logScale = scaleLog()
+        .domain([0.00725, 3.7])
+        .range([1, 99]);
+
+    // return powerScale(scaledFreq);
+    return 100 - logScale(scaledFreq);
+};
+
 export default class PhotonBeams extends React.Component {
     constructor(props) {
         super(props);
         this.canvasRef = React.createRef();
         this.initX = WIDTH;
-        this.speed = 5;
+        this.speed = 10;
         this.fadeIndex = 1;
-
-        // let prev = 5;
-        // let curr = 4;
-        // let avg = (prev + curr) / 2;
-        // let translate = getTranslationMatrix(avg);
-        //
-        // this.translateX = MIN_X_TRANSLATION - translate;
-        // this.translateY = MIN_Y_TRANSLATION - translate;
-        // console.log(`trans x ${this.translateX} and trans y ${this.translateY}`);
-
-        // this.translateX = -200;
-        // this.translateY = -310;
-
-        // 200, 310
-        // Minimum (-130, -310)
-        // Maximum (-630, -810)
-
-        // this.orbitalRadii = [{r: 20}, {r: 40}, {r: 110}, {r: 250}, {r: 420}, {r: 620}, {r: 880}];
-
-        // 6 -> -550
-        // 5 -> -360
-        // 4 -> -220
-        // 3 -> -100
-        // 2 -> -10
-        // 1 -> 40
 
         this.translateX = -200;
         this.translateY = -310;
+
+        this.emissionEnergy = 0;
 
         this.isPlaying = false;
         this.orbitalDistances = [40, 110, 250, 420, 620, 880, 880];
@@ -91,6 +99,9 @@ export default class PhotonBeams extends React.Component {
                 this.initX = 150;
                 let translation = getTranslationMatrix(prevProps.currentEnergyLevel, this.props.currentEnergyLevel);
 
+                this.emissionEnergy = energyLevelValues[prevProps.currentEnergyLevel - 1]
+                    - energyLevelValues[this.props.currentEnergyLevel - 1];
+
                 this.translateX = MIN_X_TRANSLATION + translation;
                 this.translateY = MIN_Y_TRANSLATION + translation;
 
@@ -99,14 +110,6 @@ export default class PhotonBeams extends React.Component {
                 this.raf = requestAnimationFrame(this.animatePhotonEmission.bind(this));
             }
         }
-    }
-
-    makeCircle() {
-        this.ctx.beginPath();
-        this.ctx.arc(0, 0, 30, 0, 2 * Math.PI, false);
-        this.ctx.fillStyle = 'green';
-        this.ctx.fill();
-        this.ctx.stroke();
     }
 
     stopAnimation() {
@@ -145,18 +148,22 @@ export default class PhotonBeams extends React.Component {
     animatePhotonEmission() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
+        let photonFrequency = (this.emissionEnergy / PLANCK_CONSTANT) * COULOMB_CHARGE;
+        let photonWavelength = ((PLANCK_CONSTANT * LIGHT_SPEED) / this.emissionEnergy) / COULOMB_CHARGE;
         let amplitude = 10;
-        let frequency = 10;
-        let wavelength = 100;
+        let frequency = convertToPixelFrequency(photonFrequency);
+        let photonColorRGB = getWavelengthRGB(photonWavelength * 1e9);
 
-        this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
+        let wavelength = 150;
 
-        let end = -wavelength;
-        this.initX -= this.speed;
+        this.plotSine(amplitude, frequency, wavelength, photonColorRGB);
+
+        let end = -100;
+        this.initX -= (this.speed - 5);
 
         this.raf = requestAnimationFrame(this.animatePhotonEmission);
 
-        if (this.initX <= -100) {
+        if (this.initX <= end) {
             this.ctx.translate(-this.translateX, -this.translateY);
             this.ctx.rotate(-3 * Math.PI / 4);
 
@@ -170,9 +177,14 @@ export default class PhotonBeams extends React.Component {
     animatePhotonFire() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
+        // let newEnergyValue = getSnappedOnEnergyValues(Number.parseFloat(e.target.value));
+        let photonFrequency = (this.props.photon.energyValue / PLANCK_CONSTANT) * COULOMB_CHARGE;
+        // let photonColorRGB = getWavelengthRGB(photonWavelength * 1e9);
+
         let amplitude = 10;
-        let frequency = 10;
-        let wavelength = 200;
+        // let frequency = 100;
+        let frequency = convertToPixelFrequency(photonFrequency);
+        let wavelength = 150;
         this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
 
         let end = -wavelength;
