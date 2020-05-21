@@ -87,6 +87,15 @@ body {
     height: 400px;
     margin-left: 10px;
     border: 1px solid sienna;
+    /*overflow: scroll;*/
+}
+
+.LogContainer {
+    /*height: 400px;*/
+    margin-left: 16px;
+    width: 250px;
+    height: 300px;
+    border: 1px solid green;
     overflow: scroll;
 }
 

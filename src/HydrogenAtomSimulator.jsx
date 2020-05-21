@@ -175,10 +175,11 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                     <div className={"EventLog"}>
                         <p className={"TitleText"}>Event Log</p>
-                        <EventLog
-                            eventLog={this.state.eventLog}
-                        />
-
+                        <div className={"LogContainer"}>
+                            <EventLog
+                                eventLog={this.state.eventLog}
+                            />
+                        </div>
                     </div>
                 </div>
 

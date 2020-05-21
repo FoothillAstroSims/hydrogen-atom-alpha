@@ -1,7 +1,7 @@
 import React from 'react';
 
-const WIDTH = 285;
-const HEIGHT = 330;
+const WIDTH = 250;
+const HEIGHT = 300;
 
 const convertToPixel = (energyLevel) => {
     const minHeight = 30;
@@ -16,8 +16,8 @@ const renderEventEntries = () => {
     return (data, index) => {
 
         const pixelMargin = 50;
-        let leftTextMargin = 20;
-        let rightTextMargin = 180;
+        let leftTextMargin = 10;
+        let rightTextMargin = 150;
         let pixelHeight = (index + 1) * pixelMargin;
 
         let photonReaction = "not absorbed";
@@ -42,7 +42,7 @@ const renderEventEntries = () => {
         let arrowRotation = data.emitted ? 0 : 90;
         if (data.absorbed || data.emitted) {
             previousEnergyText = {
-                x: ((leftTextMargin + rightTextMargin) / 2) - 5,
+                x: ((leftTextMargin + rightTextMargin) / 2) + 5,
                 y: pixelHeight + 12.5,
                 id: "eLevelText",
             }
@@ -54,7 +54,7 @@ const renderEventEntries = () => {
             }
 
             arrowG = {
-                transform: `translate(110, ${58 + index * 50})`
+                transform: `translate(95, ${58 + index * 50})`
             };
 
             // If absorbed then arrow points to right, otherwise it must have been emitted, so arrow points to left
@@ -95,7 +95,7 @@ const renderEventEntries = () => {
 
         return (<g key={index}>
             <g stroke={"grey"} strokeWidth={1} transform={`translate(0, ${pixelHeight - 25})`}>
-                <path strokeDasharray="2,2" d="M 10 0 L 275 0" />
+                <path strokeDasharray="2,2" d="M 10 0 L 240 0" />
             </g>
 
             {/*<g stroke="green" strokeWidth="2">*/}
