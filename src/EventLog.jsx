@@ -98,9 +98,6 @@ const renderEventEntries = () => {
                 <path strokeDasharray="2,2" d="M 10 0 L 240 0" />
             </g>
 
-            {/*<g stroke="green" strokeWidth="2">*/}
-            {/*</g>*/}
-
             <text {...leftTextProps} >{data.electronEvent}</text>
             <text {...rightTextProps} >{rightHandText}</text>
             <text {...rightBottomTextProps} >{data.photonEvent}</text>

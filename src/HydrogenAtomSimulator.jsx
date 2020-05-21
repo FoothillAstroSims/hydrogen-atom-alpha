@@ -180,6 +180,14 @@ export default class HydrogenAtomSimulator extends React.Component {
                                 eventLog={this.state.eventLog}
                             />
                         </div>
+
+                        <button type="box"
+                                className="clearLogButton"
+                                onClick={this.clearLog.bind(this)}
+                        >
+                            {"Clear Log"}
+                        </button>
+
                     </div>
                 </div>
 
@@ -194,6 +202,10 @@ export default class HydrogenAtomSimulator extends React.Component {
         //     let emptyArray = [];
         //     this.setState({ eventLog: emptyArray });
         // }
+    }
+
+    clearLog() {
+        this.setState({ eventLog: [] });
     }
 
     changePauseDeExcitation() {

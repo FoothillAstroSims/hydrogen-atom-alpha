@@ -187,3 +187,10 @@ body {
     font: 40px serif;
     fill: darkturquoise;
 }
+
+.clearLogButton {
+    background-color: royalblue;
+    /*position: relative;*/
+    margin-left: 110px;
+    margin-top: 5px;
+}
