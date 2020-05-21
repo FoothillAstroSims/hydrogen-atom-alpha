@@ -30,10 +30,22 @@ export default class MainView extends React.Component {
         this.orbitalRadii.forEach(element => { element.stroke = "grey" });
         // Setting the first energy level stroke to red to indicate that's our current level
         this.orbitalRadii[1].stroke = "red";
+
+        this.plusSign = "";
+        this.topText = "";
+        this.bottomText = "";
+
     }
 
     componentDidUpdate(prevProps, prevState, snapShot) {
         this.updateCurrentCurve();
+        this.updateVisibilityOfTexts();
+    }
+
+    updateVisibilityOfTexts () {
+        this.plusSign = this.props.currentEnergyLevel === 7 ? "+" : "";
+        this.topText = this.props.currentEnergyLevel === 7 ? "ATOM IS" : "";
+        this.bottomText = this.props.currentEnergyLevel === 7 ? "IONIZED" : "";
     }
 
     updateCurrentCurve() {
@@ -46,6 +58,7 @@ export default class MainView extends React.Component {
 
     render() {
         const center = HEIGHT / 2;
+
         return (
             <g>
                 {/*The following <g> tag will hold all the red orbital lines*/}
@@ -64,6 +77,10 @@ export default class MainView extends React.Component {
                     changeElectronState={this.props.changeElectronState}
                     electronIsBeingDragged={this.props.electronIsBeingDragged}
                 />
+
+                <text x={WIDTH - 52.5} y={30} id={"largePlusSign"}>{this.plusSign}</text>
+                <text x={WIDTH - 60} y={50} id={"ionizedText"}>{this.topText}</text>
+                <text x={WIDTH - 60} y={65} id={"ionizedText"}>{this.bottomText}</text>
             </g>
         );
     }
