@@ -79,8 +79,24 @@ export default class Electron extends React.Component {
             y = 0;
         }
 
+        // select(node).transition().attr('transform', `translate(${x}, ${y})`).duration(500).on("end", this.sendToRandomLoc.bind(this));
         select(node).transition().attr('transform', `translate(${x}, ${y})`).duration(500);
+        console.log(`x: ${x} and y ${y}`);
+
         this.props.changeElectronState(false);
+    }
+
+    sendToRandomLoc() {
+        console.log(`'hello its meee:: `);
+        if (this.props.currentEnergyLevel === 7) {
+            let node = this.ref.current;
+            let randomPosition = this.ionizeElectron();
+            let x = randomPosition.xPos;
+            let y = randomPosition.yPos;
+            console.log(` the other x: ${x} and y ${y}`);
+            select(node).attr('transform', `translate(${x}, ${y})`);
+        }
+
     }
 
     ionizeElectron() {
@@ -106,14 +122,6 @@ export default class Electron extends React.Component {
             x = Math.random() * width;
             y = -50;
         }
-
-        // if (Math.random() > 0.5) {
-        //     x = Math.random() * xOffset + width + 100;
-        //     if (Math.random() > 0.5) x = -1 * Math.random() * xOffset - 100;
-        // } else {
-        //     y = Math.random() * yOffset + height + 100;
-        //     if (Math.random() > 0.5) y = -1 * Math.random() * yOffset - 100;
-        // }
 
         return {
             xPos: x,

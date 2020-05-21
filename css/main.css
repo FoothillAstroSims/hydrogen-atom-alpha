@@ -180,12 +180,12 @@ body {
 
 #ionizedText {
     font: 10px serif;
-    fill: darkturquoise;
+    fill: lime;
 }
 
 #largePlusSign {
     font: 40px serif;
-    fill: darkturquoise;
+    fill: red;
 }
 
 .clearLogButton {

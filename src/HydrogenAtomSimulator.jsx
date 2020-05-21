@@ -313,6 +313,7 @@ export default class HydrogenAtomSimulator extends React.Component {
 
     firePhoton() {
         // If the photon has already been fired, you can't fire it again until it passes.
+        // if (this.state.photon.fired || this.state.deexcitationEvent) return;
         if (this.state.photon.fired) return;
 
         // possibly temporary
