@@ -3,15 +3,6 @@ import React from 'react';
 const WIDTH = 250;
 const HEIGHT = 300;
 
-const convertToPixel = (energyLevel) => {
-    const minHeight = 30;
-    const maxHeight = 220;
-    const minEnergyLevel = 0.4;
-    const maxEnergyLevel = 13.6;
-
-    return ((maxHeight - minHeight) * ((-energyLevel - minEnergyLevel) / (maxEnergyLevel - minEnergyLevel))) + minHeight;
-}
-
 const renderEventEntries = () => {
     return (data, index) => {
 
@@ -127,7 +118,8 @@ export default class EnergyLevelDiagram extends React.Component {
 
     render() {
 
-        const adjustedHeight = HEIGHT + this.props.eventLog.length * 50;
+        let adjustedHeight = HEIGHT;
+        if (this.props.eventLog.length > 5) adjustedHeight += (this.props.eventLog.length - 5) * 50;
 
         return (
             <svg width={WIDTH} height={adjustedHeight}>

@@ -29,7 +29,7 @@ export default class MainView extends React.Component {
         // Setting the stroke property of the curved lines to grey
         this.orbitalRadii.forEach(element => { element.stroke = "grey" });
         // Setting the first energy level stroke to red to indicate that's our current level
-        this.orbitalRadii[1].stroke = "red";
+        this.orbitalRadii[1].stroke = "white";
 
         this.plusSign = "";
         this.topText = "";
@@ -53,7 +53,7 @@ export default class MainView extends React.Component {
             this.orbitalRadii[i].stroke = "grey";
         }
 
-        if (this.props.currentEnergyLevel < 7) this.orbitalRadii[this.props.currentEnergyLevel].stroke = "red";
+        if (this.props.currentEnergyLevel < 7) this.orbitalRadii[this.props.currentEnergyLevel].stroke = "white";
     }
 
     render() {
