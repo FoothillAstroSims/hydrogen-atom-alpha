@@ -53,12 +53,14 @@ export default class Spectrum extends React.Component {
         const bottomY = (HEIGHT / 2) - 5;
 
         return (
-            <svg width={WIDTH} height={HEIGHT}>
-                <g>{ this.props.tickMarksData.map( renderTickMarks()) }</g>
-                <g>{ this.props.tickMarksData.map( renderTickTexts()) }</g>
-                <line x1={linePosition} x2={linePosition} y1={topY} y2={bottomY} stroke={"red"} strokeWidth={2}/>
-                <text className={"spectrumTexts"} x={linePosition - shiftLeft} y={16} fontSize={"15px"} >{this.props.value}</text>
-            </svg>
+            <div style={{position: "absolute"}}>
+                <svg width={WIDTH} height={HEIGHT}>
+                    <g>{ this.props.tickMarksData.map( renderTickMarks()) }</g>
+                    <g>{ this.props.tickMarksData.map( renderTickTexts()) }</g>
+                    <line x1={linePosition} x2={linePosition} y1={topY} y2={bottomY} stroke={"red"} strokeWidth={2}/>
+                    <text className={"spectrumTexts"} x={linePosition - shiftLeft} y={16} fontSize={"15px"} >{this.props.value}</text>
+                </svg>
+            </div>
         );
     }
 }

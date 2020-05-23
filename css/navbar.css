@@ -1,6 +1,7 @@
 .NavigationBar {
     border: 1px solid rgb(60, 61, 64);
     padding: 0.5em;
+    position: relative;
 }
 
 #title {
