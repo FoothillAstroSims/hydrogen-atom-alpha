@@ -40,7 +40,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         };
 
         this.state = this.initialState;
-        // this.energyLevelValues = [-13.6, -3.4, -1.5, -0.9, -0.5, -0.4];
         this.energyLevelValues = [-13.598, -3.400, -1.511, -0.850, -0.544, -0.378];
 
         this.timer = {
@@ -138,13 +137,11 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <p id={"ultravioletLabel"}>Ultraviolet</p>
                         </div>
 
-                        {/*<div className={"SliderContainer"}>*/}
                             <Slider
                                 photon={this.state.photon}
                                 changePhoton={this.changePhoton.bind(this)}
                                 firePhoton={this.firePhoton.bind(this)}
                             />
-                        {/*</div>*/}
 
                         <div className={"FirePhotonButton"}>
                             <button type="box"

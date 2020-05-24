@@ -10,7 +10,7 @@ export default class Slider extends React.Component {
     constructor(props) {
         super(props);
         this.ref = React.createRef();
-        this.bg = `linear-gradient(90deg, #00ffc0 16.499665998663996%, #d7dcdf 16.599665998663998%)`;
+        this.bg = `linear-gradient(90deg, #00ffc0 16.5%, #d7dcdf 16.6%)`;
         this.criticalPhotonEVs = [0.66, 0.97, 1.13, 1.89, 2.55, 2.86, 3.02, 10.2, 12.09, 12.75, 13.06, 13.22];
     }
 
