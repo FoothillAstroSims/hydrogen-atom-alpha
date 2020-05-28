@@ -239,7 +239,9 @@ export default class HydrogenAtomSimulator extends React.Component {
     }
 
     manuallyEmit() {
-        this.deExcitation(true);
+        if (!this.state.automaticDeExcitation) {
+            this.deExcitation(true);
+        }
     }
 
     deExcitation(manual) {
