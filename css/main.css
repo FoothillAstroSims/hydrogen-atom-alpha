@@ -132,28 +132,28 @@ body {
 
 #frequencyLabel {
     position: relative;
-    /*float: right;*/
+    float: right;
     bottom: 357px;
     left: 10px;
 }
 
 #wavelengthLabel {
     position: relative;
-    /*float: right;*/
+    float: right;
     bottom: 274px;
     left: 85px;
 }
 
 #energyLabel {
     position: relative;
-    /*float: right;*/
+    float: right;
     bottom: 192px;
     left: 170px;
 }
 
 #pauseSwitchText {
     position: relative;
-    /*float: right;*/
+    float: right;
     bottom: 50px;
     left: 230px;
     font-size: 12px;
@@ -168,7 +168,7 @@ body {
 
 .pauseSwitch {
     position: relative;
-    /*float: right;*/
+    float: right;
     bottom: 5px;
     right: 30px;
 }

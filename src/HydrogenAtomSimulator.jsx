@@ -152,6 +152,12 @@ export default class HydrogenAtomSimulator extends React.Component {
                             </button>
                         </div>
 
+                        <button type="box"
+                                className="fireButton"
+                                onClick={this.manuallyEmit.bind(this)}>
+                            {"Drop 1"}
+                        </button>
+
                         <div className={"pauseSwitch"}>
                             <label className="switch">
                                 <input
@@ -232,7 +238,11 @@ export default class HydrogenAtomSimulator extends React.Component {
         this.timer.id = setTimeout(() => this.deExcitation(), 3000);
     }
 
-    deExcitation() {
+    manuallyEmit() {
+        this.deExcitation(true);
+    }
+
+    deExcitation(manual) {
         let photonS = this.state.photon;
         photonS.emitted = true;
         let newEnergyLevel = Math.floor(Math.random() * (this.state.currentEnergyLevel - 1)) + 1;
@@ -269,8 +279,8 @@ export default class HydrogenAtomSimulator extends React.Component {
 
         this.timer.started = false;
         clearInterval(this.timer.id);
-        this.stopPhotonEmission();
-        if (newEnergyLevel !== 1) this.timer.id = setTimeout(() => this.deExcitation(), 3000);
+        if (!manual) this.stopPhotonEmission();
+        if (newEnergyLevel !== 1 && this.state.automaticDeExcitation) this.timer.id = setTimeout(() => this.deExcitation(), 3000);
     }
 
     changeDeExcitationState() {
