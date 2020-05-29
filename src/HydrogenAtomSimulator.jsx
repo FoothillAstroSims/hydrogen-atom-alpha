@@ -8,7 +8,7 @@ import {tickMarkEnergyValues, tickMarkFrequencyValues, tickMarkWavelengthValues}
 import Slider from "./Slider";
 import EnergyLevelDiagram from "./EnergyLevelDiagram";
 import EventLog from "./EventLog";
-import {getWavelengthHex, getWavelengthRGB} from "./utils/WavelengthToHex";
+import { getWavelengthRGB} from "./utils/WavelengthToHex";
 
 const WIDTH = 950;
 const HEIGHT = 300;

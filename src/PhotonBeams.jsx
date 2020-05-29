@@ -1,6 +1,6 @@
 import React from 'react';
-import {getWavelengthHex, getWavelengthRGB} from "./utils/WavelengthToHex";
-import { scaleLog, scalePow } from 'd3/dist/d3';
+import { getWavelengthRGB} from "./utils/WavelengthToHex";
+import { scaleLog } from 'd3/dist/d3';
 
 const WIDTH = 950;
 const HEIGHT = 300;
@@ -23,24 +23,11 @@ const getTranslationMatrix = (prev, curr) => {
 
 const convertToPixelFrequency = (freq) => {
     const scaledFreq = freq / 1e15;
-    // let pixelFreq = 100 - 99 * ((scaledFreq - 0.00725) / (3.6197));
-    // console.log(`pixel : ${pixelFreq} and normal ${scaledFreq}`);
-    // return pixelFreq;
-
-    // let logScale = scaleLog()
-    //     .domain([0.00725, 3.7])
-    //     .range([100, 1]);
-
-    // let powerScale = scalePow()
-    //     .exponent(0.00001)
-    //     .domain([0.00725, 3.7])
-    //     .range([100, 1]);
 
     let logScale = scaleLog()
         .domain([0.00725, 3.7])
         .range([1, 99]);
 
-    // return powerScale(scaledFreq);
     return 100 - logScale(scaledFreq);
 };
 
@@ -79,18 +66,14 @@ export default class PhotonBeams extends React.Component {
             this.startAnimation();
             this.isPlaying = true;
         } else if (prevProps.deExcitation !== this.props.deexcitation && this.props.deexcitation) {
-            // console.log(`i should only be running ONCE`);
             this.startAnimation(prevProps);
         } else {
-            // this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
             this.isPlaying = false;
             this.stopAnimation();
         }
     }
 
     startAnimation(prevProps) {
-        // this.makeCircle();
-
         if (this.props.photon.fired) {
             this.initX = WIDTH;
             this.raf = requestAnimationFrame(this.animatePhotonFire.bind(this));
@@ -177,12 +160,9 @@ export default class PhotonBeams extends React.Component {
     animatePhotonFire() {
         this.ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
-        // let newEnergyValue = getSnappedOnEnergyValues(Number.parseFloat(e.target.value));
         let photonFrequency = (this.props.photon.energyValue / PLANCK_CONSTANT) * COULOMB_CHARGE;
-        // let photonColorRGB = getWavelengthRGB(photonWavelength * 1e9);
 
         let amplitude = 10;
-        // let frequency = 100;
         let frequency = convertToPixelFrequency(photonFrequency);
         let wavelength = 150;
         this.plotSine(amplitude, frequency, wavelength, this.props.photon.color);
