@@ -11,13 +11,19 @@ export default class ManualDeexcitation extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps !== this.props) this.updateOptions();
+        // if (prevProps !== this.props) this.updateOptions();
+        this.updateOptions();
     }
 
     updateOptions() {
         const select = document.getElementById("level-select");
         select.options.length = 0;
-        if (this.props.currentEnergyLevel === 1) return;
+        this.currentSelection = 0;
+        console.log(`current energy level: ${typeof this.props.currentEnergyLevel} and testing equality: ${this.props.currentEnergyLevel === 1}`);
+        if (this.props.currentEnergyLevel === 1) {
+            console.log(`imheere`);
+            return;
+        }
 
         let possibleEnergyDrops = this.props.currentEnergyLevel - 1;
         select.options[select.options.length] = new Option(`Random Level`, `${0}`);
@@ -29,7 +35,7 @@ export default class ManualDeexcitation extends React.Component {
 
     changeCurrentSelection(e) {
         this.currentSelection = e.target.value;
-        // this.props.manuallyEmit(this.currentSelection);
+        this.currentSelection = Number(this.currentSelection);
         console.log(`current seletion: ${this.currentSelection}`);
     }
 

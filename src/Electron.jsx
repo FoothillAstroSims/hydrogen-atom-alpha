@@ -51,7 +51,7 @@ export default class Electron extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         // If the photon wasn't fired, simply return
-        console.log(`emit?? ${this.props.emitted}`);
+        // console.log(`emit?? ${this.props.emitted}`);
         if (!(this.props.moveElectron || this.props.emitted) || this.props.electronIsBeingDragged) return;
 
         if (this.props.moveElectron) this.moveElectron();
