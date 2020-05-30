@@ -11,7 +11,7 @@ export default class ManualDeexcitation extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        this.updateOptions();
+        if (prevProps !== this.props) this.updateOptions();
     }
 
     updateOptions() {
@@ -29,7 +29,13 @@ export default class ManualDeexcitation extends React.Component {
 
     changeCurrentSelection(e) {
         this.currentSelection = e.target.value;
+        // this.props.manuallyEmit(this.currentSelection);
         console.log(`current seletion: ${this.currentSelection}`);
+    }
+
+    dropToNewLevel() {
+        const select = document.getElementById("level-select");
+        if (select.options.length !== 0) this.props.manuallyEmit(this.currentSelection);
     }
 
     render() {
@@ -37,7 +43,7 @@ export default class ManualDeexcitation extends React.Component {
             <div style={{marginTop: "30px"}}>
                 <button type="box"
                         className="fireButton"
-                    onClick={this.props.manuallyEmit}
+                    onClick={this.dropToNewLevel.bind(this)}
                 >
                     {"Drop to: "}
                 </button>

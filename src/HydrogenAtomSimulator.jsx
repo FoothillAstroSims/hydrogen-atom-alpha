@@ -241,10 +241,6 @@ export default class HydrogenAtomSimulator extends React.Component {
 
     manuallyEmit(desiredEnergyLevel) {
         if (!this.state.automaticDeExcitation) {
-            // let photonState = this.state.photon;
-            // photonState.emitted = true;
-            // this.setState({ photon: photonState });
-
             this.deExcitation();
             // if (desiredEnergyLevel === 0) {
             //     this.deExcitation();
