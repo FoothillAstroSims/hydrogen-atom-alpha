@@ -172,7 +172,19 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <p id={"frequencyLabel"}><i>Frequency</i></p>
                         <p id={"wavelengthLabel"}><i>Wavelength</i></p>
                         <p id={"energyLabel"}><i>Energy</i></p>
-                        <p id={"pauseSwitchText"}>Automatic<br />DeExcitation</p>
+                        <p id={"pauseSwitchText"}>Automatic<br />De-excitation</p>
+
+                        <div>
+                            <select id="pet-select">
+                                <option value="">Random Level</option>
+                                <option value="dog">Level 1</option>
+                                <option value="cat"></option>
+                                <option style={{visible: "false"}} value="hamster">Hamster</option>
+                                <option value="parrot">Parrot</option>
+                                <option value="spider">Spider</option>
+                                <option value="goldfish">Goldfish</option>
+                            </select>
+                        </div>
 
                     </div>
 
@@ -240,6 +252,10 @@ export default class HydrogenAtomSimulator extends React.Component {
 
     manuallyEmit() {
         if (!this.state.automaticDeExcitation) {
+            // let photonState = this.state.photon;
+            // photonState.emitted = true;
+            // this.setState({ photon: photonState });
+
             this.deExcitation(true);
         }
     }
@@ -277,11 +293,13 @@ export default class HydrogenAtomSimulator extends React.Component {
             currentEnergyLevel: newEnergyLevel,
             eventLog: this.state.eventLog,
             deexcitationEvent: this.state.currentEnergyLevel !== 7,
-        });
+        },
+            this.stopPhotonEmission.bind(this));
 
         this.timer.started = false;
         clearInterval(this.timer.id);
-        if (!manual) this.stopPhotonEmission();
+        // this.stopPhotonEmission();
+        // if (!manual) this.stopPhotonEmission();
         if (newEnergyLevel !== 1 && this.state.automaticDeExcitation) this.timer.id = setTimeout(() => this.deExcitation(), 3000);
     }
 

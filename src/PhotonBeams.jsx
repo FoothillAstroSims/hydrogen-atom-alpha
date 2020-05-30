@@ -74,8 +74,10 @@ export default class PhotonBeams extends React.Component {
     }
 
     startAnimation(prevProps) {
+
         if (this.props.photon.fired) {
             this.initX = WIDTH;
+            this.ctx.setTransform(1,0,0,1,0,0);
             this.raf = requestAnimationFrame(this.animatePhotonFire.bind(this));
         } else if (this.props.deexcitation) {
             if (prevProps.currentEnergyLevel !== this.props.currentEnergyLevel && prevProps.currentEnergyLevel !== 7) {
@@ -88,6 +90,7 @@ export default class PhotonBeams extends React.Component {
                 this.translateX = MIN_X_TRANSLATION + translation;
                 this.translateY = MIN_Y_TRANSLATION + translation;
 
+                this.ctx.setTransform(1,0,0,1,0,0);
                 this.ctx.rotate(3 * Math.PI / 4);
                 this.ctx.translate(this.translateX, this.translateY);
                 this.raf = requestAnimationFrame(this.animatePhotonEmission.bind(this));
