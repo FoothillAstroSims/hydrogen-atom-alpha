@@ -9,6 +9,7 @@ import Slider from "./Slider";
 import EnergyLevelDiagram from "./EnergyLevelDiagram";
 import EventLog from "./EventLog";
 import { getWavelengthRGB} from "./utils/WavelengthToHex";
+import ManualDeexcitation from "./ManualDeexcitation";
 
 const WIDTH = 950;
 const HEIGHT = 300;
@@ -152,11 +153,11 @@ export default class HydrogenAtomSimulator extends React.Component {
                             </button>
                         </div>
 
-                        <button type="box"
-                                className="fireButton"
-                                onClick={this.manuallyEmit.bind(this)}>
-                            {"Drop 1"}
-                        </button>
+
+                        <ManualDeexcitation
+                            currentEnergyLevel={this.state.currentEnergyLevel}
+                            manuallyEmit={this.manuallyEmit.bind(this)}
+                        />
 
                         <div className={"pauseSwitch"}>
                             <label className="switch">
@@ -173,18 +174,6 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <p id={"wavelengthLabel"}><i>Wavelength</i></p>
                         <p id={"energyLabel"}><i>Energy</i></p>
                         <p id={"pauseSwitchText"}>Automatic<br />De-excitation</p>
-
-                        <div>
-                            <select id="pet-select">
-                                <option value="">Random Level</option>
-                                <option value="dog">Level 1</option>
-                                <option value="cat"></option>
-                                <option style={{visible: "false"}} value="hamster">Hamster</option>
-                                <option value="parrot">Parrot</option>
-                                <option value="spider">Spider</option>
-                                <option value="goldfish">Goldfish</option>
-                            </select>
-                        </div>
 
                     </div>
 
@@ -250,20 +239,26 @@ export default class HydrogenAtomSimulator extends React.Component {
         this.timer.id = setTimeout(() => this.deExcitation(), 3000);
     }
 
-    manuallyEmit() {
+    manuallyEmit(desiredEnergyLevel) {
         if (!this.state.automaticDeExcitation) {
             // let photonState = this.state.photon;
             // photonState.emitted = true;
             // this.setState({ photon: photonState });
 
-            this.deExcitation(true);
+            this.deExcitation();
+            // if (desiredEnergyLevel === 0) {
+            //     this.deExcitation();
+            // } else {
+            //     this.deExcitation(desiredEnergyLevel);
+            // }
         }
     }
 
-    deExcitation(manual) {
+    deExcitation(desiredEnergyLevel) {
         let photonS = this.state.photon;
         photonS.emitted = true;
         let newEnergyLevel = Math.floor(Math.random() * (this.state.currentEnergyLevel - 1)) + 1;
+        if (desiredEnergyLevel) newEnergyLevel = desiredEnergyLevel;
         let photonEnergy = this.energyLevelValues[this.state.currentEnergyLevel - 1]
             - this.energyLevelValues[newEnergyLevel - 1];
 
