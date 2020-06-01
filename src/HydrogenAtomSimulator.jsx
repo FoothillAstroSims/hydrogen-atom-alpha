@@ -154,26 +154,26 @@ export default class HydrogenAtomSimulator extends React.Component {
                         </div>
 
 
-                        <ManualDeexcitation
-                            currentEnergyLevel={this.state.currentEnergyLevel}
-                            manuallyEmit={this.manuallyEmit.bind(this)}
-                        />
+                        {/*<ManualDeexcitation*/}
+                        {/*    currentEnergyLevel={this.state.currentEnergyLevel}*/}
+                        {/*    manuallyEmit={this.manuallyEmit.bind(this)}*/}
+                        {/*/>*/}
 
-                        <div className={"pauseSwitch"}>
-                            <label className="switch">
-                                <input
-                                    type="checkbox"
-                                    onChange={this.changePauseDeExcitation.bind(this)}
-                                    checked={this.state.automaticDeExcitation}
-                                />
-                                <span className="slider round"/>
-                            </label>
-                        </div>
+                        {/*<div className={"pauseSwitch"}>*/}
+                        {/*    <label className="switch">*/}
+                        {/*        <input*/}
+                        {/*            type="checkbox"*/}
+                        {/*            onChange={this.changePauseDeExcitation.bind(this)}*/}
+                        {/*            checked={this.state.automaticDeExcitation}*/}
+                        {/*        />*/}
+                        {/*        <span className="slider round"/>*/}
+                        {/*    </label>*/}
+                        {/*</div>*/}
 
                         <p id={"frequencyLabel"}><i>Frequency</i></p>
                         <p id={"wavelengthLabel"}><i>Wavelength</i></p>
                         <p id={"energyLabel"}><i>Energy</i></p>
-                        <p id={"pauseSwitchText"}>Automatic<br />De-excitation</p>
+                        {/*<p id={"pauseSwitchText"}>Automatic<br />De-excitation</p>*/}
 
                     </div>
 

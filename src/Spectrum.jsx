@@ -53,7 +53,7 @@ export default class Spectrum extends React.Component {
         const bottomY = (HEIGHT / 2) - 5;
 
         return (
-            <div style={{position: "absolute"}}>
+            <div>
                 <svg width={WIDTH} height={HEIGHT}>
                     <g>{ this.props.tickMarksData.map( renderTickMarks()) }</g>
                     <g>{ this.props.tickMarksData.map( renderTickTexts()) }</g>

@@ -131,24 +131,33 @@ body {
 }
 
 #frequencyLabel {
-    position: relative;
-    float: right;
-    bottom: 357px;
-    left: 10px;
+    position: absolute;
+    bottom: 80.5%;
+    left: 89.5%;
+    /*position: relative;*/
+    /*float: right;*/
+    /*bottom: 357px;*/
+    /*left: 10px;*/
 }
 
 #wavelengthLabel {
-    position: relative;
-    float: right;
-    bottom: 274px;
-    left: 85px;
+    position: absolute;
+    bottom: 60%;
+    left: 88.5%;
+    /*position: relative;*/
+    /*float: right;*/
+    /*bottom: 274px;*/
+    /*left: 85px;*/
 }
 
 #energyLabel {
-    position: relative;
-    float: right;
-    bottom: 192px;
-    left: 170px;
+    position: absolute;
+    bottom: 39.5%;
+    left: 92%;
+    /*position: relative;*/
+    /*float: right;*/
+    /*bottom: 192px;*/
+    /*left: 170px;*/
 }
 
 #pauseSwitchText {

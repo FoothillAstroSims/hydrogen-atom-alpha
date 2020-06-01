@@ -19,11 +19,7 @@ export default class ManualDeexcitation extends React.Component {
         const select = document.getElementById("level-select");
         select.options.length = 0;
         this.currentSelection = 0;
-        console.log(`current energy level: ${typeof this.props.currentEnergyLevel} and testing equality: ${this.props.currentEnergyLevel === 1}`);
-        if (this.props.currentEnergyLevel === 1) {
-            console.log(`imheere`);
-            return;
-        }
+        if (this.props.currentEnergyLevel === 1) return;
 
         let possibleEnergyDrops = this.props.currentEnergyLevel - 1;
         select.options[select.options.length] = new Option(`Random Level`, `${0}`);
