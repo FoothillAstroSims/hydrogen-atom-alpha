@@ -154,26 +154,11 @@ export default class HydrogenAtomSimulator extends React.Component {
                         </div>
 
 
-                        {/*<ManualDeexcitation*/}
-                        {/*    currentEnergyLevel={this.state.currentEnergyLevel}*/}
-                        {/*    manuallyEmit={this.manuallyEmit.bind(this)}*/}
-                        {/*/>*/}
 
-                        {/*<div className={"pauseSwitch"}>*/}
-                        {/*    <label className="switch">*/}
-                        {/*        <input*/}
-                        {/*            type="checkbox"*/}
-                        {/*            onChange={this.changePauseDeExcitation.bind(this)}*/}
-                        {/*            checked={this.state.automaticDeExcitation}*/}
-                        {/*        />*/}
-                        {/*        <span className="slider round"/>*/}
-                        {/*    </label>*/}
-                        {/*</div>*/}
 
                         <p id={"frequencyLabel"}><i>Frequency</i></p>
                         <p id={"wavelengthLabel"}><i>Wavelength</i></p>
                         <p id={"energyLabel"}><i>Energy</i></p>
-                        {/*<p id={"pauseSwitchText"}>Automatic<br />De-excitation</p>*/}
 
                     </div>
 
@@ -193,6 +178,29 @@ export default class HydrogenAtomSimulator extends React.Component {
                         </button>
 
                     </div>
+
+
+                </div>
+
+                <div className={"ManualExcitations"}>
+                    <p>automatic de-excitation</p>
+                    <div className={"pauseSwitch"}>
+                        <label className="switch">
+                            <input
+                                type="checkbox"
+                                onChange={this.changePauseDeExcitation.bind(this)}
+                                checked={this.state.automaticDeExcitation}
+                            />
+                            <span className="slider round"/>
+                        </label>
+                    </div>
+
+                    <ManualDeexcitation
+                        currentEnergyLevel={this.state.currentEnergyLevel}
+                        automaticDeExcitation={this.state.automaticDeExcitation}
+                        manuallyEmit={this.manuallyEmit.bind(this)}
+                    />
+
                 </div>
 
             </React.Fragment>

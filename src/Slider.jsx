@@ -90,7 +90,6 @@ export default class Slider extends React.Component {
                 />
 
 
-
                 <Button
                     symbol={"Pᵦ"}
                     id={"Pb"}

@@ -5,28 +5,28 @@
 }
 
 .sliderButtons {
-    background-color: royalblue;
+    /*background-color: royalblue;*/
     position: relative;
     /*top: 5px;*/
-    margin-left: 5px;
+    /*margin-left: 5px;*/
 }
 
 #Pa {
     top: 5px;
-    left: 70px;
+    left: 80px;
     background-color: #630000;
     color: white;
 }
 #Py {
     top: 5px;
-    left: 43px;
+    left: 59px;
     background-color: #630000;
     color: white;
 }
 
 #Pb {
     top: 30px;
-    left: 50px;
+    left: 65px;
     background-color: #630000;
     color: white;
 }
@@ -40,56 +40,56 @@
 
 #Hy {
     top: 30px;
-    left: 60px;
+    left: 75px;
     background-color: #4900ff;
     color: white;
 }
 
 #Hb {
     top: 5px;
-    left: 7px;
+    left: 17px;
     background-color: #00ffc0;
     color: black;
 }
 
 #Hd {
     top: 5px;
-    left: 10px;
+    left: 25px;
     background-color: #7900e7;
     color: white;
 }
 
 #La {
     top: 5px;
-    left: 335px;
+    left: 345px;
     background-color: #630063;
     color: white;
 }
 
 #Lb {
     top: 5px;
-    left: 400px;
+    left: 410px;
     background-color: #630063;
     color: white;
 }
 
 #Ly {
     top: 5px;
-    left: 400px;
+    left: 415px;
     background-color: #630063;
     color: white;
 }
 
 #Le {
     top: 5px;
-    left: 406px;
+    left: 416px;
     background-color: #630063;
     color: white;
 }
 
 #Ld {
     top: 30px;
-    left: 353px;
+    left: 363px;
     background-color: #630063;
     color: white;
 }

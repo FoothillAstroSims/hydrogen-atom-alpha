@@ -23,6 +23,7 @@ body {
     /*border: 1px solid sienna;*/
 }
 
+
 .BackgroundCanvas {
     position: absolute;
     width: 100%;
@@ -57,6 +58,18 @@ body {
     margin-top: 10px;
     position: relative;
     /*height: 400px;*/
+}
+
+.ManualExcitations {
+    border: 1px solid white;
+    margin-left: 410px;
+    width: 180px;
+    height: 70px;
+}
+
+.dropButton {
+    background-color: lightgreen;
+
 }
 
 .spectrumTexts {
@@ -176,10 +189,10 @@ body {
 }
 
 .pauseSwitch {
-    position: relative;
-    float: right;
-    bottom: 5px;
-    right: 30px;
+    /*position: relative;*/
+    /*float: right;*/
+    /*bottom: 5px;*/
+    /*right: 30px;*/
 }
 
 .TitleText {

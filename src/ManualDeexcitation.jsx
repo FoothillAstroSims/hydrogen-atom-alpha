@@ -42,9 +42,10 @@ export default class ManualDeexcitation extends React.Component {
 
     render() {
         return (
-            <div style={{marginTop: "30px"}}>
+            // <div style={{visibility: this.props.currentEnergyLevel > 1 && !this.props.automaticDeExcitation ? "" : "hidden"}}>
+            <div style={{visibility: !this.props.automaticDeExcitation ? "" : "hidden"}}>
                 <button type="box"
-                        className="fireButton"
+                        className="dropButton"
                     onClick={this.dropToNewLevel.bind(this)}
                 >
                     {"Drop to: "}
