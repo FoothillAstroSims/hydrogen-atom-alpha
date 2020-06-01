@@ -183,7 +183,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                 </div>
 
                 <div className={"ManualExcitations"}>
-                    <p>automatic de-excitation</p>
+                    <p id={"pauseSwitchText"}>automatic de-excitation</p>
                     <div className={"pauseSwitch"}>
                         <label className="switch">
                             <input

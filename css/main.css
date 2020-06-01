@@ -62,13 +62,18 @@ body {
 
 .ManualExcitations {
     border: 1px solid white;
-    margin-left: 410px;
+    margin-left: 370px;
     width: 180px;
     height: 70px;
 }
 
 .dropButton {
     background-color: lightgreen;
+
+}
+
+.dropBox {
+    margin-left: 30px;
 
 }
 
@@ -175,10 +180,9 @@ body {
 
 #pauseSwitchText {
     position: relative;
-    float: right;
-    bottom: 50px;
-    left: 230px;
-    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 18px;
+    font-size: 14px;
 }
 
 .SliderContainer {
@@ -189,7 +193,9 @@ body {
 }
 
 .pauseSwitch {
-    /*position: relative;*/
+    position: relative;
+    margin-top: -7.5px;
+    margin-left: 75px;
     /*float: right;*/
     /*bottom: 5px;*/
     /*right: 30px;*/

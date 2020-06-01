@@ -32,7 +32,6 @@ export default class ManualDeexcitation extends React.Component {
     changeCurrentSelection(e) {
         this.currentSelection = e.target.value;
         this.currentSelection = Number(this.currentSelection);
-        console.log(`current seletion: ${this.currentSelection}`);
     }
 
     dropToNewLevel() {
@@ -42,8 +41,8 @@ export default class ManualDeexcitation extends React.Component {
 
     render() {
         return (
-            // <div style={{visibility: this.props.currentEnergyLevel > 1 && !this.props.automaticDeExcitation ? "" : "hidden"}}>
-            <div style={{visibility: !this.props.automaticDeExcitation ? "" : "hidden"}}>
+            <div style={{visibility: !this.props.automaticDeExcitation ? "" : "hidden",
+                marginLeft: this.props.currentEnergyLevel > 1 ? "5px" : "50px"}}>
                 <button type="box"
                         className="dropButton"
                     onClick={this.dropToNewLevel.bind(this)}
