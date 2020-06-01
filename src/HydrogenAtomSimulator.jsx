@@ -176,7 +176,6 @@ export default class HydrogenAtomSimulator extends React.Component {
                         >
                             {"Clear Log"}
                         </button>
-
                     </div>
 
 
