@@ -8,7 +8,7 @@ import {tickMarkEnergyValues, tickMarkFrequencyValues, tickMarkWavelengthValues}
 import Slider from "./Slider";
 import EnergyLevelDiagram from "./EnergyLevelDiagram";
 import EventLog from "./EventLog";
-import { getWavelengthRGB} from "./utils/WavelengthToHex";
+import { getWavelengthRGB } from "./utils/WavelengthToHex";
 import ManualDeexcitation from "./ManualDeexcitation";
 
 const WIDTH = 950;
@@ -153,9 +153,6 @@ export default class HydrogenAtomSimulator extends React.Component {
                             </button>
                         </div>
 
-
-
-
                         <p id={"frequencyLabel"}><i>Frequency</i></p>
                         <p id={"wavelengthLabel"}><i>Wavelength</i></p>
                         <p id={"energyLabel"}><i>Energy</i></p>
@@ -177,8 +174,6 @@ export default class HydrogenAtomSimulator extends React.Component {
                             {"Clear Log"}
                         </button>
                     </div>
-
-
                 </div>
 
                 <div className={"ManualExcitations"}>
