@@ -165,6 +165,8 @@ export default class HydrogenAtomSimulator extends React.Component {
                             <EventLog
                                 eventLog={this.state.eventLog}
                             />
+
+                            {/*<button> Click to scroll </button>*/}
                         </div>
 
                         <button type="box"

@@ -99,18 +99,38 @@ const renderEventEntries = () => {
 // const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 
 
-export default (props) => {
-    let adjustedHeight = HEIGHT;
-    if (props.eventLog.length > 5) adjustedHeight += (props.eventLog.length - 5) * 50;
+export default class EventLog extends React.Component {
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+    }
 
-    // const myRef = useRef(null)
-    // const executeScroll = () => scrollToRef(myRef)
+    scrollToMyRef() {
+        // window.scrollTo(0, this.myRef.current.offsetTop);
+        // console.log(`scolling now`);
+        // const el = document.getElementById("dearScotty");
+        // el.scrollTop = 50;
+        // this.myRef.scrollTo(0, 100);
+    }
 
-    return (
-        // <div ref={this.myRef}>
-            <svg width={WIDTH} height={adjustedHeight}>
-                <g>{ props.eventLog.map(renderEventEntries()) }</g>
-            </svg>
-        // </div>
-    );
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // console.log(`scrolling`);
+        // this.scrollToMyRef();
+    }
+
+    render() {
+        let adjustedHeight = HEIGHT;
+        if (this.props.eventLog.length > 5) adjustedHeight += (this.props.eventLog.length - 5) * 50;
+
+        return (
+            // <div ref={this.myRef} style={{height: `${adjustedHeight}`}}>
+            <div id={"dearScott"} ref={this.myRef}  style={{height: `${adjustedHeight}px`}} >
+                <svg id={"dearScotty"} ref={this.myRef} width={WIDTH} height={adjustedHeight}>
+                    <g>{ this.props.eventLog.map(renderEventEntries()) }</g>
+                </svg>
+
+                {/*<button onClick={this.scrollToMyRef.bind(this)}> Click to scroll </button>*/}
+            </div>
+        );
+    }
 }
