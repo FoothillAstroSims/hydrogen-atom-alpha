@@ -49,6 +49,7 @@ body {
     border: 1px solid indianred;
     background-color: transparent;
     z-index: 10;
+    overflow: hidden;
 }
 
 .Diagram {
@@ -66,14 +67,27 @@ body {
 }
 
 .ManualExcitations {
-    border: 1px solid white;
+    position: relative;
+    bottom: 5px;
+    border-bottom: 1px solid greenyellow;
+    border-right: 1px solid greenyellow;
+    border-left: 1px solid greenyellow;
+    border-radius: 10px;
     margin-left: 370px;
     width: 180px;
     height: 90px;
 }
 
 .dropButton {
-    background-color: salmon;
+    background-color: lavender;
+    border-radius: 10px;
+}
+
+#level-select {
+    font-size: 12px;
+    border-radius: 10px;
+    padding: 1px 5px;
+    background-color: aliceblue;
 }
 
 .dropBox {
@@ -182,7 +196,7 @@ body {
 
 #energyLabel {
     position: absolute;
-    bottom: 44.0%;
+    bottom: 43.75%;
     left: 92%;
     /*position: relative;*/
     /*float: right;*/
@@ -230,9 +244,7 @@ body {
     fill: darkturquoise;
 }
 
-#level-select {
-    font-size: 12px;
-}
+
 
 #ionizedText {
     font: 10px serif;

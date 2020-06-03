@@ -66,6 +66,12 @@ const renderEventEntries = () => {
             id: "rightTextEventLog",
         }
 
+        const numEventText = {
+            x: leftTextMargin + 5,
+            y: pixelHeight - 30.0,
+            id: "leftTextEventLog",
+        }
+
         let leftEnergyLevel = Math.min(data.previousEnergyLevel, data.newEnergyLevel);
         let rightEnergyLevel = Math.max(data.previousEnergyLevel, data.newEnergyLevel);
 
@@ -75,6 +81,10 @@ const renderEventEntries = () => {
             <g stroke={"grey"} strokeWidth={1} transform={`translate(0, ${pixelHeight - 25})`}>
                 <path strokeDasharray="2,2" d="M 10 0 L 240 0" />
             </g>
+
+
+            {/*Text that shows the event number (index)*/}
+            {/*<text {...numEventText} >{index}</text>*/}
 
             <text {...leftTextProps} >{data.electronEvent}</text>
             <text {...rightTextProps} >{rightHandText}</text>
