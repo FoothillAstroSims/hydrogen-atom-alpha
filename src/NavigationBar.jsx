@@ -13,8 +13,13 @@ export default class NavigationBar extends React.Component {
                     <h1 id="title">Hydrogen Atom Simulator</h1>
                     <nav>
                         <ul>
-                            <li><a href="#">Help</a></li>
-                            <li><a href="#">About</a></li>
+                            {/* needs work */}
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#helpModal">Help</a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#aboutModal">About</a>
+                            </li>
                         </ul>
                     </nav>
                 </div>

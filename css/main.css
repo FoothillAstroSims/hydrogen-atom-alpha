@@ -23,6 +23,11 @@ body {
     /*border: 1px solid sienna;*/
 }
 
+.modal-content {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
 
 .BackgroundCanvas {
     position: absolute;
@@ -64,7 +69,7 @@ body {
     border: 1px solid white;
     margin-left: 370px;
     width: 180px;
-    height: 70px;
+    height: 90px;
 }
 
 .dropButton {
@@ -157,7 +162,7 @@ body {
 
 #frequencyLabel {
     position: absolute;
-    bottom: 80.5%;
+    bottom: 84.0%;
     left: 89.5%;
     /*position: relative;*/
     /*float: right;*/
@@ -167,7 +172,7 @@ body {
 
 #wavelengthLabel {
     position: absolute;
-    bottom: 60%;
+    bottom: 63.5%;
     left: 88.5%;
     /*position: relative;*/
     /*float: right;*/
@@ -177,7 +182,7 @@ body {
 
 #energyLabel {
     position: absolute;
-    bottom: 39.5%;
+    bottom: 44.0%;
     left: 92%;
     /*position: relative;*/
     /*float: right;*/
@@ -201,7 +206,7 @@ body {
 
 .pauseSwitch {
     position: relative;
-    margin-top: -7.5px;
+    margin-top: -12.5px;
     margin-left: 75px;
     /*float: right;*/
     /*bottom: 5px;*/
@@ -211,6 +216,8 @@ body {
 .TitleText {
     text-align: center;
     font-size: 20px;
+    position: relative;
+    top: 5px;
 }
 
 #HydrogenAtomText {
@@ -237,7 +244,7 @@ body {
     background-color: royalblue;
     /*position: relative;*/
     margin-left: 110px;
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 #previousEnergyText {
