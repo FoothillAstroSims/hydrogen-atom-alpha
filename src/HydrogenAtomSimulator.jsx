@@ -157,11 +157,7 @@ export default class HydrogenAtomSimulator extends React.Component {
                         <p id={"wavelengthLabel"}><i>Wavelength</i></p>
                         <p id={"energyLabel"}><i>Energy</i></p>
 
-                        <div id="survey">
-                            <a href="https://tinyurl.com/y9vf4uep" target="_blank" rel="noopener noreferrer">
-                                <button type="button" className="btn btn=warning" id="feedback">Give us feedback!</button>
-                            </a>
-                        </div>
+
                     </div>
 
                     <div className={"EventLog"}>
@@ -204,6 +200,11 @@ export default class HydrogenAtomSimulator extends React.Component {
 
                 </div>
 
+                <div id="survey">
+                    <a href="https://tinyurl.com/y9vf4uep" target="_blank" rel="noopener noreferrer">
+                        <button type="button" className="btn btn=warning" id="feedback">Give us feedback!</button>
+                    </a>
+                </div>
             </React.Fragment>
         );
     }
