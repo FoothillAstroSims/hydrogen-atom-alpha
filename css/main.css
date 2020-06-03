@@ -247,6 +247,21 @@ body {
     margin-top: 15px;
 }
 
+#feedback {
+    position: relative;
+    float: right;
+    bottom: 20px;
+    right: 10px;
+    background-color: lightcyan;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Exo', sans-serif;
+    font-size: 10px;
+    padding: 5px;
+    /*font-weight: 550;*/
+    transition: all 0.2s ease-in-out;
+}
+
 #previousEnergyText {
     font: 14px serif;
     fill: khaki;
