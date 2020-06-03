@@ -230,6 +230,10 @@ body {
     fill: darkturquoise;
 }
 
+#level-select {
+    font-size: 12px;
+}
+
 #ionizedText {
     font: 10px serif;
     fill: lime;
