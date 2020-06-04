@@ -75,6 +75,7 @@ export default class Electron extends React.Component {
             let randomPosition = this.ionizeElectron();
             x = randomPosition.xPos;
             y = randomPosition.yPos;
+            console.log(`random positions; ${x} and ${y}`);
         } else {
             x = this.orbitalDistances[this.props.currentEnergyLevel - 1];
             y = 0;
@@ -120,7 +121,7 @@ export default class Electron extends React.Component {
             y = height + 50;
         } else if (Math.random() >= 0.00) {
             x = Math.random() * width;
-            y = -50;
+            y = -height + 50;
         }
 
         return {

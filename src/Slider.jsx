@@ -50,7 +50,6 @@ export default class Slider extends React.Component {
             fill: color,
             background: '#d7dcdf'
         }
-        console.log(`color: ${settings.fill}`);
 
         const percentage = 100 * (energy - 0.03) / (15 - 0.03);
         this.bg = `linear-gradient(90deg, ${settings.fill} ${percentage}%, ${settings.background} ${percentage+0.1}%)`;
