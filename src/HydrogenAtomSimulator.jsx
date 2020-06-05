@@ -264,7 +264,6 @@ export default class HydrogenAtomSimulator extends React.Component {
         let photonS = this.state.photon;
         photonS.emitted = true;
         let newEnergyLevel = Math.floor(Math.random() * (this.state.currentEnergyLevel - 1)) + 1;
-        // console.log(`new energy level: ${newEnergyLevel} and current: ${this.state.currentEnergyLevel}`);
         if (desiredEnergyLevel) newEnergyLevel = desiredEnergyLevel;
         let photonEnergy = this.energyLevelValues[this.state.currentEnergyLevel - 1]
             - this.energyLevelValues[newEnergyLevel - 1];
@@ -345,16 +344,17 @@ export default class HydrogenAtomSimulator extends React.Component {
         // if (this.state.photon.fired || this.state.deexcitationEvent) return;
         if (this.state.photon.fired) return;
 
-        // possibly temporary
+        // Clear the intervals so there's no deexcitations happening at the same time
         clearInterval(this.timer.id);
         this.timer.started = false;
 
         let photonEnergy = this.state.photon.energyValue;
         let electronEnergy = this.energyLevelValues[this.state.currentEnergyLevel - 1];
         let totalEnergy = Number.parseFloat((photonEnergy + electronEnergy).toFixed(3));
+        console.log(`photon energy +++ electronEnergy ; ${photonEnergy}, ${electronEnergy}, ${totalEnergy}`);
 
         let newEnergyLevel = totalEnergy >= 0 ? 7 : this.state.currentEnergyLevel;
-        let delta = 0.01;
+        let delta = 0.005; // used to be 0.01 but caused errors sometimes
         this.energyLevelValues.forEach((element, index) => {
             if (totalEnergy >= (element - delta) && totalEnergy <= (element + delta)) {
                 newEnergyLevel = index + 1;
