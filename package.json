@@ -18,6 +18,7 @@
         "d3": "^5.15.1",
         "d3-selection": "latest",
         "eslint-plugin-security": "^1.4.0",
+        "fsevents": "^2.3.2",
         "jquery": "^3.5.1",
         "pixi.js": "^5.2.3",
         "popper.js": "^1.16.0",
