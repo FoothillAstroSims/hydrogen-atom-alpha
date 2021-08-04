@@ -17,6 +17,7 @@ const renderTickMarks = () => {
             y1: data.top,
             y2: data.bottom,
             stroke: "white",
+            strokeWidth:2,
             key: index
         }
 
@@ -57,7 +58,7 @@ export default class Spectrum extends React.Component {
                 <svg width={WIDTH} height={HEIGHT}>
                     <g>{ this.props.tickMarksData.map( renderTickMarks()) }</g>
                     <g>{ this.props.tickMarksData.map( renderTickTexts()) }</g>
-                    <line x1={linePosition} x2={linePosition} y1={topY} y2={bottomY} stroke={"red"} strokeWidth={2}/>
+                    <line x1={linePosition} x2={linePosition} y1={topY} y2={bottomY} stroke={"red"} strokeWidth={4}/>
                     <text className={"spectrumTexts"} x={linePosition - shiftLeft} y={16} fontSize={"15px"} >{this.props.value}</text>
                 </svg>
             </div>

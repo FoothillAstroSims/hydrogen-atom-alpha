@@ -10,7 +10,7 @@ export default class NavigationBar extends React.Component {
         return (
             <React.Fragment>
                 <div className="navbar">
-                    <h1 id="title">Hydrogen Atom Simulator</h1>
+                    <h1 id="title"><a href="https://foothill.edu/astronomy/astrosims.html" target="_blank">AstroSims</a> > Hydrogen Atom</h1>
                     <nav>
                         <ul>
                             {/* needs work */}
